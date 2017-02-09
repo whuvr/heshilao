@@ -1,0 +1,1 @@
+define(["modules/account/backCtrl","modules/account/backService","text!htmlModule/account/back.html"],function(c,t,e){return function(n,u,o,a){c(n,u,o,a),t(n,u,o,a),u.append(e)}});

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>操作跳转中......</title>
+  <meta http-equiv="content-Type" content="text/html; charset=utf-8" />
+  <link rel="stylesheet" type="text/css" href="resources/css/build.css">
+</head>
+
+<body class="page_payform">
+  <div class="container">
+    <div class="logo"></div>
+    <div class="loading"></div>
+    <div class="load_text">操作跳转中,请您不要关闭浏览器......</div>
+    <form action="${model['submitUrl']}" method="post" id="frm1">
+      <#list model?keys as key>
+        <#if key !='submitUrl'>
+          <input name='${key}' type='hidden' value="${model[key]}" />
+        </#if>
+      </#list>
+    </form>
+  </div>
+  <script type="text/javascript">
+  document.getElementById("frm1").submit();
+  </script>
+  <script type="text/javascript">
+  window.onbeforeunload = function(event) {
+    (event || window.event).returnValue = "确定退出吗";
+  }
+  </script>
+  <script language="javascript">
+  //禁止按键F5
+  document.onkeydown = function(e) {
+    e = window.event || e;
+    var keycode = e.keyCode || e.which;
+    if (keycode = 116) {
+      if (window.event) { // IE
+        try {
+          e.keyCode = 0;
+        } catch (e) {}
+        e.returnValue = false;
+      } else { // Firefox
+        e.preventDefault();
+      }
+    }
+  }
+  </script>
+</body>
+
+</html>

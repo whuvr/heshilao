@@ -1,0 +1,61 @@
+<div ng-controller="accountSetCtrl" class="accountSet"><!-- <div class="accountSet-begin">
+	    <span class="accountSet-fontset">{{username}}</span>
+	    <span class="accountSet-positionset">联动优势帐号：UB201508211802030000000000024470</span>
+	    <div class="accountset-portrait">
+	    	<img class="portrait" ng-src="{{user.headPortraitUrl}}?imageView2/1/w/100/h/100/" alt="" ui-sref="account.photoChange">
+	    </div>
+	</div> --><div class="accountSetMain"><div class="part-cont" style="padding-left:7px"><div class="contentSet accountSet-font4"><span>安全等级&nbsp&nbsp{{score}}分</span> <span id="progress"></span> <span id="safety-color">{{grade}}</span></div></div><div class="accountSet-line"></div><div class="part-cont"><div class="contentSet"><div class="contenta"><span id="identify"></span> <span class="accountSet-font1">实名认证</span><br><span class="accountSet-font2">投资理财需要实名认证</span></div><!--
+				//idIdentify
+				0 未认证
+				1 已认证
+				2 认证不通过
+				3 已实名未授权
+				4 正在审核中
+				5 已认证待后台登记 --><div class="contentb" ng-if="idIdentify==0"><span class="accountSet-warning"></span> <span class="accountSet-font3">未认证</span></div><div class="contentc" ng-if="idIdentify==0"><a class="modifyBtn" href="#/account/payAccount">认证</a></div><div class="contentb" ng-if="idIdentify==1"><span class="accountSet-status"></span> <span class="">已认证</span></div><div class="contentb" ng-if="idIdentify==2"><span class="accountSet-status"></span> <span>认证不通过</span></div><div class="contentb" ng-if="idIdentify==3"><span class="accountSet-status"></span> <span class="">已实名未授权</span></div><div class="contentb" ng-if="idIdentify==4"><span class="accountSet-status-4"></span> <span class="">正在审核中</span></div><div class="contentb" ng-if="idIdentify==5"><span class="accountSet-status"></span> <span class="">已认证待后台登记</span></div></div></div><div class="accountSet-line"></div><div class="part-cont"><div class="contentSet"><div class="contenta"><span id="phone"></span> <span class="accountSet-font1">手机认证</span><br><span class="accountSet-font2">账户资金变动，实时通知</span></div><div class="contentd"><span>{{phone}}</span></div><div class="contentb"><span class="accountSet-status"></span> <span>已认证</span></div><div class="contentc"><a class="modifyBtn" ng-click="showMob=!showMob" ng-show="modifyMob">修改</a></div></div></div><div ng-show="showMob"><div class="accountSet-content accountSet-valid2" style="height:195px" ng-show="MobileModify"><form name="form1" novalidate="" ng-submit="submit1(form1)"><div class="accountSet-center"><div class="layer3"><label class="accountSet-label">已绑定手机号码</label><label class="accountSet-label2">{{phone}}</label></div><div class="layer3 form-group"><div class="input-group"><label class="accountSet-label">验证码</label><input type="text" class="accountSet-input" name="validCode" ng-model="formData3.validCode" required maxlength="6" ng-pattern="/^\d*$/"> <input id="getcodeMob1" class="accountSet-btn accountSet-btnPosi1" type="button" ng-click="getcodeMob1()" value="发送验证码"></div></div><input type="submit" class="accountSet-btn accountSet-btnPosi" value="下一步"></div></form></div><div class="accountSet-content accountSet-valid2" style="height:214px" ng-show="!MobileModify"><form name="form2" novalidate="" ng-submit="submit2(form2)"><div class="accountSet-center"><div class="layer3 form-group"><label class="accountSet-label">填写新手机号码</label><input type="text" class="accountSet-input" name="phone" ng-model="formData4.phone" maxlength="11" ng-pattern="/^1[3|4|5|7|8]\d{9}$/" required pattern-err-type="PhoneError" remote-validation="users/checkPhone" remote="phone/remote-phone"></div><div class="layer3 form-group" id="accountSet-valid-emailSec"><div class="input-group"><label class="accountSet-label">验证码</label><input type="text" class="accountSet-input" name="validCode" ng-model="formData4.validCode" maxlength="6" ng-pattern="/^\d*$/" required> <input type="button" id="getcodeMob2" class="accountSet-btn accountSet-btnPosi1" ng-click="getcodeMob2(form2)" value="发送验证码"></div></div><input type="submit" class="accountSet-btn accountSet-btnPosi" value="确认修改"></div></form></div></div><div class="accountSet-line"></div><div class="part-cont"><div class="contentSet"><div class="contenta"><span id="locked"></span> <span class="accountSet-font1">登录密码</span><br><span class="accountSet-font2">登录时需要输入的密码</span></div><div class="contentb"><span class="accountSet-status"></span> <span>已设置</span></div><div class="contentc"><a class="modifyBtn" ng-click="showPsw=!showPsw">修改</a></div></div></div><div id="content-accountSet" class="accountSet-content accountSet-valid1" ng-show="showPsw" style="height:282px"><div class="accountSet-center"><form name="form3" novalidate="" ng-submit="submit3(form3)"><div class="layer2 form-group"><div class="input-group accountSet-valid"><label class="accountSet-label">原密码</label><input type="password" id="password" class="accountSet-input" name="password" ng-model="formData.password" ng-pattern="/^(?![a-zA-Z]+$)(?!\d+$)[0-9A-Za-z]{8,16}$/" ng-minlength="8" maxlength="16" required pattern-err-type="PasswordError"><label class="accountSet-label1">请输入原密码</label></div></div><div class="layer2 form-group"><div class="input-group accountSet-valid"><label class="accountSet-label">新密码</label><input type="password" class="accountSet-input" name="newPassword" ng-model="formData.newPassword" ng-pattern="/^(?![a-zA-Z]+$)(?!\d+$)[0-9A-Za-z]{8,16}$/" ng-minlength="8" maxlength="16" required><label class="accountSet-label1">输入新的登录密码，8~16位数字及英文字母，其中至少包含一个字母和一个数字</label></div></div><div class="layer2 form-group"><div class="input-group accountSet-valid"><label class="accountSet-label">确认新密码</label><input type="password" id="passwordnew" class="accountSet-input" ng-pattern="/^(?![a-zA-Z]+$)(?!\d+$)[0-9A-Za-z]{8,16}$/" ng-minlength="8" maxlength="16" compare-to="formData.newPassword" ng-model="newPsaaword2" required><label class="accountSet-label1">再次输入新密码</label></div></div><input type="submit" class="accountSet-btn accountSet-btnPosi" value="确认"></form></div></div><div class="accountSet-line" ng-hide="showPsw"></div><div class="part-cont"><div class="contentSet"><div class="contenta"><span id="email"></span> <span class="accountSet-font1">绑定邮箱</span><br><span class="accountSet-font2">找回密码，接收最新消息</span></div><div class="contentd" ng-show="isEmail"><span>{{email}}</span></div><div class="contentb" ng-show="!isEmail"><span class="accountSet-warning"></span> <span class="accountSet-font3">未绑定</span></div><div class="contentb" ng-show="isEmail"><span class="accountSet-status"></span> <span>已绑定</span></div><div class="contentc" ng-show="!isEmail"><a class="modifyBtn" ng-click="bindEma=!bindEma">绑定</a></div><div class="contentc" ng-show="isEmail"><a class="modifyBtn" ng-click="showEma=!showEma">修改</a></div></div></div><div ng-show="showEma"><div class="accountSet-content accountSet-valid2" style="height:217px" ng-hide="emailFir"><form name="form4" novalidate="" ng-submit="submit4(form4)"><div class="accountSet-center" id="accountSet-valid-email"><div class="layer3"><label class="accountSet-label">已验证邮箱</label><label class="accountSet-label2">{{email}}</label></div><div class="layer3 form-group"><div class="input-group"><label class="accountSet-label">验证码</label><input type="text" class="accountSet-input" name="validCode" ng-model="formData1.validCode" required maxlength="6" ng-pattern="/^\d*$/"> <input id="getcodeEma1" class="accountSet-btn accountSet-btnPosi1" type="button" ng-click="getcodeEma1()" value="发送验证邮件"></div></div><input type="submit" class="accountSet-btn accountSet-btnPosi" value="下一步"></div></form></div><div class="accountSet-content accountSet-valid2" style="height:217px" ng-show="emailSec"><form name="form5" novalidate="" ng-submit="submit5(form5)"><div class="accountSet-center"><div class="layer3 form-group"><label class="accountSet-label">填写新邮箱</label><input type="text" class="accountSet-input" name="email" ng-model="formData2.email" ng-pattern="/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})$/" required pattern-err-type="EmailError" remote-validation="users/checkEmail" remote="email/remote-email"></div><div class="layer3 form-group" id="accountSet-valid-emailSec"><div class="input-group"><label class="accountSet-label">验证码</label><input type="text" class="accountSet-input" name="validCode" ng-model="formData2.validCode" maxlength="6" ng-pattern="/^\d*$/" required> <input type="button" id="getcodeEma2" class="accountSet-btn accountSet-btnPosi1" ng-click="getcodeEma2(form5)" value="发送验证邮件"></div></div><input type="submit" class="accountSet-btn accountSet-btnPosi" value="确认修改"></div></form></div></div><div class="accountSet-line" ng-hide="showEma"></div><div ng-show="bindEma"><div class="accountSet-content accountSet-valid2" style="height:208px"><form name="form6" novalidate="" ng-submit="submit6(form6)"><div class="accountSet-center"><div class="layer3 form-group"><label class="accountSet-label">邮箱</label><input type="text" class="accountSet-input" name="email" ng-model="formData5.email" ng-pattern="/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})$/" required pattern-err-type="EmailError" remote-validation="users/checkEmail" remote="email/remote-email"></div><div class="layer3 form-group" id="accountSet-valid-emailSec"><div class="input-group"><label class="accountSet-label">验证码</label><input type="text" class="accountSet-input" name="validCode" ng-model="formData5.validCode" maxlength="6" ng-pattern="/^\d*$/" required> <input type="button" id="getcodeEma3" class="accountSet-btn accountSet-btnPosi1" ng-click="getcodeEma3(form6)" value="发送验证邮件"></div></div><input type="submit" class="accountSet-btn accountSet-btnPosi" value="确认绑定"></div></form></div></div><!-- <div class="part-cont">
+	        <div class="contentSet">
+				<div class="contenta">
+					<span id="corp"></span>
+					<span class="accountSet-font1">开通企业借款</span><br>
+					<span class="accountSet-font2">去第三方开通企业借款账户</span>
+				</div>
+				<div class="contentd ng-hide" ng-show="isEmail">
+					<span class="ng-binding"></span>
+				</div>				
+				<div class="contentb" ng-show="{{curUser.userType==0}}">					
+					<span class="accountSet-warning"></span>
+					<span class="accountSet-font3">未开通</span>
+				</div>
+				<div class="contentb ng-hide" ng-show="{{curUser.userType==1}}">
+					<span class="accountSet-status"></span>
+					<span>已开通</span>
+				</div>
+				<div class="contentc" ng-show="{{curUser.userType==0}}">
+					<a class="modifyBtn" ng-click="showBorrow=!showBorrow">现在开通</a>
+				</div>
+				<!-- <div class="contentc ng-hide" ng-show="{{curUser.userType==0}}">
+					<a class="modifyBtn" ng-click="showEma=!showEma">修改</a>
+				</div>
+	        </div>
+	    </div>
+	    <div id="corp-borrow" class="accountSet-content accountSet-valid1" ng-show="showBorrow" >
+	        <div class="accountSet-center">
+	        	<form name="form7" novalidate ng-submit="submit7(form7)">
+		        	<div class="layer2 form-group">
+		        		<div class="input-group accountSet-valid">
+			        		<label class="accountSet-label">企业名称</label>
+			        		<input   class="accountSet-input" ng-model="formData7.corpName" required  />
+			        		<label class="accountSet-label1"></label>
+			        	</div>
+		        	</div>
+		        	<div class="layer2 form-group">
+		        		<div class="input-group accountSet-valid">
+			        		<label class="accountSet-label">营业执照注册号</label>
+			        		<input  class="accountSet-input"  ng-model="formData7.businessLicenceCode" required />
+			        		<label class="accountSet-label1"></label>
+			        	</div>
+		        	</div>
+		        	
+		        	<input type="submit" class="accountSet-btn accountSet-btnPosi"  value="确认开通" >
+		        </form>
+	        </div>
+	    </div> --></div></div>

@@ -1,0 +1,60 @@
+<ul class="cardList">
+  <li ng-repeat="item in bankLi">
+    <dl>
+      <dt><span>银行卡</span>Bank</dt>
+      <dd ng-bind="item.bank"></dd>
+      <dd ng-bind="item.bankNo"></dd>
+    </dl>
+    <span class="unbind clearfix">
+    	<div class="fl">
+			<!--case: 联动 &&　已绑卡 -->
+			<form action="user/cardBind/repaceCard"  class="form_change_bank_card" method="post" target="_blank"
+				ng-if="item.bindingStatus==0&&corpInfo.tppType==1"
+				ng-submit="submitReplace(item.id,1)">
+				<input type="hidden" name="id" ng-value="item.id">
+				<input type="submit" class="btn_change_bank_card" value="更换银行卡">
+			</form>
+			<!--case: 汇付 &&　已绑卡 -->
+			<em class="text default_card" ng-if="item.canDisable==1 && item.bindingStatus==0 && corpInfo.tppType==2">默认提现卡</em>
+			<!--case: 联动 &&  原卡使用中 -->
+			<em class="text default_card" ng-if="$index==0&&item.bindingStatus==4&&corpInfo.tppType==1">原卡使用中</em>
+			<!--case: 非联动 &&　已绑卡 -->
+			<form ng-if="(item.bindingStatus==0 && corpInfo.tppType!=1) && !((item.isopenfastPayment==1||item.canDisable==1)&&corpInfo.tppType==2)" action="user/cardBind/repaceCard" method="post" ng-submit="submitReplace(item.id,2)" target="_blank" class="form_unwrap_bank_card">
+				<input type="hidden" name="id" ng-value="item.id">
+				<input type="submit" class="btn_unwrap_bank_card" value="解绑">
+			</form>
+			<em ng-if="item.bindingStatus==3">绑定失败</em>
+			<em ng-if="item.bindingStatus==5">解绑失败</em>
+			<em ng-if="item.bindingStatus==4">解绑中</em>
+			<em ng-if="item.bindingStatus==2">绑卡审核中</em>
+    	</div>
+    	<div class="fr">
+			<!--case: 未开通快捷支付 -->
+			<!-- <em ng-if="item.isopenfastPayment==0">
+				<form action="users/openFastPay" ng-submit="openQuickPayment()" method="post" target="_blank">
+					<input type="hidden" name="id" ng-value="item.id">
+					<input type="submit" value="去开通快捷支付">
+				</form>
+			</em> -->
+				<!--case: 已开通快捷支付 -->
+				<em ng-if="item.isopenfastPayment==1">已开通快捷支付</em>
+    	</div>
+		</span>
+  </li>
+  <!--case: 非联动,可以添加多张卡 -->
+  <li class="addCard" ng-style="hideblank">
+    <span></span>
+    <form action="user/cardBind/bindCard" class="form_add_card" method="post" ng-submit="submitAdd()" target="_blank">
+      <input type="submit" class="btn_add_bank_card" value="添加银行卡">
+    </form>
+  </li>
+</ul>
+<div class="holder" ng-if="corpInfo.tppType==2">
+	<div class="content1">
+		<span class="tip-lamp"></span>
+	</div>
+	<div class="content2">
+		<span class="account-font3">温馨提示：</span><br>
+		<span>为了您的资金安全，绑定的快捷支付卡将同时被绑定为唯一取现卡。如需解绑快捷卡，请至 <a target="_blank" href="https://c.chinapnr.com/p2puser/" style="    text-decoration: underline;">汇付官网-P2P账户查询系统</a> 进行解绑。</span>
+	</div>
+</div>

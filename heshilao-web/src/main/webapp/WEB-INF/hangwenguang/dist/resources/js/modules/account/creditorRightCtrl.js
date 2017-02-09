@@ -1,0 +1,1 @@
+define(["angular","services/ui/dialogService"],function(e,i){return function(e,i,r,n){e.controller("creditorRightCtrl",["$scope",function(e){"use strict"}])}});

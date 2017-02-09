@@ -1,0 +1,1 @@
+define(["angular"],function(t){return function(t,e,a,o){t.controller("lawCtrl",["$scope","cService",function(t,e){"use strict";t.url="column/articles/4",t.page=1,t.pageSize=10,(t.getRows=function(a){e.ajax({url:t.url,method:"post",params:{page:a,rows:t.pageSize}}).success(function(e){t.data=e.rows,t.total=e.total})})(1)}])}});

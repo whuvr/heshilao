@@ -1,0 +1,1 @@
+define(["angular"],function(o){return function(o,t,e,n){o.controller("myinvestCtrl",["$scope","cService","$rootScope","$timeout","popupDialog",function(o,t,e,n,c){"use strict"}])}});

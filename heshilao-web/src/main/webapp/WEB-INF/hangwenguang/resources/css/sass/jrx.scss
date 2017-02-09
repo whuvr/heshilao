@@ -1,0 +1,650 @@
+﻿/******header start******/
+@import "base.scss";
+/*header*/
+#header{
+	background: #fff;
+
+	.top{
+		line-height: 35px;
+		border-bottom: 1px solid #ddd;
+		color: #666;
+		text-align: center;
+		@extend .f12;
+		&.top-head{
+			background: #f9f9f9;
+			color: #a3a3a3;
+			border-bottom: 1px solid #e3e3e3;
+		}
+		&.top-head{
+			height: 35px;
+			background: #fff;
+			border-bottom: 1px solid #e3e3e3;
+			span.web-phone{
+				background: url("../images/top-head.png") no-repeat 0 8px;
+				padding-left: 35px;
+				display: inline-block;
+				line-height: 34px;
+			}
+			.header-wechat,.online-service{
+				display: inline-block;
+				position: relative;
+				margin-left: 10px;
+				padding-left: 30px;
+				height: 34px;
+				/* color: $f-light; */
+				background: url("../images/top-head.png") no-repeat 0 8px;
+				z-index: 999;
+				img{
+					width: 80px;
+				}
+			}
+			.header-arrow{
+				position: absolute;
+				top: -16px;
+				right: 8px;
+				@include arrow-top($border:8px,$color:#333)
+			}
+			.online-service{
+				background-position: 5px -135px;
+				cursor: pointer;
+			}
+			.header-wechat{
+				background-position: 0px -88px;
+			}
+			#servicebox,#wechatbox{
+				display: none;
+				position: absolute;
+				top: 35px;
+				right: 0;
+				background: #333;
+				padding: 10px;
+				border-radius: 4px;
+				color: #fff;
+
+			}
+			#servicebox{
+				width: 200px;
+				text-align: left;
+				a{
+					color: $light-lighter-on;
+					float: none;
+				}
+
+			}
+			.online-service:hover #servicebox,.header-wechat:hover #wechatbox{
+				display: block;
+			}
+
+		}
+	}
+
+	.left{
+		position: relative;
+		display: table;
+		&:hover{
+			z-index: 10;
+		}
+		img{
+			max-height: 70px;
+			display: block;
+			vertical-align: top;
+		}
+		a{
+			display: inline-block;
+			color: #a3a3a3;
+		}
+		span{
+			padding-right: 15px;
+			color: #a3a3a3;
+			&:first-child{
+				padding-left: 35px;
+				background: url("../images/top-head.png") left center no-repeat;
+				background-position: 0 0;
+			}
+		}
+		.header-icons{
+			vertical-align: middle;
+			display: inline-block;
+			background: url(../images/header-icons.png)  no-repeat;
+		}
+		#header-wechat{
+			margin-left: 10px;
+			margin-right: 5px;
+			width: 25px;
+			height: 31px;
+			background-position: -26px 5px;
+			position: relative;
+			img{
+				width: 80px;
+			}
+		}
+
+		#wechatbox{
+			display: none;
+			position: absolute;
+			top: 29px;
+			left: -28px;
+			z-index: 30;
+		}
+		#header-wechat:hover {
+			padding-left: 0;
+			background-position: -26px 5px;
+			#wechatbox{
+				display: block;
+			}
+		}
+		#header-microblog{
+			position: relative;
+			margin-right: 5px;
+			width: 23px;
+			height: 20px;
+			background-position: -60px 0px;
+		}
+		#header-microblog:hover{
+		    background-position: -60px 0px;
+		}
+		#header-qq{
+			width: 20px;
+			height: 22px;
+			background-position: -99px 0px;
+		}
+		#header-qq:hover{
+			background-position: -236px 0px;
+		}
+
+		.header-arrow{
+			position: absolute;
+			background: #313131;
+			top: 0;
+			left: 29px;
+			z-index: 10;
+			width: 12px;
+			height: 12px;
+			background: url(../images/arrows.png);
+			background-position: -6px -1px;
+		}
+		#wechatContent{
+			background-color: #313131;
+			border: none;
+			border-radius: 5px;
+			padding: 14px 10px;
+			margin-top: 6px;
+		}
+		#microblogbox{
+			position: absolute;
+			top: 30px;
+			left: -28px;
+			z-index: 30;
+			border: none;
+			font-size: 14px;
+			border-radius: 5px;
+			padding: 0px;
+		}
+		#header-microblog:hover #microblogbox{
+			z-index: 4;
+		}
+		#microblogbox h2,#QQbox h2{
+			color: #fff;
+			font-size: 14px;
+			font-weight: normal;
+			width: 98px;
+		}
+		#microblogbox a{
+		    color: #4971b6;
+		}
+		#QQbox{
+			position: absolute;
+			top: 34px;
+			left: 469px;
+			background: #f5f5f5;
+			border: 1px solid #e6e6e6;
+			font-size: 14px;
+			border-radius: 5px;
+			padding: 5px 10px 15px;
+		}
+		#QQbox #QQcontent span{
+			color: #b7322c;
+			line-height: 10px;
+			margin-top: 11px;
+			display: block;
+		}
+		#QQbox .number{
+			font-size: 19px;
+			font-weight: normal;
+			color: #b7322c;
+		}
+	}
+
+	.top-cont .right{
+		position: absolute;
+		top: 0;
+		right: 0;
+		text-align: right;
+		color: #666;
+		&.navright{
+			top:15px;
+			height:60px;
+			line-height:59px;
+		}
+		a{
+			font-size: 12px;
+			margin-left: 15px;
+			float: right;
+		}
+		.user-info,#online-serviece,#login{
+			display: block;
+
+			line-height: 35px;
+		}
+
+	}
+
+	#logo-wrap{
+		display: table-cell;
+		height: 93px;
+		vertical-align: middle;
+		width: 450px;
+	}
+
+	.head-middle{
+		background: url(../images/head-bg.png) no-repeat 20%;
+		.top-cont{
+			height: 90px;
+			min-height: 90px;
+		}
+		.right{
+			width: 166px;
+			line-height: 88px;
+			z-index: 100;
+			color: #666;
+			&:hover{
+				border-top: none;
+				background: #e8e8e8;
+				a.myaccount{
+					background: url(../images/redtop.png) 75px center  no-repeat;
+				}
+				.account-detail{
+					border-top: 1px dashed #d6d6d6;
+					height: 80px;
+				}
+				.account-detail-logined{
+					height: 170px;
+				}
+			}
+			a.myaccount{
+				background: url(../images/reddown.png) 75px center  no-repeat;
+				font-size: 16px;
+				color: $gray-light;
+				padding-right: 35px;
+			    .arrow{
+					position: absolute;
+					right: 15px;
+					top: 37px;
+					width: 8px;
+					height: 8px;
+					display: inline-block;
+					transform: rotate(45deg);
+				}
+			}
+			a.active{
+				color: $light-lighter-on;
+			}
+			img{
+				position: static !important;
+				width: 38px;
+				height: 38px;
+				border-radius: 50%;
+				display: inline-block;
+				vertical-align: middle;
+			}
+			.login-p{
+				margin: 0;
+				padding: 0;
+				height: 10px;
+			}
+		}
+		.account-detail{
+			text-align: center;
+			padding: 0px 20px;
+			height: 0;
+			overflow: hidden;
+			box-sizing: border-box;
+			background:#e8e8e8;
+			.login,.login:hover{
+				margin: 0 auto;
+				background:#ffaa00;
+				@include btn-light(116px,33px,$font-size:16px)
+
+			}
+		}
+		.account-detail-logined{
+			a{
+				display: inline-block;
+				color: #333;
+				height: 15px;
+				line-height: 15px;
+				font-size: 12px;
+				width: 62px;
+				padding: 0;
+			    margin-left: 0;
+			    float: left;
+			    &:hover{
+			    	color: $light-lighter-on;
+			    }
+			    &:nth-child(even){
+					text-align: left;
+					border-right: 1px solid #dae0eb;
+				}
+				&::nth-child(odd){
+					text-align: right;
+				}
+			}
+			.account-total{
+				padding: 20px 0;
+				text-align: center;
+				line-height: 25px;
+				color: #333;
+				span{
+					color: $light-lighter-on;
+					display: block;
+				}
+			}
+		}
+	}
+	.top-head .right a:hover,.top-head .right .user-info{
+		color: $light-lighter-on;
+	}
+	.top-head .right .user-info{
+		display: inline-block;
+		padding-right:20px;
+	}
+	.nav{
+		display: inline-block;
+		padding-top: 25px;
+		h2.title{
+			@include f-normal-lightest-1();
+			font-size: 20px;
+			display: inline-block;
+			border-left: 1px solid #f3f3f3;
+			line-height: 25px;
+			padding: 0 25px;
+			margin: 25px 0 0 15px;
+		}
+		a{
+			display: inline-block;
+			float: left;
+			margin: 0 8px;
+			width: 90px;
+			font-size: 18px;
+			line-height: 55px;
+			color: #333;
+			text-align: center;
+			&.active,&.active1{
+				font-weight: bold!important;
+				color: #197abf;
+				border-bottom: 4px solid #338fff;
+
+			}
+			&:first-child{
+				margin-left: 20px;
+			}
+		}
+	}
+	.top-cont{
+		margin: 0 auto;
+		width: 1192px;
+		text-align: left;
+		position: relative;
+	}
+}
+/*footer*/
+#simply-footer{
+	.simply-footer{
+		width:1192px;
+		margin:0 auto;
+		padding: 25px 0;
+		line-height: 30px;
+		text-align: center;
+	}
+}
+#footer{
+	display: table;
+	width: 100%;
+	text-align: center;
+	font-size: 14px;
+	line-height: 39px;
+	background: #2978ae;
+	.container{
+		position: relative;
+		padding-top: 20px;
+		height: 204px;
+		margin:0 auto;
+		text-align: center;
+		vertical-align: middle;
+		@include f-white($weight:normal,$f:14px);
+		.logo{
+			position: absolute;
+			left:50%;
+			top: -100px;
+			display: inline-block;
+			width: 100px;
+			height: 100px;
+			background: url(../images/footer-logo.png) center center;
+
+		}
+		.city-bg{
+			position: absolute;
+			right: 50px;
+			top: -100px;
+			display: inline-block;
+			width: 580px;
+			height: 100px;
+			background: url(../images/head-bg.png) center center;
+		}
+		a{
+			display: inline-block;
+			text-decoration:underline;
+			@include f-white($weight:normal,$f:14px);
+		}
+		.lnav{
+			margin: 0;
+			padding-bottom: 15px;
+			border-bottom: none;
+			span{
+				margin:0 30px;
+			}
+		}
+		.left{
+			position: relative;
+			display: inline-block;
+			text-align:left;
+			vertical-align: middle;
+			img{
+				width: 115px;
+				height: 115px;
+				vertical-align: middle;
+				margin-right: 15px;
+			}
+
+		}
+		.right{
+			display: inline-block;
+			color: #e6e6e6;
+			font-size: 35px;
+			line-height: 40px;
+			vertical-align: middle;
+			text-align: left;
+			.safe{
+				a{
+					display: inline-block;
+					margin: 10px;
+					padding-left: 0;
+					img{
+						width: 100px;
+						height: 40px;
+					}
+				}
+			}
+			a{
+				display: block;
+				line-height: 20px;
+				text-decoration: none;
+				padding-left: 10px;
+				font-size: 24px;
+				&.webphone{
+					font-size: 25px;
+					line-height: 30px;
+				}
+				&.website{
+					font-size: 14px;
+					color: #dedede;
+				}
+			}
+			span{
+				display: block;
+				width: 150px;
+				@include f-normal-lightest-3();
+				padding-left:30px;
+				margin: 0 auto;
+				line-height: 30px;
+				vertical-align: bottom;
+				background:url(../images/phone_icon.png) no-repeat left center;
+			}
+		}
+		.go-top{
+			position:absolute;
+			top:0;
+			right:0;
+			width:95px;
+			height:35px;
+			background:#fd5353 url(../images/top.png) no-repeat center 10px;
+			color:#fff;
+			font-size:14px;
+			padding-top:15px;
+			cursor:pointer;
+		}
+	}
+	.laddress{
+		background: #3c4043;
+		width: 100%;
+		line-height: 45px;
+		text-align: center;
+		color: #c6cbdb;
+		// @include f-white();
+	}
+}
+#rechargeAndCash .rechargeCash-btn1,#rechargeAndCash .rechargeCash-btn2{
+	@extend .btn-light;
+}
+//2016-4-27 wyk@erongdu.com
+#rechargeAndCash .rechargeCash-btn2{
+	margin-left: 10px;
+}
+#new-task{
+	.banner{
+		background: url(../images/new-task.png) no-repeat;
+		height: 220px;
+	}
+	.container{
+		position: relative;
+		margin-top: 30px;
+		background: url(../images/new-task-bottom.png) no-repeat bottom;
+		padding-bottom: 120px;
+
+		h2{
+			font-size: $f20;
+			color: $gray;
+			padding-left: 65px;
+			line-height: 50px;
+			background: #fff;
+		}
+		#step-wrap{
+			background: #fff;
+			padding-bottom: 40px;
+			.step-default{
+				position:absolute;
+				left: 65px;
+				top: 75px;
+				width: 91px;
+				height: 692px;
+				background: url(../images/step-task-default.png) no-repeat ;
+				ul{
+					background: url(../images/step-task-light.png) no-repeat;
+					li{
+						width: 91px;
+						height: 149px;
+					}
+				}
+
+			}
+			table{
+				width: 910px;
+				margin-left: 200px;
+			}
+			td{
+				vertical-align: middle;
+				line-height: 148px;
+				font-size: $f18;
+				color: $main-color;
+				border-bottom: 1px solid #f3f3f3;
+				span.status{
+					color: $light-on;
+				}
+				span.amount{
+					position: absolute;
+					top: 57px;
+					left: 88px;
+					width:125px;
+					height:44px;
+					line-height:44px;
+					font-family: arial;
+					font-size: 28px;
+					color:#fff;
+					i{
+						font-family: '\5FAE\8F6F\96C5\9ED1';
+						font-size: 16px;
+						font-style: normal;
+						vertical-align:middle;
+					}
+				}
+				img{
+					display: inline-block;
+					vertical-align: middle;
+					margin-left: 10px;
+				}
+				a{
+					width: 160px;
+					height: 40px;
+					line-height: 40px;
+					display: inline-block;
+					text-align: center;
+					border-radius: 4px;
+					&.active{
+						background: $light-on;
+						color: $white;
+					}
+					&.default{
+						background: #eee;
+						color: $light-color;
+					}
+				}
+			}
+			td.bonus{
+				position: relative;
+				width:270px;
+				background: url(../images/red-bag-bg.png) no-repeat 65px 55px;
+			}
+		}
+	}
+}
+.m-tips{
+	padding: 55px 30px 0;
+	font-size: 14px;
+}
+.m-tips .title{
+	font-size: 16px;
+	line-height: 2em;
+}
+.m-tips .bd{
+	list-style:inside decimal;
+}

@@ -1,0 +1,1 @@
+define(["modules/activities/activitiesCtrl","directives/knobDirective","text!htmlModule/activities/activities.html"],function(i,t,e,c){return function(c,n,s,v){i(c,n,s,v),t(c,n,s,v),n.append(e)}});

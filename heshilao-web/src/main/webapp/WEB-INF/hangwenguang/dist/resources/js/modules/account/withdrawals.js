@@ -1,0 +1,1 @@
+define(["modules/account/withdrawalsCtrl","modules/account/withdrawalsService","text!htmlModule/account/withdrawals.html"],function(t,a,e){return function(n,c,l,u){t(n,c,l,u),a(n,c,l,u),c.append(e)}});

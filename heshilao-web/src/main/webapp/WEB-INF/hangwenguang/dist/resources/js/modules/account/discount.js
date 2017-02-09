@@ -1,0 +1,1 @@
+define(["modules/account/discountCtrl","modules/account/discountService","text!htmlModule/account/discount.html"],function(t,n,c){return function(u,o,e,d){t(u,o,e,d),n(u,o,e,d),o.append(c)}});

@@ -1,0 +1,1 @@
+define(["modules/account/paymentCtrl","modules/account/paymentService","text!htmlModule/account/payment.html"],function(t,e,n){return function(c,u,o,a){t(c,u,o,a),e(c,u,o,a),u.append(n)}});

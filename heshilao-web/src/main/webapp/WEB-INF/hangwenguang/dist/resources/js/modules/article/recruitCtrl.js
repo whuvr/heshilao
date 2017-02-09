@@ -1,0 +1,1 @@
+define(["angular"],function(e){return function(e,t,n,c){e.controller("recruitCtrl",["$scope","navData","cService",function(e,t,n){"use strict";e.navDate=t[0].subState,e.page=1,e.pageSize=1,n.ajax({method:"post",url:"column/articles/8"}).success(function(t,n,c,r){e.articleData=t.rows[0]}).error(function(e,t,n,c){console.log(e)})}])}});

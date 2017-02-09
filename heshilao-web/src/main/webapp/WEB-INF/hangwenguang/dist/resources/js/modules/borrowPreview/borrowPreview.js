@@ -1,0 +1,1 @@
+define(["modules/borrowPreview/borrowPreviewCtrl","modules/borrowPreview/borrowPreviewService","directives/opPagingDirective","jsCommon/knobDirective","text!htmlModule/borrowPreview/borrowPreview.html"],function(e,r,o,i,w){return function(t,n,v,b){e(t,n,v,b),r(t,n,v,b),o(t,n,v,b),i(t,n,v,b),n.append(w)}});

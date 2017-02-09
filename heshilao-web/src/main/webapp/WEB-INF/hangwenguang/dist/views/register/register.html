@@ -1,0 +1,70 @@
+<div ng-controller="registerCtrl" id="register"><div id="main-cont"><div class="mod-register mod-panel" ui-view=""><div class="col-sub"><ul class="reg-step-bg"><li id="light">填写账户信息<i class="active1"></i></li><li class="active2">账户注册成功<i></i></li></ul></div><div class="col-main"><!-- <form cp-form-register name="form" novalidate ng-submit="submit(form,$event)" class="form-fields">
+					<div class="field form-group">
+						<label class="label">用户名：</label>
+						<input
+							cp-valid-username
+							username-error-type="UserError"
+							remote-username-error-type="remote-user" maxlength="16"
+							type="text" name="username" ng-model="username" cp-ui-placeholder="请输入用户名" />
+					</div>
+					<div class="field form-group">
+						<label class="label">手机号：</label>
+						<input
+							cp-valid-phone
+							phone-error-type="PhoneError"
+							remote-phone-error-type="remote-phone"
+							maxlength="11"
+							type="text" name="phone" ng-model="phone" cp-ui-placeholder="请输入您常用的手机号码" />
+					</div>
+					<div class="field form-group">
+						<label class="label">登录密码：</label>
+						<input
+							cp-valid-password
+							password-error-type="PasswordError" maxlength="16"
+						 	type="password" name="password" id="password" ng-model="password" cp-ui-placeholder="至少8个字符，包含一个字母和一个数字" />
+					</div>
+					<div class="field form-group">
+						<label class="label">确认密码：</label>
+						<input
+							cp-valid-confirm="password"
+							confirm-error-type="repeat"
+							required maxlength="16"
+						 	type="password" ng-model="confirmPassword" cp-ui-placeholder="请再次输入密码" />
+					</div>
+				    <div class="field form-group">
+						<label class="label">推荐人：</label>
+						<input
+							cp-valid-invite
+							cp-do-fill-invite
+							username-error-type="UserError"
+							remote-invite-error-type="remote-friend"
+						     maxlength="16"
+						 	type="text" name="userInviteCode"
+						 	ng-model="userInviteCode" cp-ui-placeholder="请输入好友推荐人" />
+					</div>
+					<div class="field form-group"id="yanzm">
+						<label class="label">验证码：</label>
+						<input type="text" id="putyan1"class="captcha1" ng-model="validCode" maxlength="6" name="validCode" required cp-ui-placeholder="验证码" />
+					   	<a cp-do-send-code="phone" id="getcode" sendcode-type="register" class="btn-get-valid ml20">获取验证码</a>
+					</div>
+					<div class="field form-group" style="position:relative" id="reg-treaty">
+						<label class="label">&nbsp;</label>
+						<input required ng-required-err-type="ProtocolError" type="checkbox"  ng-model="isAgree" name="isAgree" />
+						<span class="fddd">我已阅读并同意<a cp-do-register-protocol id="light">《融都云注册协议》</a></span>
+					</div>
+					<div class="field">
+						<label class="label">&nbsp;</label>
+					    <input type="submit" value="立即注册" class="submit-btn" />
+					</div>
+					<div class="field">
+						<label class="label">&nbsp;</label>
+						<span class="login-tip">已经是平台会员了？<a id="light" ng-click="$state.go('login')">立即登录</a></span>
+					</div>
+				</form> --><form name="form" novalidate="" ng-submit="submit(form,$event)" class="form-fields"><div tabs=""><div class="index-invest register-tab"><div class="container"><a ng-click="formData.userType=0" class="active">个人用户</a> <a ng-click="formData.userType=1">企业用户</a> <a ng-click="formData.userType=2">担保用户</a></div></div></div><p class="txt">用户名：<!--<span class="rabbage"></span>--></p><div class="reigster-block form-group"><input type="text" class="register-input" ng-model="formData.username" ng-pattern="/^\d*[a-zA-Z]+[a-zA-Z0-9]*$/" maxlength="16" ng-minlength="4" required remote-validation="users/checkUsername" remote="username/remote-user" pattern-err-type="UserError" minlength-err-type="minUser" ie-placeholder="请填写您的用户名"><!-- <div class="register-tip">
+ 							<span>*该用户名已经存在</span>
+ 						</div> --></div><p class="txt">手机号码：</p><div class="reigster-block form-group"><input type="text" name="phone" class="register-input" ng-pattern="/^1[3|5|7|8|4]\d{9}$/" maxlength="11" ng-model="formData.phone" required remote-validation="users/checkPhone" remote="phone/remote-phone" pattern-err-type="PhoneError" ie-placeholder="请输入您的常用手机号码"></div><p class="txt">登录密码：</p><div class="reigster-block form-group"><input id="password" type="password" class="register-input" ng-pattern="/^(?![a-zA-Z]+$)(?!\d+$)[0-9A-Za-z]{8,16}$/" ng-minlength="8" maxlength="16" ng-model="formData.password" required pattern-err-type="PasswordError" ie-placeholder="至少8个字符，包括一个字母和一个数字"></div><p class="txt">确认密码：</p><div class="reigster-block form-group"><input id="password" type="password" class="register-input" ng-pattern="/^(?![a-zA-Z]+$)(?!\d+$)[0-9A-Za-z]{8,16}$/" ng-minlength="8" maxlength="16" compare-to="formData.password" ng-model="confirmPassword" required pattern-err-type="PasswordError" ie-placeholder="请再次输入密码"></div><div ng-if="formData.userType==0"><p class="txt">推荐人：</p><div class="reigster-block form-group" id="recommend-people"><input type="text" id="recommend-people" class="register-input" ng-pattern="/[a-zA-Z0-9]{4,16}$/" ng-minlength="4" maxlength="16" ng-model="formData.userInviteCode" remote-validation="users/checkInviteUser" remote="userInviteCode/remote-friend" pattern-err-type="recommendError" cp-ui-placeholder="请选择邀请人"></div></div><p class="txt">图片验证码：</p><div id="identifyCode" class="reigster-block form-group"><input ng-change="validImg()" class="register-input" ng-focus="hideError()" required ng-required-err-type="validateError" ng-model="formData.imageCode" type="text" name="validCode" ie-placeholder="图片验证码"><div class="reg-validatebox"><img class="validatebox" ng-click="validCode()" id="reg-validatecode" ng-src="{{valid}}" style="display:inline"></div><span id="" class="has-error" ng-show="serverError" ng-bind="callError"></span></div><p class="txt">验证码：</p><div class="reigster-block form-group" id="reg-valid"><div class="input-group" id="input5"><input id="password" type="text" class="register-input" maxlength="6" required ng-model="formData.validCode" ie-placeholder="验证码"></div><div class="reg-validatebox"><input type="button" disabled="disabled" class="register-getcode disabled" value="获取验证码" ng-click="getCode(form)" id="getcode"></div></div><!-- <div class="reigster-block form-group" id="reg-treaty">
+ 						<input type="radio" ng-model="formData.userType" value="0" checked="true" class="registerMargin" required ng-required-err-type="ProtocolError"/>
+ 						<label class="register-protocol1">个人用户</label>
+ 						<input type="radio" ng-model="formData.userType" value="1" class="registerMargin" required ng-required-err-type="ProtocolError"/>
+ 						<label class="register-protocol1">企业用户</label>
+ 					</div> --><div class="reigster-block form-group" id="reg-treaty"><input type="checkbox" ng-model="formData.isAgree" class="registerMargin" required ng-required-err-type="ProtocolError"><label class="register-protocol1">我已阅读并且同意</label><span class="register-protocol-font1" ng-click="userProtocol()">《用户服务协议》</span></div><input type="hidden" name="sourceCode" ng-value="formData.sourceCode"> <input type="hidden" name="leid" ng-value="formData.leid"> <input type="hidden" name="luid" ng-value="formData.luid"> <input type="submit" class="reg-btn" id="register_button" value="立即注册"><div class="field"><label class="label">&nbsp;</label><span class="login-tip">已经是平台会员了？<a id="light" ng-click="$state.go('login')">立即登录</a></span></div></form></div></div></div></div>

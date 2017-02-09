@@ -1,0 +1,1 @@
+define(["modules/home/homeCtrl","directives/knobDirective","text!htmlModule/home/home.html"],function(e,t,o){return function(n,i,m,h){e(n,i,m,h),t(n,i,m,h),i.append(o)}});

@@ -1,0 +1,90 @@
+@mixin f-import-1($weight:normal){
+	color: $light-lighter-on;
+	font-size: $f30;
+	font-weight: $weight;
+}
+@mixin f-import-2($weight:normal){
+	color: $light-lighter-on;
+	font-size: $f18;
+	font-weight: $weight;
+}
+@mixin f-import-3($weight:normal){
+	color: $light-lighter-on;
+	font-size: $f16;
+	font-weight: $weight;
+}
+@mixin f-import-4($weight:normal){
+	color: $light-lighter-on;
+	font-size: $f14;
+	font-weight: $weight;
+}
+@mixin f-import-5($weight:normal){
+	color: $light-lighter-on;
+	font-size: $f12;
+	font-weight: $weight;
+}
+@mixin f-normal-1($weight:normal){
+	color: $gray-dark;
+	font-size: $f20;
+	font-weight: $weight;
+}
+@mixin f-normal-2($weight:normal){
+	color: $gray-dark;
+	font-size: $f18;
+	font-weight: $weight;
+}
+@mixin f-normal-3($weight:normal){
+	color: $gray-dark;
+	font-size: $f16;
+	font-weight: $weight;
+}
+@mixin f-normal-4($weight:normal){
+	color: $gray-dark;
+	font-size: $f14;
+	font-weight: $weight;
+}
+@mixin f-normal-lighter-1($weight:normal){
+	color: $gray;
+	font-size: $f24;
+	font-weight: $weight;
+}
+@mixin f-normal-lighter-2($weight:normal){
+	color: $gray;
+	font-size: $f20;
+	font-weight: $weight;
+}
+@mixin f-normal-lighter-3($weight:normal){
+	color: $gray;
+	font-size: $f18;
+	font-weight: $weight;
+}
+@mixin f-normal-lighter-4($weight:normal){
+	color: $gray;
+	font-size: $f16;
+	font-weight: $weight;
+}
+@mixin f-normal-lighter-5($weight:normal){
+	color: $gray;
+	font-size: $f14;
+	font-weight: $weight;
+}
+@mixin f-normal-lightest-1($weight:normal){
+	color: $gray-light;
+	font-size: $f16;
+	font-weight: $weight;
+}
+@mixin f-normal-lightest-2($weight:normal){
+	color: $gray-light;
+	font-size: $f14;
+	font-weight: $weight;
+}
+@mixin f-normal-lightest-3($weight:normal){
+	color: $gray-light;
+	font-size: $f12;
+	font-weight: $weight;
+}
+@mixin f-white($weight:normal,$f:14px){
+	color: $white;
+	font-size: $f;
+	font-weight: $weight;
+}

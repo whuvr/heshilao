@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rongdu.rongyun.mapper.WorkOrderMapper">
+	<resultMap id="BaseResultMap" type="WorkOrderRes">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="corpId" property="corpId" jdbcType="INTEGER" />
+		<result column="typeId" property="typeId" jdbcType="INTEGER" />
+		<result column="applyTime" property="applyTime" jdbcType="TIMESTAMP" />
+		<result column="status" property="status" jdbcType="INTEGER" />
+		<result column="receiveTime" property="receiveTime" jdbcType="TIMESTAMP" />
+		<result column="receiveName" property="receiveName" jdbcType="VARCHAR" />
+		<result column="doneTime" property="doneTime" jdbcType="TIMESTAMP" />
+		<result column="doneName" property="doneName" jdbcType="VARCHAR" />
+		<result column="expectDoneTime" property="expectDoneTime"
+			jdbcType="TIMESTAMP" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, corpId, typeId,
+		applyTime,status,receiveTime,receiveName,doneTime,doneName,expectDoneTime
+	</sql>
+
+	<!-- 查询工单List -->
+	<select id="findWorkOrderList" resultType="workOrderRes"
+		parameterType="workOrderReq">
+		select w.*,t.typeName,t.workNumber from workOrder w,workOrderTypeDef t
+		where w.typeId=t.id
+		<if test="startTime != null">
+      <![CDATA[ and  w.applyTime >= #{startTime,jdbcType=TIMESTAMP}  ]]>
+		</if>
+		<if test="endTime != null">
+      <![CDATA[ and  w.applyTime <= #{endTime,jdbcType=TIMESTAMP}  ]]>
+		</if>
+		<if test="typeId!=null">
+			and w.typeId=#{typeId,jdbcType=INTEGER}
+		</if>
+		<if test="status !=null">
+			and w.status=#{status,jdbcType=INTEGER}
+		</if>
+		and corpId=#{corpId,jdbcType=INTEGER}
+		order by w.applyTime desc
+	</select>
+
+	<!-- 根据工单状态查询工单数量 -->
+	<select id="countOrderByStatus" resultType="Integer"
+		parameterType="WorkOrderReq">
+		select count(*) from workOrder where corpId=#{corpId}
+		and status=#{status}
+	</select>
+
+	<!-- 增加一条工单记录 -->
+	<insert id="insertSelective" parameterType="workOrderReq">
+		insert into workOrder
+		<selectKey resultType="java.lang.Long" keyProperty="id"
+			order="AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="corpId != null">
+				corpId,
+			</if>
+			<if test="typeId != null">
+				typeId,
+			</if>
+			<if test="applyTime != null">
+				applyTime,
+			</if>
+			<if test="status != null">
+				status,
+			</if>
+			<if test="receiveTime != null">
+				receiveTime,
+			</if>
+			<if test="receiveName != null">
+				receiveName,
+			</if>
+			<if test="doneTime != null">
+				doneTime,
+			</if>
+			<if test="doneName != null">
+				doneName,
+			</if>
+			<if test="expectDoneTime != null">
+				expectDoneTime,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="corpId != null">
+				#{corpId,jdbcType=INTEGER},
+			</if>
+			<if test="typeId != null">
+				#{typeId,jdbcType=INTEGER},
+			</if>
+			<if test="applyTime != null">
+				#{applyTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="receiveName != null">
+				#{receiveName,jdbcType=VARCHAR},
+			</if>
+			<if test="receiveTime != null">
+				#{receiveTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="doneTime != null">
+				#{doneTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="doneName != null">
+				#{doneName,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=INTEGER},
+			</if>
+			<if test="expectDoneTime != null">
+				#{expectDoneTime,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+
+	<!-- 通过Id查找工单 -->
+	<select id="selectOrderById" resultType="workOrderRes"
+		parameterType="int">
+		select w.*,t.typeName FROM workOrder w left join
+		workOrderTypeDef t on w.typeId=t.id WHERE w.id=#{id,jdbcType=INTEGER}
+	</select>
+
+	<!-- 更改订单状态 -->
+	<update id="updateOrderStatus" parameterType="workOrderReq">
+		update workOrder set
+		status=#{status,jdbcType=INTEGER} where id=#{id,jdbcType=INTEGER} and
+		status=#{beforeStatus,jdbcType=INTEGER}
+	</update>
+
+</mapper>

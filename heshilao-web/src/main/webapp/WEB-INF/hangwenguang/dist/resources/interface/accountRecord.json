@@ -1,0 +1,41 @@
+{
+	"total":20,
+	"pageSize":8,
+	"row" :[
+	{
+		"recordTime":"2015-1-1",
+		"counterpart":20,
+		"type":"银行",
+		"amount":1000,
+		"remarks":"成功"
+	},
+	{
+		"recordTime":"2015-1-1",
+		"counterpart":20,
+		"type":"银行",
+		"amount":1000,
+		"remarks":"成功"
+	},
+	{
+		"recordTime":"2015-1-1",
+		"counterpart":20,
+		"type":"银行",
+		"amount":1000,
+		"remarks":"成功"
+	},
+	{
+		"recordTime":"2015-1-1",
+		"counterpart":20,
+		"type":"银行",
+		"amount":1000,
+		"remarks":"成功"
+	},
+	{
+		"recordTime":"2015-1-1",
+		"counterpart":20,
+		"type":"银行",
+		"amount":1000,
+		"remarks":"成功"
+	}
+	]
+}

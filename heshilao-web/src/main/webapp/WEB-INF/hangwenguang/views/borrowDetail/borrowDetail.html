@@ -1,0 +1,218 @@
+<div ng-controller="borrowDetailCtrl" id="main-cont" class="grid-m0s34 mod-borrow-detail" cp-info-borrow-detail var-name="borrowData">
+  <div class="col-sub">
+    <div class="mod-panel mod-inv-opt">
+      <div class="can-inv-money">
+        <p>可用余额：<span class=" cl-grey"><s class="light-lightest-on f20" ng-bind="borrowData.useableBalanceAvailable"></s><s ng-if="!user.id" class="light-lightest-on f20">0</s>元</span></p>
+        <p>剩余可投：<span class="cl-grey"><s class="light-lightest-on f20" ng-bind="borrowData.amountInvestable"></s>元</span></p>
+      </div>
+      <div class="mod-body">
+        <div class="opt-switch" cp-info-borrow-status="borrowData" var-name="investStatus">
+          <div classs="opt-normal" ng-show="investStatus == 1 && borrowData.countDown <= 0">
+            <div class="inv-form">
+              <form class="form-fields form-invest-borrow" name="investBorrowForm" cp-form-invest-borrow disable-enter novalidate>
+                <div class="field form-group">
+                  <div class="input-wrap">
+                    <input class="textbox w-fill-textbox" type="text" cp-ui-placeholder="0" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" id="investFunds" cp-ui-limit-decimal="2" cp-valid-invest-value="borrowData" element-modifier="nullModifier" name="cashStr" ng-model="cashStr" ng-change="clearRedp(borrowData.redPacketResArrays)" ng-disabled="disabledInvest" />
+                    <i>元</i>
+                  </div>
+                </div>
+                <div class="field ta-right">
+                  <p>预期收益：
+                    <s class="lighter" ng-bind="(borrowData.interestRepayment / borrowData.amountBorrow) * (!cashStr ? 0 : cashStr) | number:2"></s>元</p>
+                </div>
+                <div class="field form-group directive-password" ng-if="borrowData.isDirect">
+                  <label>定向密码</label>
+                  <input name="passwordDirect" type="password" cp-ui-placeholder="请输入定向密码" ng-model="passwordDirect" ng-pattern="/^[0-9a-zA-Z]*$/" pattern-err-type="invalidcharacter" required/>
+                </div>
+                <div class="field form-group" ng-show="user.id">
+                  <a ng-show="borrowData.redPacketResArrays.length" class="redp-trigger textbox w-fill-textbox" cp-do-select-redpacket="borrowData" invest-value="cashStr">
+                    <i class="icon"></i>使用红包
+                    <i class="icon2"></i>
+                  </a>
+                  <a ng-show="!borrowData.redPacketResArrays.length" class="redp-trigger textbox w-fill-textbox">
+                    <i class="icon"></i>没有红包
+                    <i class="icon2"></i>
+                  </a>
+                </div>
+                <div class="field actual-invest">
+                  <p ng-show="user.id">红包总额：
+                    <s ng-bind="redpacketTotal"></s>元</p>
+                  <p ng-show="user.id">实际应付：
+                    <s ng-bind="cashStr - redpacketTotal"></s>元</p>
+                </div>
+                <div class="field">
+                  <input type="hidden" name="borrowId" ng-value="{{borrowData.id}}" />
+                  <input type="hidden" name="redPacketIds" ng-value="{{redPacketIds}}" />
+                  <input type="hidden" name="token" ng-value="borrowData.token" />
+                  <input ng-show="user.id" type="submit" class="button-orange w-fill-button h36" value="立即投标" cp-common-singleton-button />
+                  <!-- 未登录时回到登录页面 -->
+                  <input ng-show="!user.id" type="button" class="button-orange w-fill-button h36" ng-click="$state.go('login')" value="立即投标" />
+                </div>
+              </form>
+            </div>
+          </div>
+          <div cp-common-include="'template_investOperationAbnormal'">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div cp-common-include="'template_safePromise_hangwenguang'">
+    </div>
+    <div class="dir-tabs mod-panel  mod-inv-rank">
+      <div class="mod-head">
+        <h5 class="h5">投资排行</h5>
+      </div>
+      <div class="mod-body">
+        <table>
+          <thead>
+            <tr>
+              <td width="20%">排名</td>
+              <td width="40%">投资人</td>
+              <td width="40%">投资金额</td>
+            </tr>
+          </thead>
+          <tbody cp-list-borrow-investment-rank="$stateParams.id" var-name="monthRankData">
+            <tr ng-repeat="item in monthRankData" ng-class="{odd: ($index + 1) % 2}">
+              <td>
+                <span class="badge" ng-class="{num1:$index==0,num2:$index==1,num3:$index==2}">{{item.rank}}</span>
+              </td>
+              <td ng-bind="item.username"></td>
+              <td>￥<span ng-bind="item.totalInvestMoney"></span></td>
+            </tr>
+          </tbody>
+        </table>
+        <div id="page" ng-show="!monthRankData.length">
+          <div class="no-data" ng-class="noData">暂时没有数据</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-main">
+    <div class="mod-panel mod-inv-basic">
+      <div class="mod-head inv-det">
+        <div class="inv-title" ng-class="{danbg:borrowData.type==101,dibg:borrowData.type==102,xinbg:borrowData.type==103,miaobg:borrowData.type==104}">
+          <i class="invest-type inlineblock"></i>
+          <span class="red-packetbg" ng-show="borrowData.category == 1"></span>
+          <span class="inv-name inlineblock" ng-bind="borrowData.name"></span>
+          <span class="inv-sn">借款编号：<i ng-bind="borrowData.borrowNo"></i></span>
+          <span class="proto-view floatright cl-grey">投资协议范文<a class="cl-blue light-lightest-on" cp-do-borrow-protocol-preview="$stateParams.id">预览</a></span>
+        </div>
+      </div>
+      <div class="mod-body">
+        <div class="basic-part1">
+          <!--
+						// wyk@erongdu.com 2016-8-3 18:02:35
+						// classify 0:普通标 1:浮动标 2:即息标 3:活期理财
+						// isRegionConfirm  0:浮动利率未确认 1:浮动利率确定
+						// platformRateYear : 平台加息年利率判断
+					-->
+          <!-- 非浮动标，可以是普通标，即息标，活期理财 -->
+          <table ng-if="borrowData.classify!=1">
+            <tbody>
+              <tr>
+                <td width="44%" class="cl-grey light-lightest-on"><b class="ft30 cl-orange ng-binding" ng-bind="borrowData.rateYear | number: 2"></b>%<em ng-if="borrowData.platformRateYear">+<span ng-bind="borrowData.platformRateYear | number: 2"></span>%</em></td>
+                <td width="18%"><span class="ft18 cl-black ng-binding" ng-bind="borrowData.timeLimit"></span><span ng-if="borrowData.timeType == 0">个月</span><span ng-if="borrowData.timeType == 1">天</span></td>
+                <td width="24%"><span class="ft18 cl-black ng-binding" ng-bind="borrowData.amountBorrow"></span>元</td>
+                <td width="14%" rowspan="2" align="center"><i class="knob" cp-ui-knob="borrowData.progressPercentage" r="50" line-width="3"><span class="per-val f12 gray-light"><span class="h7 ng-binding" ng-bind="borrowData.progressPercentage"></span>%</span></i></td>
+              </tr>
+              <tr class="f12 light-color">
+                <td>预期年化利率</td>
+                <td>项目期限</td>
+                <td>借款金额</td>
+              </tr>
+            </tbody>
+          </table>
+          <!-- 浮动标 -->
+          <table ng-if="borrowData.classify==1">
+            <tr>
+              <td width="60%" class="cl-grey ">预期年化收益率:<span class="light-lightest-on"><b class="ft30 cl-orange" ng-bind="borrowData.rateYearMin+'%'+'~'+borrowData.rateYearMax+'%'"></b><em ng-if="borrowData.platformRateYear">+<span ng-bind="borrowData.platformRateYear | number: 2"></span>%</em>
+                </span>
+              </td>
+              <td width="38%">最终年化收益率：<span class="light-lightest-on">
+								<b class="f30 " ng-if="borrowData.classify==1 && borrowData.isRegionConfirm==0" >待确定</b>
+								<b class="f30 " ng-if="borrowData.classify!=1||borrowData.isRegionConfirm==1" ng-bind="borrowData.rateYear+'%'"></b></span>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div class="basic-part3" ng-if="borrowData.classify==1 && borrowData.isRegionConfirm==0">
+          <table>
+            <tr>
+              <td width="15%" rowspan="2" align="left">
+                <i class="knob" knob="borrowData.progressPercentage" width="70" height="70" line-width="5"> <!--  cp-ui-knob="borrowData.progressPercentage" r="50" line-width="3"   -->
+									<span class="per-val f14"><span class="f20" ng-bind="borrowData.progressPercentage"></span>%</span>
+								</i>
+              </td>
+              <td width="22%">项目期限:
+                <span class="ft18 cl-black" ng-bind="borrowData.timeLimit"></span>
+                <span ng-if="borrowData.timeType == 0">个月</span>
+                <span ng-if="borrowData.timeType == 1">天</span>
+              </td>
+              <td width="26%">借款金额:<span class="ft18 cl-black" ng-bind="borrowData.amountBorrow | number: 2"></span>元</td>
+            </tr>
+          </table>
+        </div>
+        <div class="basic-part2">
+          <table>
+            <tr>
+              <td>还款方式
+                <span ng-if="borrowData.repayWay == 1">按月分期还款</span>
+                <span ng-if="borrowData.repayWay == 2">一次性还款</span>
+                <span ng-if="borrowData.repayWay == 3">每月还息到期还本</span>
+              </td>
+              <td>起购金额
+                <span>{{borrowData.investMin | number: 2}}元</span>
+              </td>
+              <td>最大投标
+                <span ng-if="borrowData.investMax == 0">无限制</span>
+                <span ng-if="borrowData.investMax !=0 ">{{borrowData.investMax | number: 2}}元</span>
+              </td>
+            </tr>
+            <tr>
+              <td>当前状态
+                <span ng-if="borrowData.status == 0||borrowData.status==9||borrowData.status==10||borrowData.status==11||borrowData.status==12">待初审</span>
+                <span ng-if="borrowData.status == 1">招标中</span>
+                <span ng-if="borrowData.status == 2 || borrowData.status == 3 || borrowData.status == 7">招标结束</span>
+                <!-- <span ng-if="borrowData.status == 2">初审未通过</span>
+								<span ng-if="borrowData.status == 3">满标待审</span>
+								<span ng-if="borrowData.status == 4">还款中</span>
+								<span ng-if="borrowData.status == 5">复审未通过</span>
+								<span ng-if="borrowData.status == 6">已撤回</span>
+								<span ng-if="borrowData.status == 7">已流标</span>
+								<span ng-if="borrowData.status == 8">已还款</span> -->
+                <span ng-if="borrowData.status == 5 || borrowData.status == 6">招标失败</span>
+                <span ng-if="borrowData.status == 4">还款中</span>
+                <span ng-if="borrowData.status == 8">已还款</span>
+              </td>
+              <td>发布日期
+                <span ng-bind="borrowData.openTime | date: 'yyyy-MM-dd'"></span>
+              </td>
+              <td>结束日期
+                <span ng-bind="borrowData.validDate | date: 'yyyy-MM-dd'"></span>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+    <!-- <div cp-common-include="'template_borrowDetailDetail'"></div> -->
+    <div class="dir-tabs mod-panel" tabs>
+      <div class="tabs-nav3 clearfix" cp-ui-fixed>
+        <!-- 	<a href="javascript:;" ng-click="gotoAnchor('userInfo')" tab-index="0">借款方详情</a> -->
+        <a href="javascript:;" ng-click="gotoAnchor('borrowDesc')" tab-index="0">借款描述</a>
+        <a href="javascript:;" ng-click="gotoAnchor('borrowInf')" tab-index="0">借款资料</a>
+        <a href="javascript:;" ng-click="gotoAnchor('investRecord')" tab-index="0">投资记录</a>
+      </div>
+      <div class="tabs-group">
+        <div class="mod-panel mod-inv-detail">
+          <div class="mod-body">
+            <!-- 	<div cp-common-include="'template_borrowDetailDetailUserInfo'"></div> -->
+            <div cp-common-include="'template_borrowDetailDetailDescribe'"></div>
+            <div cp-common-include="'template_borrowDetailDetailBorrowInfo'"></div>
+            <div cp-common-include="'template_borrowDetailDetailInvestRecord'"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

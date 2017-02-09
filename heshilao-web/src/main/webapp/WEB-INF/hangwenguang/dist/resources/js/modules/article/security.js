@@ -1,0 +1,1 @@
+define(["modules/article/securityCtrl","modules/article/securityService","text!htmlModule/article/security.html"],function(e,t,i){return function(r,c,l,u){e(r,c,l,u),t(r,c,l,u),c.append(i)}});

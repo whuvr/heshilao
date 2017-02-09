@@ -1,0 +1,61 @@
+<div class="credit" id="credit">
+  <div class="tabs2">
+    <div class="tab2-nav">
+      <a href="" class="active no-border"><span>信用额度</span></a>
+    </div>
+    <form id="form" novalidate name="form" role="form" cp-form-credit>
+      <div class="apply">
+        <label>申请人：</label>
+        <span ng-bind='user.username' ng-model="user.username"></span>
+        <!-- <input type="hidden" name="username" value="{{user.username}}"> -->
+      </div>
+      <div class="apply form-group">
+        <label class="l">申请金额：</label>
+        <input required type="text" class="w170" pattern-err-type="Float" ng-pattern="/(^(([1-9]+\d*)|([1-9]+\d*\.\d{1,2}))$)/" dymax="{{corpInfo.creditApplyAmountMax}}" name="amount" ng-model="amount" onkeyup="this.value=this.value.match(/\d+\.?\d*/)||[''][0]">
+      </div>
+      <div class="apply form-group">
+        <label class="mt10">申请说明：</label>
+        <textarea name="content" required ng-maxlength="50" cols="50" rows="10" resize="no" ng-model="content"></textarea>
+      </div>
+      <div class="apply">
+        <label></label>
+        <button type="submit" class="surebtn button-red" cp-common-singleton-button>确认提交</button>
+      </div>
+    </form>
+    <div class="apply_record mt30">
+      <div class="tab2-nav">
+        <a href="" class="active no-border"><span>申请记录</span></a>
+      </div>
+      <table class="table-noline mt20">
+        <thead>
+          <tr>
+            <td>时间</td>
+            <td>申请信用额度</td>
+            <td>现有额度</td>
+            <td>审核状态</td>
+            <td>说明</td>
+          </tr>
+        </thead>
+        <tbody cp-list-credit-apply var-name="creditApplyData">
+          <tr ng-repeat="item in creditApplyData">
+            <td ng-bind="item.applyTime | date:'yyyy-MM-dd HH:mm:ss'"></td>
+            <td><span ng-bind="item.amount | number:2"></span>元</td>
+            <td><span ng-bind="item.creditAvailable | number:2"></span>元</td>
+            <td>
+              <span ng-if="item.status==0">待审核</span>
+              <span ng-if="item.status==1">通过</span>
+              <span ng-if="item.status==2">未通过</span>
+            </td>
+            <td class="nameTitle">
+              <div ng-bind="item.content" title="{{item.content}}"></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div id="page">
+        <div paging class="small" page="creditApplyDataPage" page-size="creditApplyDataPageSize" total="creditApplyDataTotal" adjacent="2" dots="..." scroll-top="false" hide-if-empty="true" ul-class="pagination" active-class="active" disabled-class="disabled" show-prev-next="true" paging-action="creditApplyDataPageSearch(page)">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

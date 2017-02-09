@@ -1,0 +1,1 @@
+define(["angular","services/invest/investRankService"],function(o,n){return function(o,n,t,e){o.controller("expBorrowsDetailCtrl",["$state","$stateParams","$scope","cService","$location","popupDialog","$rootScope",function(o,n,t,e,r,i,c){t.isExist=null,t.returnWindow=function(){history.go(-1)},t.gotoAnchor=e.gotoAnchor}])}});

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rongdu.rongyun.mapper.CorpProductMapper">
+	<resultMap type="corpProductRes" id="BaseResultMap">
+		<result column="productCategory" property="productCategory"
+			jdbcType="INTEGER" />
+		<result column="productName" property="productName" jdbcType="VARCHAR" />
+		<result column="productValidityStart" property="productValidityStart"
+			jdbcType="TIMESTAMP" />
+		<result column="productValidityEnd" property="productValidityEnd"
+			jdbcType="TIMESTAMP" />
+		<result column="productBalance" property="productBalance"
+			jdbcType="INTEGER" />
+		<result column="categoryName" property="categoryName"
+			jdbcType="VARCHAR" />
+		<result column="strategyUnit" property="strategyUnit" jdbcType="VARCHAR" />
+		<result column="serviceType" property="serviceType" jdbcType="INTEGER" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		productCategory,productName,productValidity,StartproductValidityEnd,productBalance
+	</sql>
+
+	<select id="countByCriteria" parameterType="corpProductReq"
+		resultType="Integer">
+		select count(*) from
+		corpProductStock as s,productCategory
+		as c
+		where
+		s.categoryCode=c.categoryCode and
+		s.corpId=#{corpId,jdbcType=INTEGER}
+	</select>
+
+	<select id="selectByCriteriaLimit" parameterType="corpProductReq"
+		resultMap="BaseResultMap">
+		select
+		s.categoryCode,s.productBalance,s.productValidityStart,s.productValidityEnd,c.categoryName,
+		s.strategyUnit,c.serviceType from corpProductStock as
+		s,productCategory as c where
+		s.categoryCode=c.categoryCode and
+		s.corpId=#{corpId,jdbcType=INTEGER} order by c.serviceType asc,s.categoryCode asc
+	</select>
+</mapper>

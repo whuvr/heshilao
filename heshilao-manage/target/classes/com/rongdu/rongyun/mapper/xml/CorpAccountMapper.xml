@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rongdu.rongyun.mapper.CorpAccountMapper">
+	<resultMap id="BaseResultMap" type="corpAccountRes">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="corpId" property="corpId" jdbcType="INTEGER" />
+		<result column="balance" property="balance" jdbcType="DECIMAL" />
+		<result column="state" property="state" jdbcType="INTEGER" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, corpId, balance, state
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from corpAccount
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+
+	<select id="selectByCorpId" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from corpAccount
+		where corpId = #{corpId,jdbcType=INTEGER}
+	</select>
+
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		corpAccount
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="corpAccountReq">
+		insert into corpAccount (id,
+		corpId, balance,
+		state)
+		values (#{id,jdbcType=INTEGER},
+		#{corpId,jdbcType=INTEGER},
+		#{balance,jdbcType=DECIMAL},
+		#{state,jdbcType=INTEGER})
+	</insert>
+	<insert id="insertSelective" parameterType="corpAccountReq">
+		insert into corpAccount
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="corpId != null">
+				corpId,
+			</if>
+			<if test="balance != null">
+				balance,
+			</if>
+			<if test="state != null">
+				state,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="corpId != null">
+				#{corpId,jdbcType=INTEGER},
+			</if>
+			<if test="balance != null">
+				#{balance,jdbcType=DECIMAL},
+			</if>
+			<if test="state != null">
+				#{state,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="corpAccountReq">
+		update corpAccount
+		<set>
+			<if test="corpId != null">
+				corpId = #{corpId,jdbcType=INTEGER},
+			</if>
+			<if test="balance != null">
+				balance = #{balance,jdbcType=DECIMAL},
+			</if>
+			<if test="state != null">
+				state = #{state,jdbcType=INTEGER},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+
+	<update id="updateByCorpIdSelective" parameterType="corpAccountReq">
+		update corpAccount
+		<set>
+			<if test="balance != null">
+				balance = balance+#{balance,jdbcType=DECIMAL},
+			</if>
+			<if test="state != null">
+				state = #{state,jdbcType=INTEGER},
+			</if>
+		</set>
+		where corpId = #{corpId,jdbcType=INTEGER}
+	</update>
+	
+	<update id="doCash" parameterType="corpAccountReq">
+		update corpAccount set balance = balance-#{balance,jdbcType=DECIMAL}
+		where corpId = #{corpId,jdbcType=INTEGER} and balance >= #{balance,jdbcType=DECIMAL}
+	</update>
+
+	<select id="getBalance" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select * from corpAccount where
+		corpId=#{corpId,jdbcType=INTEGER}
+	</select>
+</mapper>

@@ -1,0 +1,36 @@
+<div ng-controller="transferCtrl" class="transfer">
+	<h2>转让设置</h2>
+	<div class="part-cont part-cont1">
+		<table >	
+			<tr >
+				<td class="title">债权价值：</td>
+				<td class="content"><span>10,000.00</span> 元</td>
+			</tr>
+			<tr >
+				<td class="title">转让债权：</td>
+				<td class="content" ><input class="input" size="26" type="text" name="" placeholder="金额必须小于等于债权价值"> 元</td>
+			</tr>
+			<tr >
+				<td class="title">转让折让率：</td>
+				<td class="content" ><div class="relative"><input class="input number" size="11" type="text" name=""><span class="add"></span><span class="reduce"></span></div></td>
+			</tr>
+			<tr >
+				<td class="title">转让价格：</td>
+				<td class="content"><span>9,960.00</span> 元</td>
+			</tr>	
+		</table>
+		<div class="tips">
+			<p>温馨提示：</p>
+			<p>1.转让成功后可赎回金额=本金*（1 - 转让折让率）+当期应收收益 - 转让手续费</p>
+			<p>2.手续费将从转让后投资人支付的每笔成交额中扣除0.2%</p>
+			<p>3.当期应收收益将由投资人投资时支付</p>
+		</div>
+		<div class="mt15 f12">
+			<span class="l dark"><input type="checkbox" name="check">&nbsp;&nbsp;我已阅读并同意<a class="bluec" href="#">《转让协议》</a></span> 
+			<p class="l pinkbg errorbox"><span class="errorbg"></span>请您阅读并同意《转让协议》！</p></div>
+	</div>
+	<div class="right mt25">
+		<a  class="btn blue f16" href="">保存</a>
+		<a  class="btn graybg f16 ml20" href="">返回</a>
+	</div>
+</div>

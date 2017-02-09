@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rongdu.rongyun.mapper.ProductCompanyMapper" >
+  <resultMap id="BaseResultMap" type="com.rongdu.rongyun.domain.ProductCompany" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="categoryCode" property="type" jdbcType="VARCHAR" />
+    <result column="memo" property="memo" jdbcType="VARCHAR" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, name, categoryCode, memo, sort
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from productCompany
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from productCompany
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.rongdu.rongyun.domain.ProductCompany" >
+    insert into productCompany (id, name, type, 
+      memo, sort)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{categoryCode,jdbcType=VARCHAR}, 
+      #{memo,jdbcType=VARCHAR}, #{sort,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.rongdu.rongyun.domain.ProductCompany" >
+    insert into productCompany
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="categoryCode != null" >
+        categoryCode,
+      </if>
+      <if test="memo != null" >
+        memo,
+      </if>
+      <if test="sort != null" >
+        sort,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryCode != null" >
+        #{categoryCode,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null" >
+        #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null" >
+        #{sort,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.rongdu.rongyun.domain.ProductCompany" >
+    update productCompany
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryCode != null" >
+        categoryCode = #{categoryCode,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null" >
+        memo = #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null" >
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.rongdu.rongyun.domain.ProductCompany" >
+    update productCompany
+    set name = #{name,jdbcType=VARCHAR},
+      categoryCode = #{categoryCode,jdbcType=VARCHAR},
+      memo = #{memo,jdbcType=VARCHAR},
+      sort = #{sort,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+    <!-- selectCompanyByCategoryCode -->
+  <select id="selectCompanyByCategoryCode" resultType="com.rongdu.rongyun.model.ProductCompanyRes"  parameterType="java.lang.String">
+    select *
+    from productCompany where categoryCode=#{categoryCode,jdbcType=VARCHAR}  order by sort,id
+  </select>
+  
+  <!-- selectCurrentCompany -->
+   <select id="selectCurrentCompany" resultType="com.rongdu.rongyun.model.ProductCompanyRes"  >
+    SELECT b.* FROM 
+(SELECT * FROM corpProductStock WHERE corpId=#{0} AND categoryCode =#{1} AND businessType = #{2} AND prodType = #{3}) a
+LEFT JOIN productCompany b 
+ON a.productCompanyId = b.id;
+  </select>
+</mapper>

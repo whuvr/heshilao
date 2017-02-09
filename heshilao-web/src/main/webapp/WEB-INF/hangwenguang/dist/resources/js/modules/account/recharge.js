@@ -1,0 +1,1 @@
+define(["modules/account/rechargeCtrl","modules/account/rechargeService","text!htmlModule/account/recharge.html"],function(e,c,t){return function(n,r,u,o){e(n,r,u,o),c(n,r,u,o),r.append(t)}});

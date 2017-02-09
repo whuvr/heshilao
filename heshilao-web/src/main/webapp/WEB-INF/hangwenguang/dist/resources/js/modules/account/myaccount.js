@@ -1,0 +1,1 @@
+define(["modules/account/myaccountCtrl","modules/account/myaccountService","text!htmlModule/account/myaccount.html"],function(c,t,n){return function(u,o,e,a){c(u,o,e,a),t(u,o,e,a),o.append(n)}});

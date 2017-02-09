@@ -1,0 +1,38 @@
+﻿@mixin arrow-top($border:8px,$color:#f1f1f1){
+	display:inline-block;
+	width: 0px;
+	height:0px;
+	border-top: solid $border transparent;
+	border-left: solid $border transparent;
+	border-right: solid $border transparent;
+	border-bottom: solid $border $color;
+}
+@mixin arrow-bottom($border:8px,$color:#f1f1f1){
+	display:inline-block;
+	width: 0px;
+	height:0px;
+	border-top: solid $border $color;
+	border-left: solid $border transparent;
+	border-right: solid $border transparent;
+	border-bottom: solid $border transparent;
+}
+@mixin arrow-left($border:8px,$color:#f1f1f1){
+	display:inline-block;
+	width: 0px;
+	height:0px;
+	border-top: solid $border transparent;
+	border-left: solid $border transparent;
+	border-right: solid $border $color;
+	border-bottom: solid $border transparent;
+}
+@mixin arrow-right($border:8px,$color:#f1f1f1){
+	display:inline-block;
+	width: 0px;
+	height:0px;
+	border-top: solid $border transparent;
+	border-left: solid $border $color;
+	border-right: solid $border transparent;
+	border-bottom: solid $border transparent;
+}
+
+

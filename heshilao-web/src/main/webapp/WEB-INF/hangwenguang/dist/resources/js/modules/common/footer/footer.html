@@ -1,0 +1,30 @@
+<div ng-controller="footerCtrl" id="footer">
+	<!-- <div cp-common-include=" 'template_links' "></div> -->
+	<div class="footer-top" >
+		<div class="top-cont">
+			<div class="left">
+				<a ui-sref="article.aboutus">平台介绍</a><a ui-sref="newuser">新手指引</a><a ui-sref="article.faq">常见问题</a><a ui-sref="article.law">法律声明</a><a ui-sref="article.contactus">联系我们</a>
+
+			</div>
+			<div class="right">
+				<span class="hostline">{{corpInfo.webPhone}}</span>  (服务时间：{{corpInfo.serviceTime}}   )
+				<!-- <p>{{company}} {{ICP}}</p></div> -->
+			</div>
+		</div>
+	</div>
+	<div class="footer-bottom">
+		<div class="top-cont">
+			<div class="left">{{corpInfo.copyRight}}&nbsp;&nbsp;&nbsp;&nbsp; {{corpInfo.icp}}</div>
+			<div class="right">关注我们
+				<a  id="footer-microblog" target="_blank" ng-mouseenter="showWechat()" ng-mouseleave="hideWechat()"></a>
+				<a href="http://weibo.com/u/3632830283" id="footer-wechat" ></a>
+				<div id="two-dimensionalcode"  ng-show="wechat" ng-mouseover="showWechat()" ng-mouseleave="hideWechat()">
+					<i></i>
+					<div>
+						<img ng-src="{{corpInfo.QRCodeUrl}}" />
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

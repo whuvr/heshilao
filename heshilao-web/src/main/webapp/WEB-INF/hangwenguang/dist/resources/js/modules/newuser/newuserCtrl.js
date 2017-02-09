@@ -1,0 +1,1 @@
+define(["angular"],function(n){return function(e,t,o,c){e.controller("newuserCtrl",["$scope","navData","cService","$rootScope","$state",function(e,t,o,c,r){"use strict";var s=n.element(document.getElementById("sharepage"));s.css("display","none"),e.$on("$destroy",function(){s.css("display","")}),e.jump=function(){c.user.id?r.go("account.myaccount"):r.go("login")}}])}});

@@ -1,0 +1,16 @@
+<!DOCTYPE html><html><head><title>错误页面</title><meta http-equiv="content-Type" content="text/html; charset=utf-8"><link rel="stylesheet" type="text/css" href="resources/css/build.css?v=201701171401"></head><body><div class="error-page"><div class="error-page-cont"><div class="status500"></div><p class="tip">尊敬的用户，服务器连接异常，请您稍后再试。</p><div class="operate mt20"><a class="button-orange" href="javascript:;" onclick="window.close();">关闭页面</a></div></div></div><script>//获取url中的参数
+function getQueryParam(name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+    var r = window.location.search.substr(1).match(reg);
+    if (r != null) return decodeURIComponent(r[2]);
+    return '';
+}
+
+var sTips = getQueryParam('message');
+var oTip = document.querySelector('.tip');
+var oErrPage = document.querySelector('.error-page');
+var oErrCon = document.querySelector('.status500');
+if ( sTips ) {
+  oTip.innerHTML = sTips;
+  oErrCon.style.backgroundImage = 'url(../resources/images/error-err.png)';
+}</script></body></html>

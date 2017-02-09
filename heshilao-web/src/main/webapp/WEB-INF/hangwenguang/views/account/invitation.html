@@ -1,0 +1,47 @@
+<div ng-controller="invitationCtrl" id="invitationCtrl">
+	<div class="apply_record">
+		<div class="tabs2">
+			<div class="tab2-nav">
+				<a href="" class="active no-border"><span>好友邀请</span></a>
+			</div>
+			<div class="invitation" cp-list-user-invite-link var-name="inviteLinkData">
+				<div class="f14 dark">复制邀请链接发送给好友</div>
+				<a href="javascript:;" class="btn-light button p010" id="d_clip_button" data-clipboard-target="fe_text">复制邀请链接</a>
+				<input class="ml15" readonly="readonly" unselectable=on id="fe_text" ng-model="inviteLinkData" type="text" name="lijie" size="30" value="">
+				
+			</div>
+			<table class="table-noline">
+				<thead>
+					<tr><td>被邀请人</td><td>邀请日期</td><td>红包是否派送</td></tr>
+				</thead>
+				<tbody cp-list-user-invite var-name="inviteData">
+					<tr ng-repeat="item in inviteData">
+						<td ng-bind="item.invitedUsername"></td>
+						<td ng-bind="item.inviteTime | date:'yyyy-MM-dd HH:mm:ss'"></td>
+						<td>
+							<span ng-if="item.isSent==0">未派送</span>
+							<span ng-if="item.isSent==1">已派送</span>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<div id="page">
+				<div paging
+				class="small"
+				page="inviteDataPage"
+				page-size="inviteDataPageSize"
+				total="inviteDataTotal"
+				adjacent="2"
+				dots="..."
+				scroll-top="false"
+				hide-if-empty="true"
+				ul-class="pagination"
+				active-class="active"
+				disabled-class="disabled"
+				show-prev-next="true"
+				paging-action="inviteDataPageSearch(page)">
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

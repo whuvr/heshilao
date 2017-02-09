@@ -1,0 +1,98 @@
+<div ng-controller="discountCtrl" class="discount">
+	<div class="apply_record">
+		<div class="tabs2">
+			<div class="screenColumn" style="margin:0;">
+				<div class="r mr30">
+					<span>&nbsp;&nbsp;类型&nbsp;&nbsp;</span>
+					<select id="type" name="type" class="rechargeCash-select"  ng-model="packageDataType">
+		                <option value="-1">全部</option>
+		                <option value="0">虚拟红包</option>
+		                <option value="1">现金红包</option>
+		            </select>
+					<span>&nbsp;&nbsp;分类&nbsp;&nbsp;</span>
+					<select id="type" name="type" class="rechargeCash-select"  ng-model="packageDataActivityType">
+		                <option value="-1">全部</option>
+		                <option value="0">手工发送</option>
+		                <option value="1">用户注册</option>
+		                <option value="2">实名认证</option>
+		                <option value="3">首次充值</option>
+		                <option value="4">首次投资</option>
+		                <option value="5">最高投资</option>
+		                <option value="6">随机抽取</option>
+		                <option value="7">邀请好友</option>
+		                <option value="8">每次投资</option>
+		                <option value="9">累计投资</option>
+		                <option value="10">生日礼物</option>
+		            </select>
+		            <span>&nbsp;&nbsp;状态&nbsp;&nbsp;</span>
+		            <select id="usedStatus" name="usedStatus" class="rechargeCash-select"  ng-model="packageDataUsedStatus">
+		                <option value="-1">全部</option>
+		                <option value="0">未使用</option>
+		                <option value="2">冻结</option>
+		                <option value="3">已过期</option>
+		                <option value="4">已关闭</option>
+		                <option value="5">已使用</option>
+		            </select>
+				</div>
+			</div>
+			<div class="tab2-nav">
+				<a href="" class="active no-border"><span>我的红包</span></a>
+			</div>
+			<table class="table-noline mt20">
+				<thead>
+					<tr><td>红包名称</td><td>金额</td><td>类型</td><td>领取时间</td><td>过期时间</td><td>状态</td></tr>
+				</thead>
+				<tbody cp-list-my-red-packet var-name="packageData">
+					<tr ng-repeat="item in packageData">
+						<td ng-bind="item.name"></td>
+						<td><span ng-bind="item.amount | number:2"></span>元</td>
+						<td>
+							<span ng-if="item.type==0">虚拟红包</span>
+							<span ng-if="item.type==1">现金红包</span>
+						</td>
+						<td ng-bind="item.addTime | date:'yyyy-MM-dd'"></td>
+						<td ng-bind="item.expiredTime | date:'yyyy-MM-dd'"></td>
+						<td>
+							<span ng-if="item.usedStatus==0&&item.type==0">未使用</span>
+							<span ng-if="item.usedStatus==0&&item.type==1">未兑现</span>
+							<span ng-if="item.usedStatus==1&&item.type==0">已使用</span>
+							<span ng-if="item.usedStatus==1&&item.type==1">已兑现</span>
+							<span ng-if="item.usedStatus==2">冻结</span>
+							<span ng-if="item.usedStatus==3">已过期</span>
+							<span ng-if="item.usedStatus==4">已关闭</span>
+							<span ng-if="item.usedStatus==5 && item.type==0">已使用</span>
+							<span ng-if="item.usedStatus==5 && item.type==1">已兑现</span>
+							<span ng-if="item.usedStatus==-1">现金红包兑换失败</span>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div id="page">
+		<div paging
+		class="small"
+		page="packageDataPage"
+		page-size="packageDataPageSize"
+		total="packageDataTotal"
+		adjacent="2"
+		dots="..."
+		scroll-top="false"
+		hide-if-empty="true"
+		ul-class="pagination"
+		active-class="active"
+		disabled-class="disabled"
+		show-prev-next="true"
+		paging-action="packageDataPageSearch(page)">
+		</div>
+	</div>
+	<div class="m-tips">
+		<div class="title">红包说明：</div>
+		<ol class="bd">
+			<li>“虚拟红包”领取后不可直接提现，仅作为投资时抵用。</li>
+			<li>“现金红包”领取后直接存于账户余额中，可做投资或直接提现。</li>
+			<li>“虚拟红包”可以累积使用，红包使用最大比率为每次投资额度的0.5% ，例如：投资10000元，可用累计红包50元。</li>
+		</ol>
+	</div>
+
+</div>

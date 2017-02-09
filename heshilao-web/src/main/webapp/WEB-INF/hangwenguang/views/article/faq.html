@@ -1,0 +1,33 @@
+
+<div ng-controller="faqCtrl" class="mod-faq-list mt20">
+
+	<ul class="faq-list">
+		<li ng-repeat="item in data">
+			<a ng-click="expandRow(item,!item.expand)">
+				<!--<i class="faq-q"></i>-->
+				<b class="title inlineblock" ng-bind="item.title"></b>
+				<!-- <i class="faq-arrow floatright"></i> -->
+			</a>
+			<div class="content"  ng-show="item.expand">
+				<span class="answer inlineblock" ng-bind-html="item.content|html"></span>
+			</div>
+		</li>
+	</ul>
+	<div id="page">
+		<div paging
+		class="small"
+		page="page" 
+		page-size="pageSize" 
+		total="total"
+		adjacent="2"
+		dots="..."
+		scroll-top="false" 
+		hide-if-empty="true"
+		ul-class="pagination"
+		active-class="active"
+		disabled-class="disabled"
+		show-prev-next="true"
+		paging-action="getRows(page)">
+	</div>
+
+</div>

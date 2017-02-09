@@ -1,0 +1,28 @@
+<div ng-controller="modifyPswCtrl" class="center-main">
+	<div class="north-content">
+		<div class="getback-title">
+			<h2>找回密码</h2>
+			<div class="getback-line"></div>
+		</div>
+
+	    <div class="part-cont1">
+			<form name="form" novalidate ng-submit="submit(form)">
+				<div class="modify-content">
+					<div class="layer1">
+						<label>8~16位数字及英文字母，其中至少包含一个字母和一个数字</label>
+					</div>
+					<div class="layer form-group">
+						<span class="getback-header">密码：</span>
+					    <input type="password" class="getback-sInput" ng-pattern="/^(?![a-zA-Z]+$)(?!\d+$)[0-9A-Za-z]{8,16}$/" ng-minlength="8" maxlength="16" ng-model="formData.newPassword" required pattern-err-type="PasswordError" cp-ui-placeholder="输入新密码" />
+					</div>
+					<div class="layer form-group">
+						<span class="getback-header">新密码：</span>
+						<input type="password" id="password" class="getback-sInput" ng-pattern="/^(?![a-zA-Z]+$)(?!\d+$)[0-9A-Za-z]{8,16}$/" ng-minlength="8" maxlength="16" ng-model="confirmPassword" required compare-to="formData.newPassword" pattern-err-type="PasswordError" cp-ui-placeholder="确认新密码"/>
+					</div>
+					<input class="getBackBtn1 btnPosi1" type="submit" value="确认修改" />
+				</div>
+			</form>
+		</div>
+	</div>
+	
+</div>

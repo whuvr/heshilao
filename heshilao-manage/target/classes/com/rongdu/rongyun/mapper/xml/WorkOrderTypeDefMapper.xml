@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rongdu.rongyun.mapper.WorkOrderTypeDefMapper">
+	<resultMap id="BaseResultMap" type="workOrderTypeDefRes">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="typeName" property="typeName" jdbcType="VARCHAR" />
+		<result column="workNumber" property="workNumber" jdbcType="INTEGER" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, typeName,workNumber
+	</sql>
+
+	<select id="findOrderTypeList" resultType="workOrderTypeDefRes">
+		select * from
+		workOrderTypeDef
+	</select>
+
+	<select id="findOrderById" resultType="workOrderTypeDefRes"
+		parameterType="Long">
+		select * from workOrderTypeDef where
+		id=#{id,jdbcType=INTEGER}
+	</select>
+
+
+	<resultMap id="workOrderTypeDefMap" type="workOrderTypeDefRes">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="typeName" property="typeName" jdbcType="VARCHAR" />
+		<result column="workNumber" property="workNumber" jdbcType="INTEGER" />
+		<association property="workNumberRes" column="corpId"
+			resultMap="corpWorkNumberRes"></association>
+	</resultMap>
+
+	<resultMap id="corpWorkNumberRes" type="corpWorkNumberRes">
+		<result column="corpId" property="corpId" jdbcType="INTEGER" />
+		<result column="number" property="workNumber" jdbcType="INTEGER" />
+		<result column="workNumberUsed" property="workNumberUsed"
+			jdbcType="INTEGER" />
+		<result column="validityStart" property="validityStart"
+			jdbcType="TIMESTAMP" />
+		<result column="validityEnd" property="validityEnd" jdbcType="TIMESTAMP" />
+		<result column="typeId" property="typeId" jdbcType="INTEGER" />
+	</resultMap>
+
+	<select id="findOrderTypeListAndNumber" resultMap="workOrderTypeDefMap"
+		parameterType="corpWorkNumberReq">
+		<![CDATA[ 
+		SELECT
+		a.*,c.workNumber number,c.workNumberUsed,c.validityStart,c.validityEnd FROM
+		workOrderTypeDef a LEFT JOIN
+		corpWorkNumber c ON a.id=c.typeId and
+		corpId=#{corpId,jdbcType=INTEGER} 
+		and (validityStart <= #{validityStart,jdbcType=TIMESTAMP} or validityStart is null)
+		and (validityEnd >= #{validityEnd,jdbcType=TIMESTAMP} or validityEnd is null)   
+		 order by a.id asc 
+		 ]]>
+	</select>
+</mapper>

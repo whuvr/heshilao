@@ -1,0 +1,1 @@
+define(["angular"],function(){return function(n,o,t,c){n.controller("modifySucCtrl",["$scope","$rootScope","$state","$window",function(n,o,t,c){}])}});

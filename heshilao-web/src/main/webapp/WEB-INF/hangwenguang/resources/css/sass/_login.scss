@@ -1,0 +1,207 @@
+@charset "utf-8";
+#content-top .login{
+	background: #f5f5f5 url("../images/login-bg.png");
+	color: #666;
+	font-size: 14px;
+	margin-bottom: -1px;
+}
+#content-top .login .top-cont{
+	position: relative;
+	height: 600px;
+	width: 1190px;
+	margin: 0 auto;
+	text-align: left;
+	overflow: hidden;
+}
+#content-top #login{
+	position: absolute;
+	top: 79px;
+	right: 50%;
+	margin-right: -150px;
+	width: 300px;
+	text-align: center;
+	background: url("../images/banner-login-bg.png");
+	border-radius: 3px;
+}
+.login-content{
+    margin: 27px 0 26px;
+}
+#login .login-part{
+	position: relative;
+	width: 240px;
+	height: 40px;
+	margin: 0 auto 20px;
+	border-radius: 3px;
+	-webkit-border-radius: 3px;
+	-o-border-radius: 3px;
+	-ms-border-radius: 3px;
+	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-o-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+}
+#login #send-mail-again{
+	background: #fdebed;
+	border: 1px solid #ffd9d9;
+	line-height: 44px;
+	text-align: left;
+	padding-left: 40px;
+	width: 318px;
+	margin-left: 128px;
+	margin-top: 18px;
+}
+#login #send-mail-again:hover{
+	color: #333;
+}
+
+#login #send-mail-again a{
+	color: red;
+	padding: 0 15px;
+}
+#login #identifyCode{
+	position: relative;
+	width: 240px;
+	margin: 0 auto 18px;
+	height: 41px;
+}
+#login .input-group.identifyCode{
+	width: 115px;
+	background: none;
+	float: left;
+}
+#login .input-group.identifyCode  .text-btn{
+	width: 115px;
+}
+#login .text-btn,#login span.is-ie{
+	@include insert(240px,40px);
+	padding: 0 7px 0 38px;
+	background: #fff url("../images/login-icon.png") no-repeat;
+}
+#login #username .text-btn{
+	background-position: 10px 7px;
+}
+#login #password .text-btn, #login #passwordimg .text-btn{
+	background-position: 10px -41px;
+}
+#login #identifyCode .text-btn{
+	background-position: 10px -91px;
+}
+#login .has-error input[type="text"]{
+	border: 1px solid #f24b0b;
+	box-shadow: 0px 0px 5px #f24b0b;
+	-webkit-box-shadow: 0px 0px 5px #f24b0b;
+	-moz-box-shadow: 0px 0px 5px #f24b0b
+}
+#login .text-btn:focus{
+	@include insert-focus();
+	background: #fff url("../images/login-icon.png") no-repeat;
+}
+#login span.is-ie{
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	text-align: left;
+	background: #fff;
+	color: #d1d1d1;
+}
+#login span#reg-icons7{
+	position: absolute;
+	top:0;
+	right: -50px;
+	width: 42px;
+	height: 44px;
+	background: url(../images/icons-register.png) #fff no-repeat;
+	background-position: 0px 5px;
+	vertical-align: middle;
+	cursor: pointer;
+}
+#login .remember{
+	position: relative;
+	width: 240px;
+	min-height: 20px;
+	height: auto;
+	text-align: right;
+	margin: 0 auto;
+}
+#login #login-top{
+	position: relative;
+	@include f-normal-lighter-3(bold);
+	border-bottom: $border-line;
+	line-height: 35px;
+	text-align: left;
+	margin: 20px auto;
+}
+.remember input{
+	width: 18px;
+	height: 18px;
+	vertical-align: middle;
+	background: #f2f3f7;
+	border: 1px solid #ddd;
+	margin-right: 15px;
+}
+.remember a.register{
+	position: absolute;
+	background: url(../images/register-icon.png) no-repeat right center;
+	right: 0;
+	padding-right: 25px;
+	@include f-normal-lightest-2();
+}
+.remember .login-font{
+	color: #ff7d00;
+}
+#forget{
+	margin-top: 15px;
+    display: inline-block;
+}
+#submit-login{
+	@extend .btn-light-login;
+}
+#login .call-error:before{
+	content: " ";
+	background: url(../images/server-tip.png) no-repeat;
+	position: relative;
+	top: 3px;
+	left: 0px;
+	width: 15px;
+	height: 20px;
+	display: inline-block;
+	vertical-align: middle;
+}
+#login .call-error{
+	background: url(../images/login-error-bg.png) no-repeat;
+	display: block;
+	width: 240px;
+	height: 30px;
+	line-height: 30px;
+	margin: 0 auto 17px;
+	color: $light-lightest-on;
+}
+#login .login-part .error-msg,#login #identifyCode .error-msg{
+	position: absolute;
+	width: 262px;
+	height: 20px;
+	margin: 0 auto;
+	font-size: 12px;
+	color: #e43a3d;
+	text-align: left;
+	display: block;
+}
+#login .login-part .error-msg:before,#login #identifyCode .error-msg:before{
+	content: '';
+	display: inline-block;
+	width: 14px;
+	height: 14px;
+	background: url(../images/error-tip.png);
+}
+#login .login-part .error-msg,#login #identifyCode .error-msg{
+	top: 42px;
+	left: 7px;
+}
+#login .reg-validatebox{
+	right:0;
+	margin-left: 10px;
+	img{
+		border-radius: 3px;
+	}
+}
+

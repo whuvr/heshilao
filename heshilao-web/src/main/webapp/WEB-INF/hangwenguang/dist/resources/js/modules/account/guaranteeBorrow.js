@@ -1,0 +1,1 @@
+define(["modules/account/guaranteeBorrowCtrl","modules/account/guaranteeBorrowService","text!htmlModule/account/guaranteeBorrow.html"],function(e,o,t){return function(n,r,u,a){e(n,r,u,a),o(n,r,u,a),r.append(t)}});

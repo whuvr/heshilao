@@ -1,0 +1,32 @@
+<div ng-controller="webtipsCtrl"  class="mod-webtip-list mt20">
+	<div rd-fly items="articleData">
+		<ul class="webtip-list">
+			<li ng-repeat="item in articleData">
+				<a ng-bind="item.title" ui-sref="article.articleDetail({id:item.id,type: 'website'})"></a>
+				<div class="floatright">
+					<span ng-bind="item.publishTime | date:'yyyy-MM-dd HH:mm:ss'" class="mr10"></span>
+					<!-- <span>点击数：<s class="cl-orange" ng-bind="item.id"></s></span> -->
+				</div>				
+			</li>
+		</ul>
+	</div>				
+
+	<div id="page">
+		<div paging
+		class="small"
+		page="page" 
+		page-size="pageSize" 
+		total="total"
+		adjacent="2"
+		dots="..."
+		scroll-top="false" 
+		hide-if-empty="true"
+		ul-class="pagination"
+		active-class="active"
+		disabled-class="disabled"
+		show-prev-next="true"
+		paging-action="pageSerch(page)">
+	</div>
+		
+
+</div>

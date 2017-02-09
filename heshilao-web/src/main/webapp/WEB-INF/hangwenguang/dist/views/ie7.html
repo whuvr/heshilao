@@ -1,0 +1,112 @@
+<!DOCTYPE html><html><head><title></title><meta http-equiv="content-type" content="text/html;charset=UTF-8"><style>/*ie7以下的兼容性样式*/
+.ie-content{
+    margin: 0 auto;
+    width: 435px;
+    background: url(/resources/images/ie7-bg1.png) no-repeat center 230px;
+    font-family: 'Microsoft YaHei'; 
+    padding: 500px 0 0 0;
+    position: relative;
+}
+.ie7-logo{
+    position: absolute;
+    top: 30px;
+}
+.ie-item{
+    margin: 33px auto ;
+}
+.ie-button{
+    width: 161px;
+    height: 49px;
+    display:inline-block;
+    color: #fff;
+    font-size: 16px;
+    background-color: #00aaee;
+    text-align: center;
+    line-height: 49px;
+    text-decoration: none;
+}
+.ie-font1{
+    color: #333333;
+    margin: 0px auto 22px;
+    font-size: 26px;
+    font-weight: bold;
+    text-align: center;
+}
+.ie-font2{
+    color: #999;
+    margin: 0 auto;
+    font-size: 14px;
+    text-align: center;
+}
+.ie-font3{
+    color: #ff7d00;
+}
+.ie-button-posi1{
+    margin-right: 83px;
+    margin-left: 11px;
+}</style></head><body style="min-width:1000px"><div class="ie-content"><!-- <div class="ie7-logo">
+		    <img  id="logo" />
+		</div> --><p class="ie-font1">您好！您的浏览器版本有点低了~~</p><p class="ie-font2">目前网站支持IE8及以上内核版本，为能正常访问，请升级浏览器！</p><div class="ie-item"><a class="ie-button ie-button-posi1" href="http://www.firefox.com.cn/">下载火狐浏览器</a> <a class="ie-button ie-button-posi2" href="http://windows.microsoft.com/zh-cn/internet-explorer/download-ie">下载IE浏览器</a></div><p class="ie-font2">如您目前使用的为360浏览器，您可尝试切换至<span class="ie-font3">极速模式</span>下进行访问。</p></div></body><!--<script>
+    function getReq(){
+        if(typeof XMLHttpRequest != "undefined"){
+            return new XMLHttpRequest();
+        }
+        var versions = [
+        "MSXML2.XmlHttp.5.0",   
+        "MSXML2.XmlHttp.4.0",  
+        "MSXML2.XmlHttp.3.0",   
+        "MSXML2.XmlHttp.2.0",  
+        "Microsoft.XmlHttp"
+        ];
+
+        var xhr;
+        for(var i=0;i<versions.length;i++){
+            try{
+                xhr = new ActiveXObject(versions[i]);
+                break;
+            }catch(e){
+
+            }
+        }
+        return xhr;
+    }
+    var req = getReq();
+    req.open("get","/corp/logourl",true);
+    req.onreadystatechange = function(){
+        if(req.readyState==4){
+            if(req.status==200){
+                var img = document.getElementById("logo");
+                img.onload = function() {
+                    var width = img.offsetWidth;
+                    img.parentNode.style.left = '-' + (width + 120) + 'px';
+                }
+                img.setAttribute("src",req.responseText);
+                
+            }
+        }
+    }
+    req.send();
+
+    /*-22222*/
+	// var req = getReq();
+ //    if(typeof XMLHttpRequest != 'undefined')
+ //    	req = new XMLHttpRequest();
+ //    else{
+ //    	req = new ActiveXObject("Microsoft.XMLHTTP");
+ //    }
+ //    req.open("get","/corp/logourl",true);
+ //    req.onreadystatechange = function(){
+ //        if(req.readyState==4){
+ //            if(req.status==200){
+ //                var img = document.getElementById("logo");
+ //                img.onload = function() {
+ //                    var width = img.offsetWidth;
+ //                    img.parentNode.style.left = '-' + (width + 120) + 'px';
+ //                }
+ //                img.setAttribute("src",req.responseText);
+                
+ //            }
+ //        }
+ //    }
+ //    req.send();
+</script>   --></html>

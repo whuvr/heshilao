@@ -1,0 +1,1 @@
+define(["modules/article/webtipsCtrl","modules/article/webtipsService","directives/opPagingDirective","text!htmlModule/article/webtips.html"],function(e,t,i,l){return function(r,c,n,d){e(r,c,n,d),t(r,c,n,d),i(r,c,n,d),c.append(l)}});

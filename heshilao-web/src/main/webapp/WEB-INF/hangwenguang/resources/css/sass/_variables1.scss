@@ -1,0 +1,117 @@
+﻿//网站的字体
+$font-stack:    Helvetica, sans-serif;
+$font-yh:'微软雅黑';
+
+//常用的字号（可以根据具体的项目字号调整）
+$f12:12px;
+$f14:14px;
+$f16:16px;
+$f18:18px;
+$f20:20px;
+$f22:22px;
+$f24:24px;
+$f30:30px;
+
+//常用的颜色（可以根据具体的项目调整色值和添加变量）
+$main-color:#333;
+$dark-color:#666;
+$light-color:#999;
+$white-color:#fff;
+$blue:#308ef7;
+$error-color:#f00;//错误提示的颜色
+$title-color:#5bb433;//标题的颜色（可以自己定义）
+
+//布局宽度
+$container: 1192px; //页面总宽度
+
+$gray-dark:                 #333 !default;
+$gray:                      #666 !default;
+$gray-light:                #999 !default;
+$gray-lighter:              #e7e7e7 !default;
+$white:                     #fff;
+$light-on:                  #f7745e;
+$light-lighter-on:          #fc8e4b;
+$light-lightest-on:         #f7745e;
+$search-lighter:            #f87275;
+$search-lightest:           #ed3e42;
+$body-bg:                   #f7f7f7;
+$gray-bg:                   #dcdcdc;
+$top-bg:                    #f9f9f9;
+$bottom-bg:                 #3a4b5e;
+$border-line:               1px solid #e3e3e3;
+$border-line-lighter:       1px solid #f3f3f3;
+$border-line-gray-light:          1px solid #666;
+
+//for btn
+
+$btn-normal-bg:             $white;
+$btn-normal-color:          $gray;
+$btn-light-bg:			    $light-lighter-on;
+$btn-light-color:           $white;
+$btn-border-radius:         3px;
+$btn-display:               block;
+
+//for input
+$input-border:              1px solid #e3e3e3;
+$input-height:              40px;
+$input-line-height:         $input-height;
+$input-border-radius:       $btn-border-radius;
+$input-border-focus:        1px solid $light-lighter-on !default;
+$input-box-shadow-focus:    0 0 3px rgba(237,112,20,.6);
+
+// 在bootstrap3.0的基础上进行scss结构优化
+// 基于历史原因，以上的一些变量还存在
+// 2016-6-29
+// @wyk@erongdu.com
+//
+// Variables
+// --------------------------------------------------
+
+
+//== Colors
+//
+//## Gray and brand colors for use across the site.
+$brand-primary:         #f49e00 !default;
+// $brand-success:         #5cb85c !default;
+$brand-info:            #25b4f8 !default;
+// $brand-warning:         #f0ad4e !default;
+// $brand-danger:          #d9534f !default;
+
+//== Scaffolding
+//
+//## Settings for some of the most global styles.
+
+
+
+//** Global text color on `<body>`.
+$text-color-highlight:            #ff7d00 !default;
+$text-color-important:            $brand-info !default;
+$text-color-title:            		#333 !default;
+$text-color:            					#666 !default;
+$text-color-secondary:            		#999 !default;
+
+//== Grid system
+//
+//## Define your custom responsive grid.
+
+//** Number of columns in the grid.
+$grid-columns:              12 !default;
+//** Padding between columns. Gets divided in half for the left and right.
+$grid-gutter-width:         30px !default;
+
+//== Forms
+//
+//##
+
+//** `<input>` background color
+// $input-bg:                       #fff !default;
+//** 输入框上的单位背景图片，由于兼容性考虑，先用图片
+$input-unit-bg:			url(../images/input-bg2.png) no-repeat !default;
+//** 输入框上的单位背景图片，由于兼容性考虑，先用图片
+$input-unit-color:									#8d8d8d !default;
+
+//** Text color for `<input>`s
+$input-color:                    		#666 !default;
+//** `<input>` border color
+$input-border-color:                   		#dbdbdb !default;
+$input-border-color-err:                  #ff6600 !default;

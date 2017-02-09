@@ -1,0 +1,1 @@
+define(["modules/expBorrowsDetail/expBorrowsDetailCtrl","modules/expBorrowsDetail/expBorrowsDetailService","directives/opPagingDirective","directives/knobDirective","text!htmlModule/expBorrowsDetail/expBorrowsDetail.html"],function(e,r,i,o,t){return function(l,s,n,p){e(l,s,n,p),r(l,s,n,p),i(l,s,n,p),o(l,s,n,p),s.append(t)}});

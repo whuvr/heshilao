@@ -1,0 +1,1 @@
+define(["modules/account/bankCardCtrl","text!htmlModule/account/bankCard.html","directives/areaDirective","directives/bankDirective"],function(e,t,n,i){return function(a,c,r,d){e(a,c,r,d),c.append(t),n(a,c,r,d),i(a,c,r,d)}});

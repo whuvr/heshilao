@@ -1,0 +1,1 @@
+define(["modules/account/myinvestCtrl","modules/account/myinvestService","text!htmlModule/account/myinvest.html"],function(t,e,n){return function(c,u,o,i){t(c,u,o,i),e(c,u,o,i),u.append(n)}});

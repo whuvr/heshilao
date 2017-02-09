@@ -1,0 +1,1 @@
+define(["modules/account/messageCtrl","modules/account/messageService","text!htmlModule/account/message.html"],function(e,t,n){return function(c,u,o,s){e(c,u,o,s),t(c,u,o,s),u.append(n)}});

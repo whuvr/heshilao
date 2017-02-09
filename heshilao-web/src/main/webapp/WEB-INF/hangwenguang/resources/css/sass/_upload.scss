@@ -1,0 +1,74 @@
+#upload .filed-name{
+    display: inline-block;
+    text-align: right;
+    width: 150px;
+    font-size: 14px;
+    line-height: 32px;
+}
+#upload .form-group{
+    padding: 10px 0;
+}
+#upload .input-group{
+    position: relative;
+
+}
+#upload .pickfiles{
+    background: $light-on;
+    width: 80px;
+    height: 30px;
+    color: #fff;
+    text-align: center;
+    line-height: 30px;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+    font-weight: normal;
+    border-radius: 4px;
+}
+#upload .button-blue{
+	margin:0;
+}
+.upload-wrap{
+    margin-left: 15px;
+    display: inline-block;
+    max-width: 380px;
+    vertical-align: middle;
+}
+#upload  .container{
+    text-align: left;
+    min-width: 100px;
+    width: auto;
+    margin: 0;
+}
+.upload-wrap .img-preview{
+    padding: 15px 0;
+    overflow: hidden;
+    display: none;
+}
+.upload-wrap .img-preview .item{
+    float: left;
+    position: relative;
+    padding: 1px;
+    margin: 10px 10px 0 0; 
+    height: auto;   
+}
+.upload-wrap .img-preview .item img{
+    border-radius: 5px;
+}
+.upload-wrap .img-preview .remove{
+    position: absolute;
+    top: -7px;
+    right: -7px;
+    width: 15px;
+    height: 15px;
+    background: #ff7d00;
+    border-radius: 50%;
+    display: block;
+    font-size: 13px;
+    font-weight: bold;
+    text-align: center;
+    line-height: 14px;
+    color: #fff;
+    cursor: pointer;
+}
+    

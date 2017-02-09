@@ -1,0 +1,144 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans    
+      http://www.springframework.org/schema/beans/spring-beans.xsd    
+      http://www.springframework.org/schema/context    
+      http://www.springframework.org/schema/context/spring-context.xsd    
+      http://www.springframework.org/schema/mvc    
+      http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+	<context:component-scan base-package="com.heshilao.web.controller" />
+	<!-- 引入配置文件 -->
+	<bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:global.properties</value>
+			</list>
+		</property>
+	</bean>
+	
+	<import resource="dubbo-consumer.xml" />
+	
+	<bean id="utf8Charset" class="java.nio.charset.Charset"
+		factory-method="forName">
+		<constructor-arg value="UTF-8" />
+	</bean>
+
+	<mvc:annotation-driven>
+		<mvc:message-converters>
+			<bean class="org.springframework.http.converter.StringHttpMessageConverter">
+				<constructor-arg ref="utf8Charset" />
+			</bean>
+			<!-- 定制json转化 -->
+			<bean
+				class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+				<!-- <property name="objectMapper">
+					<bean class="com.rongdu.p2p.core.util.CustomObjectMapper"/>
+				</property> -->
+			</bean> 
+		</mvc:message-converters>
+	</mvc:annotation-driven>
+
+	<!-- 静态文件处理 -->
+	<mvc:resources location="/WEB-INF/base/" mapping="/base/**" />
+	<mvc:resources location="/WEB-INF/hangwenguang/resources/" mapping="/resources/**" />
+	<mvc:resources location="/WEB-INF/hangwenguang/views/" mapping="/views/**" />
+
+
+	<mvc:view-controller path="/" view-name="index" />
+	<mvc:view-controller path="/404" view-name="error/404" />
+	<mvc:view-controller path="/500" view-name="error/500" />
+
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="order" value="2" />
+		<property name="prefix" value="/views/" />
+		<property name="suffix" value=".html" />
+		<property name="contentType" value="text/html;charset=UTF-8" />
+		<property name="redirectHttp10Compatible" value="false" />
+	</bean>
+	
+	<!-- 配置freeMarker的模板路径 -->
+	<bean
+		class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+		<property name="templateLoaderPath" value="WEB-INF/hangwenguang/flt/" />
+		<property name="defaultEncoding" value="UTF-8" />
+		<property name="freemarkerSettings">
+			<props>
+				<prop key="number_format">0.##</prop>
+			</props>
+		</property>
+	</bean>
+
+	<!-- freemarker视图解析器 -->
+	<bean
+		class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+		 <property name="order" value="1" />
+		<property name="suffix" value=".html" />
+		<property name="contentType" value="text/html;charset=UTF-8" />
+		<property name="redirectHttp10Compatible" value="false" />
+	</bean>
+
+	<!-- 配置文件上传，如果没有使用文件上传可以不用配置，当然如果不配，那么配置文件中也不必引入上传组件包 -->
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- 默认编码 -->
+		<property name="defaultEncoding" value="utf-8" />
+		<!-- 文件大小最大值 -->
+		<property name="maxUploadSize" value="31457280" />
+		<!-- 内存中的最大值 -->
+		<property name="maxInMemorySize" value="40960" />
+		
+	</bean>
+
+	<!-- <mvc:interceptors>
+		<mvc:interceptor>
+			设置拦截的路径
+			<mvc:mapping path="/**" />
+			<mvc:exclude-mapping path="/resources" />
+			<bean class="com.rongdu.p2p.web.web.interceptor.ParamInterceptor" />
+		</mvc:interceptor>
+		<mvc:interceptor>
+			设置拦截的路径
+			<mvc:mapping path="/**" />
+			<mvc:exclude-mapping path="/" />
+			<mvc:exclude-mapping path="/canBorrow" />
+			<bean class="com.rongdu.p2p.web.web.interceptor.AuthenticationInterceptor" />
+		</mvc:interceptor>
+	</mvc:interceptors> -->
+	
+	<!-- <bean id="zkClient" class="com.rongdu.p2p.util.zookeeper.ZKClientImpl">
+		<constructor-arg value="${zk.address}"></constructor-arg>
+	</bean>  -->
+
+	<!-- kaptcha验证码图片生成器配置 -->
+	<bean id="captchaProducer" class="com.google.code.kaptcha.impl.DefaultKaptcha">
+		<property name="config">
+			<bean class="com.google.code.kaptcha.util.Config">
+				<constructor-arg>
+					<props>
+						<!-- 边框颜色 默认为Color.BLACK -->
+						<prop key="kaptcha.border.color">190,190,190</prop>
+						<!-- 验证码文本字符颜色 默认为Color.BLACK -->
+						<prop key="kaptcha.textproducer.font.color">blue</prop>
+						<!-- 验证码图片宽度 默认为250 -->
+						<prop key="kaptcha.image.width">250</prop>
+						<!-- 验证码图片高度 默认为60 -->
+						<prop key="kaptcha.image.height">90</prop>
+						<!-- 验证码文本字符大小 默认为40 -->
+						<prop key="kaptcha.textproducer.font.size">70</prop>
+						<prop key="kaptcha.session.key">code</prop>
+						<prop key="kaptcha.textproducer.char.length">4</prop>
+						<!-- 验证码文本字符内容范围 abcdefhijkmnpqrstuvwxy3478 -->
+						<prop key="kaptcha.textproducer.char.string">abcdefhijkmnpqrstuvwxy3478</prop>
+						<!-- 验证码文本字体样式 -->
+						<prop key="kaptcha.textproducer.font.names">宋体,楷体,微软雅黑</prop>
+					</props>
+				</constructor-arg>
+			</bean>
+		</property>
+	</bean>
+
+</beans>

@@ -1,0 +1,92 @@
+.m-form{
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+.m-form .form-group .field-title {
+  min-width: 80px;
+  height: 40px;
+  float: left;
+  padding-left: 15px;
+  padding-right: 20px;
+  line-height: 40px;
+  text-align: justify;
+  text-justify: inter-word;
+
+  &:after {
+    //文字两端对齐
+    content: '';
+    display: inline-block;/* Opera */
+    padding-left: 99%;
+  }
+
+}
+
+.m-form .form-group {
+  position: relative;
+  margin-bottom: 10px;
+  @include clearfix;
+}
+// 输入框上的单位，如：元
+.m-form .form-group .input-unit {
+  position: absolute;
+  top: 1px;
+  right: 406px;
+  display: block;
+  width: 39px;
+  height: 38px;
+  background: $input-unit-bg;
+  color: $input-unit-color;
+  font-size: 14px;
+  font-style: normal;
+  line-height: 38px;
+  text-align: center;
+  @include user-select(none);
+}
+
+.m-form .form-group .error-msg {
+  position: absolute;
+  top: 0;
+  left: 560px;
+  line-height: 40px;
+  color: #f98211;
+  white-space: nowrap;
+}
+
+.m-form .form-group input[type="text"],
+.m-form .form-group input[type="password"] {
+  box-sizing: border-box;
+  width: 280px;
+  border: 1px solid $input-border-color;
+  float: left;
+}
+
+.m-form .has-error input[type="text"],
+.m-form .has-error input[type="password"] {
+  border: 1px solid $input-border-color-err;
+}
+
+.m-form .radio-inline {
+  float: left;
+  width: 90px;
+  line-height: 40px;
+  padding-right: 20px;
+}
+
+.m-form .radio-inline input[type="radio"] {
+  margin-right: 5px;
+  vertical-align: middle;
+}
+
+.m-form .btn {
+  box-sizing: border-box;
+  background-color: #f98211;
+  width: 250px;
+  height: 44px;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  font-size: 18px;
+  line-height: 44px;
+  color: #fff;
+  margin: 30px 0 0 115px;
+}

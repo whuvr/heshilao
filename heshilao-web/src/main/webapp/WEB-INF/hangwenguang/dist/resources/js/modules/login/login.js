@@ -1,0 +1,1 @@
+define(["modules/login/loginCtrl","text!htmlModule/login/login.html"],function(n,l){return function(o,t,e,i){n(o,t,e,i),t.append(l)}});

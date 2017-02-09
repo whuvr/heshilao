@@ -1,0 +1,1 @@
+define(["modules/account/guaranteeBackCtrl","modules/account/guaranteeBackService","text!htmlModule/account/guaranteeBack.html"],function(e,t,a){return function(n,c,u,o){e(n,c,u,o),t(n,c,u,o),c.append(a)}});

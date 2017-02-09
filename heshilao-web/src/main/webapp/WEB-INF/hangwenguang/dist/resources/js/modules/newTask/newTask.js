@@ -1,0 +1,1 @@
+define(["modules/newTask/newTaskCtrl","modules/newTask/newTaskService","text!htmlModule/newTask/newTask.html"],function(e,n,s){return function(t,a,k,l){e(t,a,k,l),n(t,a,k,l),a.append(s)}});

@@ -1,0 +1,1 @@
+define(["modules/app_down/app_downCtrl","text!htmlModule/app_down/app_down.html"],function(n,p,d){return function(d,o,t,e){n(d,o,t,e),o.append(p)}});

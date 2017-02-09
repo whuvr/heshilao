@@ -1,0 +1,1 @@
+define(["modules/account/accountCtrl","directives/opPagingDirective","text!htmlModule/account/account.html"],function(t,c,n){return function(e,o,u,i){c(e,o,u,i),o.append(n),t(e,o,u,i)}});

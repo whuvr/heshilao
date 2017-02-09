@@ -1,0 +1,1 @@
+define(["angular"],function(n){return function(n,o,t,c){n.controller("activatedEmaCtrl",["$scope",function(n){n.countdown=4;var o=setInterval(function(){n.countdown--,n.$apply(),0==n.countdown&&(clearInterval(o),window.location.href="#/login")},1e3);n.jumpLogin=function(){clearInterval(o),window.location.href="#/login"}}])}});

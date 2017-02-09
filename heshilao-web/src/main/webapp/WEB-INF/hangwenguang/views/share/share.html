@@ -1,0 +1,126 @@
+
+<ul ng-controller="shareCtrl" class="onlineService" id="sharepage">
+	<div ng-show="computer" class="computer_main" id="calculator">
+		<h2>收益计算器</h2> 
+		<div class="computer-close" ng-click="computer=!computer"></div>
+		<div id="computer-innermain" class="clearfix" style="height:450px;overflow:auto">
+			<div id="innermain">
+		    	<div id="conDiv">
+		        	<div class="computer-part">
+					    <form name="form" novalidate ng-submit="compute(form)" >
+							<div class="computer_part_line">
+								<div class="computer_content form-group">
+								    <div class="computer_content_first">
+								    	<span class="computer_red">*</span>
+								    	借款金额
+								    </div>
+								    <input class="computer_input" type="text" ng-model="formData.amountBorrow" ng-pattern="/(^(([0-9]+\d*)|([0-9]+\d*\.\d{1,2}))$)/" pattern-err-type="Float" maxlength="10"  required/>
+								    <em>元</em>
+								</div>
+								<div class="computer_content1 form-group">
+								    <div class="computer_content_first">
+								    	<span class="computer_red">*</span>
+								    	年化利率
+								    </div>
+								    <input class="computer_input" type="text" dymax="50" ng-model="formData.rateYear" ng-pattern="/^\d*$|^\d+.\d{1,2}$/" pattern-err-type="Float" maxlength="5" required/>
+								    <em>%</em>
+								</div>
+							</div>
+							<div class="computer_part_line">
+								<div class="computer_content form-group">
+								    <div class="computer_content_first">
+								    	<span class="computer_red">*</span>
+								    	借款期限
+								    </div>
+								    <input class="computer_input" type="text" ng-model="formData.timeLimit" pattern-err-type="MonthInteger" maxlength="2" ng-pattern="/^\d+$/" dymax="36" required  ng-if="type==1" />
+								    <input class="computer_input" type="text" ng-model="formData.timeLimit" pattern-err-type="DayInteger" maxlength="3" ng-pattern="/^\d+$/" required ng-if="type==0" />
+								    <em ng-if="type==1">月</em>
+								    <em ng-if="type==0">天</em>
+
+
+								    <input id="set_radio" class="computer_radio" name="timeType" value="0" type="radio" checked="checked" ng-click="type=1"  />
+								    <span class="computer_font1">月</span>
+								    <input class="computer_radio" name="timeType" value="0" type="radio" ng-click="type=0"/>
+								    <span class="computer_font1">天</span>
+			 					</div>
+								<div class="computer_content1" ng-if="type==0">
+								    <div class="computer_content_first"><span class="computer_red">*</span><span>还款方式</span></div>
+								    <select class="computer_select">
+								    	<option value="2">一次性还款</option>
+								    </select>
+								</div>
+								<div class="computer_content1" ng-if="type==1">
+								    <div class="computer_content_first"><span class="computer_red">*</span><span>还款方式</span></div>
+								    <select class="computer_select">
+								    	<option value="2">一次性还款</option>
+								    	<option value="3">每月还息到期还本</option>
+								    	<option value="1">按月分期还款</option>
+								    </select>
+								</div>
+							</div>
+
+							<div class="computer_button">
+								<input type="submit" class="computer_blue computer_btn" value="计算" />
+								<a class="computer_grey computer_btn" ng-click="reset()">重置</a>
+							</div>
+						</form>
+					</div>
+					
+					<div class="computer-part1">
+						<div class="computer_part_result">
+							<span class="computer_font2">总收益 :
+								<span class="computer_orange">{{total_profit}}</span>元
+							    <span class="computer_font3">本息总计：</span><span class="computer_orange">{{capital}}</span>元
+						    </span>
+						</div>
+						<div class="computer_part_result">
+							<span class="computer_font4">计算结果仅供参考，最终请以实际收益为准</span>
+						</div>
+					</div>
+
+					<div class="computer-part2">
+						<h1 class="computer_font5">回款计划</h1>
+					    <table class="computer_table" >
+					    	<thead>
+					    		<tr>
+					    			<td>期数</td>
+					    			<td>应收本息(元)</td>
+					    			<td>应收本金(元)</td>
+					    			<td>应收利息(元)</td>
+					    			<td>剩余本息(元)</td>
+					    		</tr>
+					    	</thead>
+					    	<tbody>
+					    		<tr ng-repeat="item in innerData">
+					    			<td ng-bind="$index+1"></td>
+					    			<td ng-bind="item.total"></td>
+					    			<td ng-bind="item.capital"></td>
+					    			<td ng-bind="item.interest"></td>
+					    			<td ng-bind="item.surplusTotal"></td>
+					    		</tr>
+					    	</tbody>
+					    </table>
+					</div>
+		    	</div>
+		    </div>
+		    <div id="scroll">
+		    	<div class="sTop">↑</div>
+		        <div class="sBtn"></div>
+		        <div class="sBtm">↓</div>
+		    </div>
+	    </div>
+	</div>
+	<li class="phone" ><em class="iconfont "></em><a href="javascript:;"  class="qq">{{corpInfo.webPhone}} <span></span></a></li>
+	<li class="qqLink" ><em class="iconfont "></em>
+		<div class="wrap">
+			<div class="info"><p ng-repeat="items in qqs">在线客服：<a ng-if="items[1]" target="_blank" ng-href="http://wpa.qq.com/msgrd?v=3&uin={{items[0]}}">{{items[1]}}</a>
+	            <a ng-if="!items[1]" target="_blank" ng-href="http://wpa.qq.com/msgrd?v=3&uin={{items[0]}}">{{items[0]}}</a>
+	            </p>
+	            <span class="arrow"></span>
+			</div>
+        </div>
+	</li>
+	<li class="wxLink"><em class="iconfont"></em><a href="javascript:;"><i></i><img ng-src="{{corpInfo.QRCodeUrl}}" alt=""></a></li>
+	<li class="comLink" ng-click="computer=!computer"><em class="iconfont"></em></li>
+	<li id="backTop" ng-click="goTop()" class="backTop"><em  class="iconfont"></em></li>
+</ul>

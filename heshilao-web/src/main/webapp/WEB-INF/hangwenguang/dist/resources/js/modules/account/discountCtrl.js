@@ -1,0 +1,1 @@
+define(["angular"],function(n){return function(n,t,e,c){n.controller("discountCtrl",["$scope","navData","cService",function(n,t,e){"use strict";n.navDate=t[0].subState}])}});

@@ -1,0 +1,1 @@
+define(["modules/article/articleDetailCtrl","modules/article/articleDetailService","text!htmlModule/article/articleDetail.html"],function(e,t,l){return function(i,a,r,c){e(i,a,r,c),t(i,a,r,c),a.append(l)}});

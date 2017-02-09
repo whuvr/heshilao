@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rongdu.rongyun.mapper.CorpAccountLogMapper" >
+  <resultMap id="BaseResultMap" type="com.rongdu.rongyun.domain.CorpAccountLog" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="corpId" property="corpId" jdbcType="INTEGER" />
+    <result column="productCode" property="productCode" jdbcType="VARCHAR" />
+    <result column="productName" property="productName" jdbcType="VARCHAR" />
+    <result column="dealAmount" property="dealAmount" jdbcType="DECIMAL" />
+    <result column="dealType" property="dealType" jdbcType="INTEGER" />
+    <result column="dealTime" property="dealTime" jdbcType="TIMESTAMP" />
+    <result column="dealMethod" property="dealMethod" jdbcType="INTEGER" />
+    <result column="accountBalance" property="accountBalance" jdbcType="DECIMAL" />
+    <result column="dealMemo" property="dealMemo" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, corpId, productCode, productName, dealAmount, dealType, dealTime, dealMethod,
+    accountBalance, dealMemo
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from corpAccountLog
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from corpAccountLog
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.rongdu.rongyun.domain.CorpAccountLog" >
+    insert into corpAccountLog (id, corpId, productCode,
+      productName, dealAmount, dealType,
+      dealTime, dealMethod, accountBalance,
+      dealMemo)
+    values (#{id,jdbcType=INTEGER}, #{corpId,jdbcType=INTEGER}, #{productCode,jdbcType=VARCHAR},
+      #{productName,jdbcType=VARCHAR}, #{dealAmount,jdbcType=DECIMAL}, #{dealType,jdbcType=INTEGER},
+      #{dealTime,jdbcType=TIMESTAMP}, #{dealMethod,jdbcType=INTEGER}, #{accountBalance,jdbcType=DECIMAL},
+      #{dealMemo,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.rongdu.rongyun.model.CorpAccountLogReq" >
+    insert into corpAccountLog
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="corpId != null" >
+        corpId,
+      </if>
+      <if test="productCode != null" >
+        productCode,
+      </if>
+      <if test="productName != null" >
+        productName,
+      </if>
+      <if test="dealAmount != null" >
+        dealAmount,
+      </if>
+      <if test="dealType != null" >
+        dealType,
+      </if>
+      <if test="dealTime != null" >
+        dealTime,
+      </if>
+      <if test="dealMethod != null" >
+        dealMethod,
+      </if>
+      <if test="accountBalance != null" >
+        accountBalance,
+      </if>
+      <if test="dealMemo != null" >
+        dealMemo,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="corpId != null" >
+        #{corpId,jdbcType=INTEGER},
+      </if>
+      <if test="productCode != null" >
+        #{productCode,jdbcType=VARCHAR},
+      </if>
+      <if test="productName != null" >
+        #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="dealAmount != null" >
+        #{dealAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="dealType != null" >
+        #{dealType,jdbcType=INTEGER},
+      </if>
+      <if test="dealTime != null" >
+        #{dealTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dealMethod != null" >
+        #{dealMethod,jdbcType=INTEGER},
+      </if>
+      <if test="accountBalance != null" >
+        #{accountBalance,jdbcType=DECIMAL},
+      </if>
+      <if test="dealMemo != null" >
+        #{dealMemo,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.rongdu.rongyun.domain.CorpAccountLog" >
+    update corpAccountLog
+    <set >
+      <if test="corpId != null" >
+        corpId = #{corpId,jdbcType=INTEGER},
+      </if>
+      <if test="productCode != null" >
+        productCode = #{productCode,jdbcType=VARCHAR},
+      </if>
+      <if test="productName != null" >
+        productName = #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="dealAmount != null" >
+        dealAmount = #{dealAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="dealType != null" >
+        dealType = #{dealType,jdbcType=INTEGER},
+      </if>
+      <if test="dealTime != null" >
+        dealTime = #{dealTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dealMethod != null" >
+        dealMethod = #{dealMethod,jdbcType=INTEGER},
+      </if>
+      <if test="accountBalance != null" >
+        accountBalance = #{accountBalance,jdbcType=DECIMAL},
+      </if>
+      <if test="dealMemo != null" >
+        dealMemo = #{dealMemo,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.rongdu.rongyun.domain.CorpAccountLog" >
+    update corpAccountLog
+    set corpId = #{corpId,jdbcType=INTEGER},
+      productCode = #{productCode,jdbcType=VARCHAR},
+      productName = #{productName,jdbcType=VARCHAR},
+      dealAmount = #{dealAmount,jdbcType=DECIMAL},
+      dealType = #{dealType,jdbcType=INTEGER},
+      dealTime = #{dealTime,jdbcType=TIMESTAMP},
+      dealMethod = #{dealMethod,jdbcType=INTEGER},
+      accountBalance = #{accountBalance,jdbcType=DECIMAL},
+      dealMemo = #{dealMemo,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <select id="selectSelective" resultType="corpAccountLogRes" parameterType="corpAccountLogReq" >
+    select a.*,b.businessType from 
+    (select * from corpAccountLog 
+    where corpId=#{corpId}
+     <if test="productName!=null">
+       and productName like CONCAT('%',#{productName},'%')
+    </if>
+    <if test="dealType!=null">
+    <![CDATA[ and dealType =  #{dealType} ]]>
+    </if>
+     <if test="startTime!=null">
+      <![CDATA[ and dealTime >  #{startTime} ]]>
+    </if>
+     <if test="endTime!=null">
+        <![CDATA[ and dealTime <  #{endTime} ]]>
+    </if>
+    ) a
+    left join product b
+    on a.productCode = b.productCode
+    where 1=1
+     <if test="businessType!=null">
+    <![CDATA[ and businessType =  #{businessType} ]]>
+    </if>
+    order by a.id desc
+  </select>
+</mapper>

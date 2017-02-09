@@ -1,0 +1,46 @@
+{
+	"total":20,
+	"pageSize":8,
+	"row" :[
+	{
+		"withdrawTime":"2015-1-1",
+		"serialNum":20,
+		"withdrawWay":"银行",
+		"withdrawMoney":1000,
+		"fee":20,
+		"status":"成功"
+	},
+	{
+		"withdrawTime":"2015-1-1",
+		"serialNum":20,
+		"withdrawWay":"银行",
+		"withdrawMoney":1000,
+		"fee":20,
+		"status":"成功"
+	},
+	{
+		"withdrawTime":"2015-1-1",
+		"serialNum":20,
+		"withdrawWay":"银行",
+		"withdrawMoney":1000,
+		"fee":20,
+		"status":"成功"
+	},
+	{
+		"withdrawTime":"2015-1-1",
+		"serialNum":20,
+		"withdrawWay":"银行",
+		"withdrawMoney":1000,
+		"fee":20,
+		"status":"成功"
+	},
+	{
+		"withdrawTime":"2015-1-1",
+		"serialNum":20,
+		"withdrawWay":"银行",
+		"withdrawMoney":1000,
+		"fee":20,
+		"status":"成功"
+	}
+	]
+}

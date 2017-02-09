@@ -1,0 +1,1 @@
+define(["modules/newuser/newuserCtrl","modules/newuser/newuserService","text!htmlModule/newuser/newuser.html"],function(e,n,u){return function(r,s,t,l){e(r,s,t,l),n(r,s,t,l),s.append(u)}});

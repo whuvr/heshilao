@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rongdu.rongyun.mapper.ProductCategoryApplyDetailMapper">
+	<resultMap id="BaseResultMap"
+		type="com.rongdu.rongyun.domain.ProductCategoryApplyDetail">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="productCategoryApplyId" property="productCategoryApplyId"
+			jdbcType="INTEGER" />
+		<result column="applyItemName" property="applyItemName"
+			jdbcType="VARCHAR" />
+		<result column="applyItemCode" property="applyItemCode"
+			jdbcType="VARCHAR" />
+		<result column="applyItemValue" property="applyItemValue"
+			jdbcType="VARCHAR" />
+	</resultMap>
+
+	<!-- 查询host -->
+	<select id="selectHost" resultType="string" parameterType="map">
+		select applyItemValue
+		from productCategoryApplyDetail
+		where
+		productCategoryApplyId
+		= #{productCategoryApplyId,jdbcType=INTEGER}
+		and
+		applyItemCode=#{applyItemCode,jdbcType=VARCHAR}
+	</select>
+</mapper>

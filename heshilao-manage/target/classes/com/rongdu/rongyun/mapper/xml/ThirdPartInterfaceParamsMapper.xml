@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rongdu.rongyun.mapper.ThirdPartInterfaceParamsMapper" >
+  <resultMap id="BaseResultMap" type="com.rongdu.rongyun.domain.ThirdPartInterfaceParams" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="thirdPartInterfaceId" property="thirdPartInterfaceId" jdbcType="INTEGER" />
+    <result column="paramKey" property="paramKey" jdbcType="VARCHAR" />
+    <result column="paramValue" property="paramValue" jdbcType="VARCHAR" />
+    <result column="paramSort" property="paramSort" jdbcType="INTEGER" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, thirdPartInterfaceId, paramKey, paramValue, paramSort, description
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from thirdPartInterfaceParams
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from thirdPartInterfaceParams
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.rongdu.rongyun.domain.ThirdPartInterfaceParams" >
+    insert into thirdPartInterfaceParams (id, thirdPartInterfaceId, paramKey, 
+      paramValue, paramSort, description
+      )
+    values (#{id,jdbcType=INTEGER}, #{thirdPartInterfaceId,jdbcType=INTEGER}, #{paramKey,jdbcType=VARCHAR}, 
+      #{paramValue,jdbcType=VARCHAR}, #{paramSort,jdbcType=INTEGER}, #{description,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.rongdu.rongyun.domain.ThirdPartInterfaceParams" >
+    insert into thirdPartInterfaceParams
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="thirdPartInterfaceId != null" >
+        thirdPartInterfaceId,
+      </if>
+      <if test="paramKey != null" >
+        paramKey,
+      </if>
+      <if test="paramValue != null" >
+        paramValue,
+      </if>
+      <if test="paramSort != null" >
+        paramSort,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="thirdPartInterfaceId != null" >
+        #{thirdPartInterfaceId,jdbcType=INTEGER},
+      </if>
+      <if test="paramKey != null" >
+        #{paramKey,jdbcType=VARCHAR},
+      </if>
+      <if test="paramValue != null" >
+        #{paramValue,jdbcType=VARCHAR},
+      </if>
+      <if test="paramSort != null" >
+        #{paramSort,jdbcType=INTEGER},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.rongdu.rongyun.domain.ThirdPartInterfaceParams" >
+    update thirdPartInterfaceParams
+    <set >
+      <if test="thirdPartInterfaceId != null" >
+        thirdPartInterfaceId = #{thirdPartInterfaceId,jdbcType=INTEGER},
+      </if>
+      <if test="paramKey != null" >
+        paramKey = #{paramKey,jdbcType=VARCHAR},
+      </if>
+      <if test="paramValue != null" >
+        paramValue = #{paramValue,jdbcType=VARCHAR},
+      </if>
+      <if test="paramSort != null" >
+        paramSort = #{paramSort,jdbcType=INTEGER},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.rongdu.rongyun.domain.ThirdPartInterfaceParams" >
+    update thirdPartInterfaceParams
+    set thirdPartInterfaceId = #{thirdPartInterfaceId,jdbcType=INTEGER},
+      paramKey = #{paramKey,jdbcType=VARCHAR},
+      paramValue = #{paramValue,jdbcType=VARCHAR},
+      paramSort = #{paramSort,jdbcType=INTEGER},
+      description = #{description,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

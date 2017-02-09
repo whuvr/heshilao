@@ -1,0 +1,1 @@
+define(["modules/article/faqCtrl","modules/article/faqService","directives/opPagingDirective","text!htmlModule/article/faq.html"],function(e,t,i,l){return function(r,a,c,n){e(r,a,c,n),t(r,a,c,n),i(r,a,c,n),a.append(l)}});

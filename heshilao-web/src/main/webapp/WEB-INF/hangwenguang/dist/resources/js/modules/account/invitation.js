@@ -1,0 +1,1 @@
+define(["modules/account/invitationCtrl","modules/account/invitationService","text!htmlModule/account/invitation.html"],function(t,n,i){return function(o,e,c,u){t(o,e,c,u),n(o,e,c,u),e.append(i)}});

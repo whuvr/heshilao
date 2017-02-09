@@ -1,0 +1,1 @@
+define(["modules/account/creditorRightCtrl","modules/account/creditorRightService","text!htmlModule/account/creditorRight.html"],function(t,e,c){return function(o,i,n,r){t(o,i,n,r),e(o,i,n,r),i.append(c)}});

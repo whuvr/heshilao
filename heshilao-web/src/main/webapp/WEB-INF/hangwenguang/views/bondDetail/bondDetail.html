@@ -1,0 +1,137 @@
+<div  id="main-cont" cp-info-bond-detail var-name="bondData">
+	
+	<div class="grid-m0s34  mod-borrow-detail">
+		<div class="col-sub">
+			<div class="mod-panel mod-inv-opt">
+				<!-- <div class="mod-head">
+					<div class="can-inv-money" ng-show="user.id">
+						<p class="key">可用余额</p>
+						<p><span class="value" ng-bind="bondData.account.balanceAvailable | number :2"></span>元</p>
+					</div>
+					<div class="remain-inv-money">
+						<p class="key">最小投资金额</p>
+						<p><span class="value" ng-bind="bondData.bond.bondCapital | number :2"></span>元</p>
+					</div>
+				</div> -->
+				<div class="can-inv-money">
+						<p>可用余额<span class="floatright cl-grey"><s ng-bind="bondData.account.balanceAvailable | number :2"></s>元</span></p>
+						<p>最小投资金额<span class="floatright cl-grey"><s ng-bind="bondData.bond.bondCapital | number :2"></s>元</span></p>
+				</div>
+				<div class="mod-body">
+					<div class="opt-switch" cp-info-bond-status="bondData" var-name="investStatus">
+						<div classs="opt-normal" ng-show="investStatus == 1" >
+							<div class="inv-form">
+								<form class="form-fields form-invest-borrow" name="investBorrowForm" cp-form-invest-bond disable-enter>		       						
+						       		<div class="field form-group">
+						       			<div class="input-wrap">
+							       			<input
+							       				class="textbox w-fill-textbox"
+							       				type="text"
+							       				id="investFunds"
+							       				cp-valid-invest-bond-value="bondData"
+							       				element-modifier="nullModifier"
+							       				name="investCapitalStr" 
+							       				ng-model="bondData.bond.remainCapital" 	
+							       				disabled="disabled" />
+							       			<i>元</i>
+							       		</div>						       						       								       								       			
+						       		</div>
+						       		<div class="field ta-right">
+						       			<p>预期收益：<!-- <s class="lighter" ng-bind="bondData.bond.bondCapital / 360 * bondData.bond.remainDays * bondData.bond.rateYear / 100 | number:2"></s> -->
+						       			<s class="lighter" ng-bind="bondData.bond.interest"></s>元</p>
+						       		</div>				       																       		
+						       		<div class="field actual-invest">
+										<p ng-show="user.id">折让金额：<s ng-bind="bondData.bond.remainCapital - bondData.bond.sellingPrice | number:2"></s>元</p>
+										<p ng-show="user.id">实际应付：<s ng-bind="bondData.bond.sellingPrice | number:2"></s>元</p>
+						       		</div>
+						       		<div class="field">
+										<input type="hidden" name="id" value="{{bondData.bond.id}}" />
+										<input type="hidden" name="userId" value="{{bondData.bond.userId}}" />
+										<input ng-show="user.id" type="submit" class="button-orange w-fill-button h36" value="立即受让" cp-common-singleton-button />	
+										<input ng-show="!user.id" type="button" class="button-orange w-fill-button h36" ng-click="$state.go('login')" value="立即受让"  />	
+									</div>							       
+						       	</form>
+							</div>							
+						</div>
+						<div cp-common-include="'template_investBondOperationAbnormal'">
+						</div> 
+					</div>
+				</div>
+			</div>
+			<div cp-common-include="'template_safePromise'"></div>
+		</div>
+		<div class="col-main">	
+			<div class="mod-panel mod-inv-basic">
+				<div class="mod-head inv-det">
+					<div class="inv-title">
+						<i class="invest-type invest-type-bond inlineblock"></i>
+						<span class="inv-name inlineblock" ng-bind="bondData.bond.borrowName"></span>						
+						<span class="inv-sn">债权转让编号：<span ng-bind="bondData.bond.bondNo"></span></span>
+						<span class="proto-view floatright black3">投资协议范文<a class="lighter" cp-do-bond-detail-protocol-preview="$stateParams.id">预览</a></span>	
+					</div>																
+				</div>
+				<div class="mod-body bond-basic">
+					<div class="basic-part1">
+						<table>
+							
+							<tr>
+								<td class="cl-grey light-lightest-on">
+									<span class="light2">
+										<span class="h2" ng-bind="bondData.bond.discountRate - 0.5 | number: 0"></span>
+										.
+										<span ng-bind="bondData.bond.discountRate % 1 * 100 == 0 ? '00' : (bondData.bond.discountRate % 1 * 100 | number:0)"></span>										
+									</span>
+									%
+								</td>
+								<td><span class="h3 black2" ng-bind="bondData.bond.remainCapital | number: 2"></span>元</td>
+								<td><span class="h4 black2" ng-bind="bondData.bond.bondEndTime | date:'yyyy-MM-dd'"></span></td>
+								
+							</tr>
+							<tr>
+								<td width="25%">折让率</td>
+								<td width="30%">剩余可投债权</td>
+								<td width="30%">投资截止日期</td>						
+								<td class="last" width="15%" rowspan="2">
+									<i class="knob" cp-ui-knob="bondData.bond.remainCapital ? 0 : 100" r="52" line-width="2" color="#aed787">
+										<span class="per-value"><span class="h7" ng-bind="bondData.bond.remainCapital ? 0 : 100"></span>%</span>
+									</i>									
+								</td>
+							</tr>
+						</table>
+					</div>
+					<div class="basic-part2">
+						<table>
+							
+							<tr>
+								<td class="cl-grey light-lightest-on">
+									<span class="light2">
+										<span class="h2" ng-bind="bondData.bond.rateYear - 0.5 | number: 0">{{}}</span>
+										.
+										<span ng-bind="bondData.bond.rateYear % 1 * 100 == 0 ? '00' : (bondData.bond.rateYear % 1 * 100 | number:0)"></span>										
+									</span>
+									%
+								</td>
+								<td><span class="h4 black2" ng-bind="bondData.bond.bondCapital | number: 2"></span>元</td>								
+								<td class="last">
+									<span class="h3 black2" ng-bind="bondData.bond.remainDays"></span>天
+								</td>
+								
+							</tr>
+							<tr>
+								<td width="25%">预期年化收益</td>
+								<td width="30%">债权总额</td>
+								<td class="last" width="30%">剩余期限</td>							
+								<td class="last" width="15%" rowspan="2">								
+								</td>
+							</tr>
+						</table>
+					</div>
+					<div class="view-ori-invest">
+						<a class="lighter" target="_blank" ui-sref="borrowDetail({id:bondData.bond.borrowId})">查看原始借贷情况</a>
+					</div>					
+				</div>							
+			</div>
+			<div cp-common-include="'template_bondDetailDetail_kunlongchedai'"></div>		
+		</div>
+	</div>
+</div>

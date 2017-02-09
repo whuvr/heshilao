@@ -1,0 +1,46 @@
+{
+	"total":20,
+	"pageSize":8,
+	"row" :[
+	{
+		"rechargeTime":"2015-1-1",
+		"serialNum":20,
+		"rechargeWay":"银行",
+		"rechargeMoney":1000,
+		
+		"status":"成功"
+	},
+	{
+		"rechargeTime":"2015-1-1",
+		"serialNum":20,
+		"rechargeWay":"银行",
+		"rechargeMoney":1000,
+		
+		"status":"成功"
+	},
+	{
+		"rechargeTime":"2015-1-1",
+		"serialNum":20,
+		"rechargeWay":"银行",
+		"rechargeMoney":1000,
+		
+		"status":"成功"
+	},
+	{
+		"rechargeTime":"2015-1-1",
+		"serialNum":20,
+		"rechargeWay":"银行",
+		"rechargeMoney":1000,
+		
+		"status":"成功"
+	},
+	{
+		"rechargeTime":"2015-1-1",
+		"serialNum":20,
+		"rechargeWay":"银行",
+		"rechargeMoney":1000,
+		
+		"status":"成功"
+	}
+	]
+}

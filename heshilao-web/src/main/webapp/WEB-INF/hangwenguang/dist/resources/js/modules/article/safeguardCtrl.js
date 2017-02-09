@@ -1,0 +1,1 @@
+define(["angular"],function(n){return function(n,o,t,e){n.controller("safeguardCtrl",["$scope","$rootScope","$state","$window",function(n,o,t,e){}])}});

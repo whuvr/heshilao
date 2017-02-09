@@ -1,0 +1,39 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><!--[if lt IE 8]>
+	    <script type="text/javascript">
+            window.location = "views/ie7.html";
+	    </script>
+		<![endif]--><title>杭文投-专注于文创产业及创业助力金融项目</title><meta name="description" content=""><meta name="keywords" content=""><meta name="renderer" content="webkit"><meta http-equiv="X-UA-Compatible" content="IE=edge"><script src="views/account/ZeroClipboard.min.js?v=201701171401"></script><script src="resources/plugins/My97DatePicker/WdatePicker.js?v=201701171401"></script><link rel="stylesheet" type="text/css" href="resources/css/build.css?v=201701171401"><!-- <link rel="stylesheet" type="text/css" href="resources/css/build_1.css?v=201701171401"> --><!-- endbuild --><script>var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?4ddb00a7ead203e011b1d0a8dd1d1ca9";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();</script><script>var v = 20150901;</script></head><body><div style="display:none"><!-- cnzz统计 --><!--<script src="http://s4.cnzz.com/z_stat.php?id=1256733209&web_id=1256733209&v=201701171401" language="JavaScript"></script>--></div><div id="header" ng-component="modules/common/header/header" class=""></div><div id="content" ui-view=""></div><div id="footerWrap" ng-component="modules/common/footer/footer" class=""></div><div id="footer2" ng-component="modules/share/share" class=""></div><script>var js = document.createElement('script');
+    js.type = 'text/javascript';
+    js.src = 'resources/plugins/requirejs/require.min.js';
+    js.setAttribute('data-main', 'views/main.js?v=' + v);
+    document.body.appendChild(js);
+
+    var link = document.createElement('link');
+    link.rel = "shortcut icon";
+    link.type = "text/css";
+    var XMLHttpReq;
+    if (typeof XMLHttpRequest != undefined) {
+        XMLHttpReq = new XMLHttpRequest();
+    } else {
+        XMLHttpReq = new ActiveXObject('Microsoft.XMLHTTP');
+    }
+    XMLHttpReq.open("get", "corp/faviconurl", true);
+    XMLHttpReq.onreadystatechange = function() {
+        if (XMLHttpReq.readyState == 4) {
+            if (XMLHttpReq.status == 200) {
+                link.href = XMLHttpReq.responseText;
+                if ((navigator.userAgent.indexOf('MSIE') >= 0) && (navigator.userAgent.indexOf('Opera') < 0)) {
+                    document.body.appendChild(link);
+                } else {
+                    document.getElementsByTagName('head')[0].appendChild(link);
+                }
+            }
+        }
+    }
+    XMLHttpReq.send(null);</script></body></html>

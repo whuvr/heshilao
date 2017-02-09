@@ -1,0 +1,275 @@
+<div ng-controller="borrowPreviewCtrl"  id="main-cont" class="grid-m0s34">
+	<div class="col-sub">
+		<div class="mod-panel mod-inv-opt">
+			<div class="mod-body">
+				<p>投资进度<span class="floatright"><s ng-bind="borrowData.progressPercentage"></s>%</span></p>
+				<div class="process-bar">
+					<i ng-style="{width: borrowData.progressPercentage && (borrowData.progressPercentage + '%')}"></i>
+				</div>
+				<div class="can-inv-money">
+					<p>可投金额<span class="floatright cl-grey"><s ng-bind="borrowData.amountBorrow - borrowData.amountInvested"></s>元</span></p>
+				</div>
+				<div class="opt-switch">
+					<div class="inv-status" style="margin-top:75px;">
+						<i class="inv-status-self"></i>
+						<a class="mt30 button-grey w0" style="margin:0">此页面为预览页面，不可操作</a>
+					</div>
+				</div>				
+				
+			</div>
+		</div>
+		
+		<div class="dir-tabs mod-panel" tabs>
+			<div class="tabs-nav clearfix">
+				<a href="javascript:;">安全保障</a>
+			</div>
+			<div class="tabs-group">
+				<div class="mod-panel mod-safe-prom">
+					<div class="mod-body">
+						<i class="icon"></i>
+						<ul class="safe-list">
+							<li>								
+								<h4>业务模式</h4>
+								<p>一对多的交易制，有效分散风险</p>																
+							</li>
+							<li>								
+								<h4>机构合作</h4>
+								<p>全面控制源头风险</p>																
+							</li>
+							<li>								
+								<h4>项目审核</h4>
+								<p>多重审核，保证每笔借款都是优质的</p>																
+							</li>
+							<li>								
+								<h4>资金保护</h4>
+								<p>本息保障制度</p>																
+							</li>
+							<li>								
+								<h4>网站建设</h4>
+								<p>银行级别的投资安全保障</p>																
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		
+		
+
+	</div>
+	<div class="col-main">
+		<div class="mod-panel mod-inv-basic">
+			<div class="mod-head">
+				<div class="inv-title" ng-class="{danbg:borrowData.type==101,dibg:borrowData.type==102,xinbg:borrowData.type==103,miaobg:borrowData.type==104}">
+					<span class="inv-name inlineblock" ng-bind="borrowData.name"></span>
+					<i class="invest-type inlineblock"></i>
+					<span class="inv-novice inlineblock" ng-show="investStatus == 4">新手体验标</span>
+					<span class="proto-view floatright cl-grey">投资协议范文<a class="cl-blue" ng-click="viewProtocol()">预览</a></span>	
+				</div>							
+				<div class="inv-sn">借款编号：<span ng-bind="borrowData.borrowNo"></span></div>
+			</div>
+			<div class="mod-body">
+				<div class="basic-part1">
+					<table>
+						<tr>
+							<td width="27%">预期年化利率</td>
+							<td class="slice" rowspan="2"><i></i></td>
+							<td width="27%">项目期限</td>
+							<td class="slice" rowspan="2"><i></i></td>
+							<td width="46%">剩余金额</td>
+						</tr>
+						<tr>
+							<td class="cl-grey"><span class="ft30 cl-orange" ng-bind="borrowData.rateYear | number: 2"></span>%</td>
+							<td>
+								<span class="ft30 cl-black" ng-bind="borrowData.timeLimit"></span>
+								<span ng-if="borrowData.timeType == 0">月</span>
+								<span ng-if="borrowData.timeType == 1">天</span>
+							</td>
+							<td><span class="ft30 cl-black" ng-bind="borrowData.amountBorrow - borrowData.amountInvested | number: 2"></span>元</td>
+						</tr>
+					</table>
+				</div>
+				<div class="basic-part2">
+					<table>
+						<tr>
+							<td>还款方式
+								<span ng-if="borrowData.repayWay == 1">按月分期还款</span>
+								<span ng-if="borrowData.repayWay == 2">一次性还款</span>
+								<span ng-if="borrowData.repayWay == 3">每月还息到期还本</span>
+							</td>
+							<td>最小投标
+								<span>{{borrowData.investMin | number: 2}}元</span>
+							</td>
+							<td>最大投标
+								<span ng-if="borrowData.investMax == 0">无限制</span>
+								<span ng-if="borrowData.investMax !=0 ">{{borrowData.investMax}}元</span>
+							</td>
+						</tr>
+						<tr>
+							<td>当前状态
+								<span ng-if="borrowData.status == 0||borrowData.status==9||borrowData.status==10||borrowData.status==11||borrowData.status==12">待初审</span>
+								<span ng-if="borrowData.status == 1">招标中</span>
+								<span ng-if="borrowData.status == 2">初审未通过</span>
+								<span ng-if="borrowData.status == 3">满标待审</span>
+								<span ng-if="borrowData.status == 4">还款中</span>
+								<span ng-if="borrowData.status == 5">复审未通过</span>
+								<span ng-if="borrowData.status == 6">已撤回</span>
+								<span ng-if="borrowData.status == 7">已流标</span>
+								<span ng-if="borrowData.status == 8">已还款</span>
+							</td>
+							<td>发布日期
+								<span ng-bind="borrowData.openTime | date: 'yyyy-MM-dd'"></span>
+							</td>
+							<td>结束日期
+								<span ng-bind="borrowData.validDate | date: 'yyyy-MM-dd'"></span>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>		
+		<div class="dir-tabs mod-panel" tabs>
+			<div class="tabs-nav clearfix">
+				<a href="javascript:;" ng-click="gotoAnchor('userInfo')" tab-index="0">借款方详情</a>
+				<a href="javascript:;" ng-click="gotoAnchor('borrowDesc')" tab-index="0">借款描述</a>
+				<a href="javascript:;" ng-click="gotoAnchor('borrowInf')" tab-index="0">借款资料</a>
+				<a href="javascript:;" ng-click="gotoAnchor('investRecord')" tab-index="0">投资记录</a>
+			</div>
+			<div class="tabs-group">
+				<div class="mod-panel mod-inv-detail">
+					<div class="mod-body">
+						<div class="part user-info">
+							<h3 class="anchor-name"><a id="userInfo">借款方详情</a></h3>
+							<div class="anchor-content">
+								<table class="w0">
+									<tr>
+										<td>真实姓名：<span ng-bind="userinfo.realName"></span></td>
+										<td>婚姻状况：<span ng-bind="userinfo.maritalStatus == 1 ? '已婚' : '未婚'"></span></td>
+										<td ng-switch="userinfo.monthIncomeRange">收入范围：
+											<span ng-switch-when="0">3000元以下</span>
+											<span ng-switch-when="1">3000-5000元</span>
+											<span ng-switch-when="2">5000-8000元</span>
+											<span ng-switch-when="3">8000-10000元</span>
+											<span ng-switch-when="4">10000-13000元</span>
+											<span ng-switch-when="5">13000-15000元</span>
+											<span ng-switch-when="6">15000-20000元</span>
+											<span ng-switch-when="7">20000元以上</span>
+										</td>
+									</tr>
+									<tr>
+										<td>年龄：<span ng-bind="userinfo.age"></span>岁</td>
+										<td>户籍城市：<span ng-bind="userinfo.province"></span><span ng-bind="userinfo.city"></span></td>
+										<td>车产：<span ng-bind="userinfo.hasCar == 1 ? '有车' : '无车'"></span></td>
+									</tr>
+									<tr>
+										<td ng-switch="userinfo.education">学历：
+											<span ng-switch-when="0">小学</span>
+											<span ng-switch-when="1">初中</span>
+											<span ng-switch-when="2">高中</span>
+											<span ng-switch-when="3">中专</span>
+											<span ng-switch-when="4">大专</span>
+											<span ng-switch-when="5">本科</span>
+											<span ng-switch-when="6">硕士</span>
+											<span ng-switch-when="7">博士</span>
+											<span ng-switch-default>其他</span>
+										</td>
+										<td ng-switch="userinfo.workExperience">工作时间：
+											<span ng-switch-when="0">0-3年</span>
+											<span ng-switch-when="1">3-5年</span>
+											<span ng-switch-when="2">5-8年</span>
+											<span ng-switch-when="3">8年以上</span>
+										</td>
+										<td>房产：<span ng-bind="userinfo.hasHouse == 1 ? '有房' : '无房'"></span></td>
+									</tr>
+								</table>
+							</div>
+						</div>
+						<div class="part">
+							<h3 class="anchor-name"><a id="borrowDesc">借款描述</a></h3>
+							<div class="anchor-content">
+								<p class="borrow-desc-content" multi-line-text-overflow="100" ng-bind-html="borrowData.content | html"></p>
+							</div>
+						</div>
+						<div class="part borrow-info">
+							<h3 class="anchor-name"><a id="borrowInf">借款资料</a></h3>
+							<div class="anchor-content">
+								<ul class="clearfix image-list">
+									<li ng-repeat="item in imageData" ng-class="{mr0: $index % 3 == 2,floatright: $index % 3 == 2}">
+										<img ng-src="{{domain + item.imageUrl + '?imageView2/1/w/100/h/100'}}" />
+									</li>
+								</ul>
+								<div id="page">	
+									<div paging
+										class="small"
+										page="imagePage" 
+										page-size="imagePageSize" 
+										total="imageTotal"
+										adjacent="2"
+										dots="..."
+										scroll-top="false" 
+										hide-if-empty="true"
+										ul-class="pagination"
+										active-class="active"
+										disabled-class="disabled"
+										show-prev-next="true"
+										paging-action="imagePagingAction(page)">
+									</div>	
+								</div>
+							</div>							
+						</div>
+						<div class="part invest-record">
+							<h3 class="anchor-name"><a id="investRecord">投资记录</a></h3>
+							<div class="anchor-content">
+								<table class="w0 list-table">
+									<thead>
+										<tr>
+											<td>序号</td>
+											<td>投资人</td>
+											<td>投资金额</td>
+											<td>投资时间</td>
+											<td>投资方式</td>
+											<td>状态</td>								
+										</tr>
+									</thead>
+									<tbody>
+										<tr ng-repeat="item in investmentList">
+											<td ng-bind="(recordPage-1) * recordPageSize +  $index + 1"></td>
+											<td ng-bind="item.realName"></td>
+											<td ><span class="money">￥</span><span ng-bind="item.capital"></span></td>
+											<td ng-bind="item.addTime|date:'yyyy-MM-dd'"></td>
+											
+											<td ng-switch="item.investmentType">
+												<span ng-switch-when="0">网站</span>
+												<span ng-switch-when="1">自动</span>
+												<span ng-switch-when="2">手机</span>
+											</td>
+											<td>完成</td>	
+										</tr>
+									</tbody>
+								</table>
+								<div id="page">	
+									<div paging
+										class="small"
+										page="recordPage" 
+										page-size="recordPageSize" 
+										total="recordTotal"
+										adjacent="2"
+										dots="..."
+										scroll-top="false" 
+										hide-if-empty="true"
+										ul-class="pagination"
+										active-class="active"
+										disabled-class="disabled"
+										show-prev-next="true"
+										paging-action="getInvestmentList(page)">
+									</div>	
+								</div>
+							</div>								
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>		
+	</div>
+</div>

@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rongdu.rongyun.mapper.IntentApplyMapper" >
+  <resultMap id="BaseResultMap" type="com.rongdu.rongyun.domain.IntentApply" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="corpId" property="corpId" jdbcType="INTEGER" />
+    <result column="productType" property="productType" jdbcType="INTEGER" />
+    <result column="productCode" property="productCode" jdbcType="VARCHAR" />
+    <result column="productName" property="productName" jdbcType="VARCHAR" />
+    <result column="linkman" property="linkman" jdbcType="VARCHAR" />
+    <result column="linkmanPhone" property="linkmanPhone" jdbcType="VARCHAR" />
+    <result column="applyTime" property="applyTime" jdbcType="TIMESTAMP" />
+    <result column="result" property="result" jdbcType="INTEGER" />
+    <result column="dealTime" property="dealTime" jdbcType="TIMESTAMP" />
+    <result column="dealManageName" property="dealManageName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, corpId, productType, productCode,productName, linkman, linkmanPhone, applyTime, result, dealTime, 
+    dealManageName
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from intentApply
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from intentApply
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.rongdu.rongyun.domain.IntentApply" >
+    insert into intentApply (id, corpId, productType, productCode
+      productName, linkman, linkmanPhone, 
+      applyTime, result, dealTime, 
+      dealManageName)
+    values (#{id,jdbcType=INTEGER}, #{corpId,jdbcType=INTEGER}, #{productType,jdbcType=INTEGER}, 
+     #{productCode,jdbcType=VARCHAR},  #{productName,jdbcType=VARCHAR}, #{linkman,jdbcType=VARCHAR}, #{linkmanPhone,jdbcType=VARCHAR}, 
+      #{applyTime,jdbcType=TIMESTAMP}, #{result,jdbcType=INTEGER}, #{dealTime,jdbcType=TIMESTAMP}, 
+      #{dealManageName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.rongdu.rongyun.domain.IntentApply" >
+    insert into intentApply
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="corpId != null" >
+        corpId,
+      </if>
+      <if test="productType != null" >
+        productType,
+      </if>
+      <if test="productCode != null" >
+        productCode,
+      </if>
+      <if test="productName != null" >
+        productName,
+      </if>
+      <if test="linkman != null" >
+        linkman,
+      </if>
+      <if test="linkmanPhone != null" >
+        linkmanPhone,
+      </if>
+      <if test="applyTime != null" >
+        applyTime,
+      </if>
+      <if test="result != null" >
+        result,
+      </if>
+      <if test="dealTime != null" >
+        dealTime,
+      </if>
+      <if test="dealManageName != null" >
+        dealManageName,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="corpId != null" >
+        #{corpId,jdbcType=INTEGER},
+      </if>
+      <if test="productType != null" >
+        #{productType,jdbcType=INTEGER},
+      </if>
+      <if test="productCode != null" >
+        #{productCode,jdbcType=VARCHAR},
+      </if>
+      <if test="productName != null" >
+        #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="linkman != null" >
+        #{linkman,jdbcType=VARCHAR},
+      </if>
+      <if test="linkmanPhone != null" >
+        #{linkmanPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="applyTime != null" >
+        #{applyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="result != null" >
+        #{result,jdbcType=INTEGER},
+      </if>
+      <if test="dealTime != null" >
+        #{dealTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dealManageName != null" >
+        #{dealManageName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.rongdu.rongyun.domain.IntentApply" >
+    update intentApply
+    <set >
+      <if test="corpId != null" >
+        corpId = #{corpId,jdbcType=INTEGER},
+      </if>
+      <if test="productType != null" >
+        productType = #{productType,jdbcType=INTEGER},
+      </if>
+      <if test="productCode != null" >
+        productCode = #{productCode,jdbcType=VARCHAR},
+      </if>
+      <if test="productName != null" >
+        productName = #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="linkman != null" >
+        linkman = #{linkman,jdbcType=VARCHAR},
+      </if>
+      <if test="linkmanPhone != null" >
+        linkmanPhone = #{linkmanPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="applyTime != null" >
+        applyTime = #{applyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="result != null" >
+        result = #{result,jdbcType=INTEGER},
+      </if>
+      <if test="dealTime != null" >
+        dealTime = #{dealTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dealManageName != null" >
+        dealManageName = #{dealManageName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.rongdu.rongyun.domain.IntentApply" >
+    update intentApply
+    set corpId = #{corpId,jdbcType=INTEGER},
+      productType = #{productType,jdbcType=INTEGER},
+      productCode = #{productCode,jdbcType=VARCHAR},
+      productName = #{productName,jdbcType=VARCHAR},
+      linkman = #{linkman,jdbcType=VARCHAR},
+      linkmanPhone = #{linkmanPhone,jdbcType=VARCHAR},
+      applyTime = #{applyTime,jdbcType=TIMESTAMP},
+      result = #{result,jdbcType=INTEGER},
+      dealTime = #{dealTime,jdbcType=TIMESTAMP},
+      dealManageName = #{dealManageName,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <!-- findExistCount  -->
+  <select id="findExistCount" resultType="java.lang.Integer" parameterType="java.lang.Integer" >
+    select 
+    count(*)
+    from intentApply
+    where corpId = #{0} 
+    and productType = #{1} 
+    and productCode = #{2} 
+  </select>
+  
+  <!-- findExist -->
+    <select id="findExist" resultMap="BaseResultMap"  parameterType="java.lang.Integer" >
+    select <include refid="Base_Column_List" /> 
+    from intentApply
+    where corpId = #{0} 
+    and productType = #{1} 
+    and productCode = #{2} 
+    order by applyTime desc
+  </select>
+</mapper>

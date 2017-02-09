@@ -1,0 +1,395 @@
+// app_down style
+.app_down_wrap {
+	$img-url: '../images/app_img/';
+
+	.pages-wrap {
+		text-align: center;
+		font-size: 12px;
+		margin: 0 auto;
+		padding: 0;
+		min-width: 960px;
+		/* position:relative; */
+		background: #f8f9f9;
+	}
+
+	.banner {
+		background: url($img-url + "banner.png");
+		width: 100%;
+		height: 627px;
+	}
+
+	.banner_main {
+		position: relative;
+		width: 960px;
+		height: 627px;
+		margin: 0 auto;
+	}
+	.mask_phone{
+		position: relative;
+		z-index: 1;
+	}
+	.mask_inner{
+		position: absolute;
+	}
+
+	.hand_phone {
+		background: url($img-url + "hand.png") -3px 93px no-repeat;
+		padding-top: 93px;
+		width: 46%;
+		height: 534px;
+		float: left;
+	}
+
+	.iphone {
+		background: url($img-url + "iphone0.png") -4px 0px no-repeat;
+		background-size: cover;
+		width: 215px;
+		height: 372px;
+		top: 152px;
+    left: 175px;
+	}
+
+	.qrcode {
+		float: left;
+		color: #fff;
+		margin: 20% 5%;
+	}
+
+	/* .qr{
+		font-size:20px;
+		margin-top:15%;
+	} */
+	.scan_downlaod {
+		background: url($img-url + "scan_download.png") no-repeat;
+		width: 221px;
+		height: 49px;
+		margin-left: -30px;
+		margin-bottom: -20px;
+	}
+
+	.android,
+	.ios {
+		outline: none;
+		color: #fff;
+		width: 165px;
+		height: 40px;
+		background: transparent;
+		border: 1px solid #fff;
+		border-radius: 20px;
+		margin-top: 30px;
+		font-size: 14px;
+	}
+
+	button:visited {
+		border: none;
+	}
+
+	a {
+		color: #fff;
+		text-decoration: none;
+	}
+
+	a:hover {
+		color: #ccc;
+		background: none;	/* border:1px solid #ccc; */
+		border-radius: 20px;
+	}
+
+	.invest {
+		position: relative;
+		left: 1%;
+		top: 33%;
+	}
+
+	.invest span {
+		font-size: 28px;
+		color: #fff;
+		margin-right: 20px;
+	}
+
+	.down {
+		float: left;
+		margin-top: 270px;
+		margin-left: 82px;
+		width: 170px;
+	}
+
+	.code {
+		background: url($img-url + "qr_code.png") no-repeat;
+		background-size: cover;
+		width: 189px;
+		height: 189px;
+		float: left;
+		margin-left: 33px;
+		margin-top: 270px;
+	}
+
+	.whitebg {
+		background: #fff;
+	}
+
+	.main {
+		width: 960px;
+		height: 500px;
+		margin: 0 auto;
+		position: relative;
+		font-family: "\5E7C\5706";
+		overflow: hidden;
+	}
+
+	.onepic {
+		background: url($img-url + "img1.png") 0px 62px no-repeat;
+		width: 487px;
+		height: 500px;
+		float: right;
+	}
+
+	.twopic {
+		background: url($img-url + "img2.png") 0px 61px no-repeat;
+		width: 50%;
+		height: 500px;
+		float: left;
+	}
+
+	.threepic {
+		background: url($img-url + "img3.png") 2px 86px no-repeat;
+		width: 50%;
+		height: 525px;
+		float: right;
+	}
+
+	// .iphone1,
+	.iphone2,
+	.iphone3 {
+		background: url($img-url + "iphone1.png") no-repeat;
+		width: 236px;
+		height: 363px;
+		position: relative;
+	}
+
+	.iphone1,
+	.iphone2,
+	.iphone3 {
+		background-repeat: no-repeat;
+		background-size:cover;
+		width: 236px;
+		height: 363px;
+		position: relative;
+	}
+
+	.iphone1 {
+		background-image: url($img-url + "iphone1.png");
+	}
+
+	.iphone2 {
+		background-image: url($img-url + "iphone2.png");
+	}
+
+	.iphone3 {
+		background-image: url($img-url + "iphone3.png");
+	}
+
+	.iphone1 {
+		top: 138px;
+		right: -233px;
+	}
+
+	.iphone2 {
+		top: 137px;
+		left: 48px;
+	}
+
+	.iphone3 {
+		top: 161px;
+		left: 215px;
+	}
+
+	.main p {
+		font-size: 38px;
+		margin-bottom: 30px;
+		color: #666;
+	}
+
+	span {
+		font-size: 20px;
+		color: #666;
+	}
+
+	.lf {
+		float: left;
+		width: 35%;
+		margin: 20% 3%;
+	}
+
+	.gt {
+		float: right;
+		width: 37%;
+		margin: 20% 3%;
+	}
+
+	.footer {
+		height: 300px;
+		background: #2f2c2c;
+		clear: both;
+	}
+
+	.scan {
+		color: #636363;
+		font-size: 24px;
+		width: 217px;
+		position: relative;
+		left: 4%;
+		top: 32%;
+		text-align: left;
+	}
+
+	.scan span {
+		margin-bottom: 100px;
+	}
+
+	.fbut {
+		width: 400px;
+		position: relative;
+		left: 27%;
+	}
+
+	.fbut button {
+		margin-left: 20px;
+	}
+
+	.qr {
+		float: right;
+		margin: -11% 4%;
+	}
+
+	.footer_main {
+		width: 960px;
+		height: 300px;
+		margin: 0 auto;
+	}
+
+}
+
+/* 苹果安卓下载字体图标 */
+@font-face {
+	font-family: 'appiconfont';
+	src: url('../iconfont/app_iconfont/iconfont.eot');
+	src: url('../iconfont/app_iconfont/iconfont.eot?#iefix') format('embedded-opentype'), url('../iconfont/app_iconfont/iconfont.woff') format('woff'), url('../iconfont/app_iconfont/iconfont.ttf') format('truetype'), url('../iconfont/app_iconfont/iconfont.svg#iconfont') format('svg')
+}
+
+.app_down_f_wrap {
+	$img-url: '../images/app_img/';
+
+	// body {
+	// 	margin: 0;
+	// 	padding: 0;
+	// 	position: realtive;
+	// 	min-width: 1366px;
+	// }
+
+	.iconfont {
+		font-family: "appiconfont" !important;
+		font-size: 16px;
+		font-style: normal;
+		-webkit-font-smoothing: antialiased;
+		-webkit-text-stroke-width: 0.2px;
+		-moz-osx-font-smoothing: grayscale;
+	}
+
+	/*.icon-pingguo:before { content: "\e649"; }*/
+
+	/*.icon-anzhuo:before { content: "\e698"; }*/
+	.pingguo {
+		font-size: 20px;
+	}
+
+	.anzhuo {
+		font-size: 20px;
+	}
+
+	.download span {
+		margin-right: 5px;
+	}
+
+	.download_page {
+		width: 100%;
+		background: url($img-url + "bg.jpg") no-repeat center center;
+		background-size: 100% 100%;
+		height: 812px;
+		position: relative;
+	}
+
+	.not_stand {
+		background: url($img-url + "not_stand.png") no-repeat;
+		width: 355px;
+		height: 126px;
+	}
+
+	.bg_code {
+		background: url($img-url + "bg_code.png") no-repeat;
+		background-size: cover;
+		width: 149px;
+		height: 149px;
+		position: relative;    /* left: 0.5%; */
+		margin: 8% 0%;
+	}
+
+	.main {
+		width: 500px;
+		float: left;
+		margin: 15% 25%;
+	}
+
+	.download {
+		width: 200px;
+		position: relative;
+		margin: -37% 35%;
+	}
+
+	.download button {
+		width: 160px;
+		height: 42px;
+		border-radius: 12px;
+		border: 1px solid #fff;
+		background: transparent;
+		outline: none;
+		margin-top: 20px;
+		text-align: left;
+		padding-left: 18px;
+	}
+
+	button:hover {
+		border-color: rgba(255, 255, 255, .1);
+		background-color: rgba(255, 255, 255, .2);
+	}
+
+	.left {
+		width: 500px;
+		height: 315px;
+		position: absolute;
+		left: 15%;
+		top: 230px;
+	}
+
+	a {
+		color: #fff;
+		text-decoration: none;
+		font-size: 14px;
+		z-index: 10;
+	}
+
+	/* button:visited{
+		border:none;
+		background-color:#fff;
+		opacity:.3;
+	} */
+	.bg_iphone {
+		background: url($img-url + "bg_iphone.png") no-repeat;
+		width: 409px;
+		height: 506px;
+		float: right;
+		position: absolute;
+		top: 150px;
+		right: 15%;
+	}
+}

@@ -1,0 +1,1 @@
+define(["angular"],function(n){var e={confirm:function(n,e){dialog=alert(n,{type:"prompt",buttons:[{value:"确定",callBack:function(){"function"==typeof e&&e()}},{value:"取消",className:"cancel"}],closeBtn:!1})}};return globalApp.service("dialogService",[function(n){return e}]),e});

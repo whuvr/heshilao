@@ -1,0 +1,1 @@
+define(["modules/art/artCtrl","modules/art/artService","text!htmlModule/art/art.html"],function(t,e,r){return function(a,n,l,u){t(a,n,l,u),e(a,n,l,u),n.append(r)}});

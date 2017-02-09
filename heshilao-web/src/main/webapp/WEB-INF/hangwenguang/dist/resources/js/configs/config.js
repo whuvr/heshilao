@@ -1,0 +1,1 @@
+define(["angular","configs/navData","configs/router","configs/G","configs/interceptor","configs/httpService","directives/common"],function(n,i,c,o,e,t,r){return function(n){o(n),i(n),c(n),e(n),t(n),r(n)}});

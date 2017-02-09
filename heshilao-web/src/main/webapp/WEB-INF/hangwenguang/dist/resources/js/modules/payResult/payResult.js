@@ -1,0 +1,1 @@
+define(["modules/payResult/payResultCtrl","modules/payResult/payResultService","text!htmlModule/payResult/payResult.html"],function(e,t,l){return function(u,p,s,a){e(u,p,s,a),t(u,p,s,a),p.append(l)}});

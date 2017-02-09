@@ -1,0 +1,53 @@
+﻿
+@mixin insert($width:270px,$height:40px){
+	box-sizing: border-box;
+	width: $width;
+	height: $height;
+	line-height: $height;
+	border-radius:$input-border-radius;
+	border: $input-border;
+	font-size: $f14;
+	color: $gray;
+	background: $white;
+	padding: 0 7px
+}
+@mixin insert-focus(){
+	border-radius: $input-border-radius;
+	border: $input-border-focus;
+	box-shadow: $input-box-shadow-focus;
+	font-size: $f14;
+	color: $gray;
+	background: $white;
+	outline: 0;
+	outline: $input-border-focus \9;
+	-webkit-box-shadow: $input-box-shadow-focus;
+	box-shadow: $input-box-shadow-focus;
+}
+//默认的input 参数分别是宽度 高度 字号 字体颜色 边框宽度 边框样式 边框样式 圆角 背景颜色
+@mixin form-input($width:null,$height:40px,$font-size:14px,$font-color:#999,$stoke:1px,$border-style:solid,$border-color:#e3e3e3,$border-radius:3px,$bg:#fff){
+	width: $width;
+	height: $height;
+	line-height: $height;
+	font-size: $font-size;
+	color: $font-color;
+	border-width: $stoke;
+	border-style: $border-style;
+	border-color: $border-color;
+	border-radius: $border-radius;
+	box-sizing: border-box;
+	background: $bg;
+	padding: 0 10px;
+	outline: 0;	
+}
+input[type="text"],input[type="password"],select,.normal-input{
+	@include form-input();
+}
+.normal-input:hover{
+	@include form-input($border-color: #f24b0b);
+}
+input[type="text"]:focus,input[type="password"]:focus,select:focus,.normal-input:focus{
+	@include form-input($font-color: #666,$border-color: #f24b0b);
+}
+
+
+

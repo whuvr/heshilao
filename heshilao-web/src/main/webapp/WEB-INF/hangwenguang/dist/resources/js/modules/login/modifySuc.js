@@ -1,0 +1,1 @@
+define(["modules/login/modifySucCtrl","text!htmlModule/login/modifySuc.html"],function(n,o){return function(t,e,i,l){n(t,e,i,l),e.append(o)}});

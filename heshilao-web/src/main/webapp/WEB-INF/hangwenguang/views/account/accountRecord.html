@@ -1,0 +1,56 @@
+<div ng-controller="accountRecordCtrl" class="accountRecord">
+  <div>
+    <div class="tabs2">
+      <div class="tab2-nav">
+        <a href="" class="active no-border"><span>资金记录</span></a>
+      </div>
+      <div class="screenColumn">
+        <form>
+          <span>日期范围</span>
+          <select class="rechargeCash-select" ng-model="time" ng-change="changeTime()">
+            <option value="-1">全部</option>
+            <option value="7d">近7天</option>
+            <option value="15d">近15天</option>
+            <option value="1m">近1个月</option>
+            <option value="2m">近2个月</option>
+            <option value="">具体日期</option>
+          </select>
+          <div ng-show="searchDate" style="display:inline-block">
+            <span>日期：</span>
+            <input type="text" id="startTime" class="inputTime Wdate" onFocus="WdatePicker({dateFmt:'yyyy-MM-dd',maxDate:'#F{$dp.$D(\'endTime\')}',readOnly:true})" /> &nbsp;-&nbsp;
+            <input type="text" id="endTime" class="inputTime Wdate" onFocus="WdatePicker({minDate:'#F{$dp.$D(\'startTime\')}',readOnly:true})" />
+          </div>
+          <a class="screenSearch" href="javascript:void(0)" ng-click="change(1)">搜索</a>
+        </form>
+      </div>
+      <table class="table-noline">
+        <thead>
+          <tr>
+            <td>时间</td>
+            <td>类型</td>
+            <td>交易对方</td>
+            <td>操作金额</td>
+            <td width="35%">备注</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="item in data" id="trdata">
+            <td ng-bind="item.addTime|date:'yyyy-MM-dd HH:mm:ss'"></td>
+            <td ng-bind="item.type"></td>
+            <td ng-bind="item.toUser"></td>
+            <td><span ng-bind="item.amount | number:2"></span>元</td>
+            <td class="nameTitle1">
+              <div ng-if="item.borrowId" title="{{item.remark}}"><span ng-bind="item.remark1"></span>
+                <a ng-if="item.url==false" ui-sref="borrowDetail({id:item.borrowId})" ng-bind="item.remark2"></a><a ng-if="item.url==true" ui-sref="expBorrowsDetail({id:item.borrowId})" ng-bind="item.remark2"></a><span ng-bind="item.remark3"></span></div>
+              <div ng-if="!item.borrowId" title="{{item.remark}}"><span ng-bind="item.remark"></span></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div id="page">
+        <div paging class="small" page="page" page-size="pageSize" total="total" adjacent="2" dots="..." scroll-top="false" hide-if-empty="true" ul-class="pagination" active-class="active" disabled-class="disabled" show-prev-next="true" paging-action="change(page,1)">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

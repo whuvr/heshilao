@@ -1,0 +1,40 @@
+<div ng-controller="newsCtrl"  class="mod-news-list">
+	
+	<ul class="news-list">
+		<li ng-repeat="item in articleData" class="clearfix">
+			<div class="thumbnail floatleft">				
+				<img ng-if="item.imageUrl"  ng-src="{{domain + item.imageUrl}}" alt="文章图片" />
+				<img ng-if="!item.imageUrl"  src="resources/images/default-zixun.jpg" alt="文章图片" />
+			</div>
+			<div class="content">
+				<h2 class="title"><a ng-bind="item.title" ui-sref="article.articleDetail({id:item.id,type: 'news'})"></a></h2>
+				<div class="date">
+					<span ng-bind="item.publishTime | date:'yyyy-MM-dd HH:mm:ss'" class="mr10"></span>
+					<!-- <span>点击数：<s class="cl-orange" ng-bind="item.id"></s></span> -->
+				</div>
+				<div class="introduction">
+					<p ng-bind="item.introduction"></p>
+				</div>
+			</div>
+		</li>
+	</ul>				
+
+	<div id="page">
+		<div paging
+		class="small"
+		page="page" 
+		page-size="pageSize" 
+		total="total"
+		adjacent="2"
+		dots="..."
+		scroll-top="false" 
+		hide-if-empty="true"
+		ul-class="pagination"
+		active-class="active"
+		disabled-class="disabled"
+		show-prev-next="true"
+		paging-action="pageSerch(page)">
+	</div>
+		
+
+</div>

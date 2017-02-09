@@ -1,0 +1,1 @@
+define(["angular"],function(n){return function(n,e,r,i){n.factory("expBorrowsDetailService",[function(){return{name:"qian"}}])}});

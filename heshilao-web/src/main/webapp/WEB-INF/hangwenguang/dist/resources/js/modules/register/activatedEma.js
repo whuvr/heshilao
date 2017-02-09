@@ -1,0 +1,1 @@
+define(["modules/register/activatedEmaCtrl","text!htmlModule/register/activatedEma.html"],function(t,e){return function(a,i,n,r){t(a,i,n,r),i.append(e)}});

@@ -1,0 +1,145 @@
+@charset "utf-8";
+.ui_alert{
+	position:absolute;
+	top:-100%;
+	left:50%;
+	min-width:335px;
+	margin-left:-200px;
+	width:auto;
+	padding-bottom: 25px;
+	border:1px solid #ddd;
+	background:#fff;	
+	box-shadow:0 2px 3px rgba(0, 0, 0, 0.2);
+	border-radius: 0.3em;
+	-moz-border-radius: 0.3em;
+	-webkit-border-radius: 0.3em;
+	-ms-border-radius: 0.3em;
+	/*transition: top 0.5s;*/
+	/*-moz-transition: top 0.5s;
+	-webkit-transition: top 0.5s;*/
+	z-index:10000;
+}
+.ui_alert div.default{
+	margin: 0;
+	padding: 0;
+}
+.ui_alert #content{
+	background: none; 
+}
+.ui_alert .close{
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 20px;
+  height: 20px;
+  font-size: 25px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  line-height: 20px;
+  color: #8f8f8f;
+  outline: none;
+}
+.ui_alert .close:hover{
+	color: #f39800;
+}
+.ui_alert h1{
+	text-align: left;
+	font-weight: normal;
+	border-bottom: 1px solid #cdcdce;
+	line-height: 40px;
+	height: 40px;
+	font-size: 16px;
+	color: #666;
+	background: #f4f6f9;
+	padding-left: 2em;
+}
+.ui_alert div.default{
+	font-size: 0.9em;
+	line-height: 1.3em;
+	padding: 25px 35px;	
+	text-align: center;
+	color:#403d3a;
+	background:#fff;
+	position: relative;
+}
+.ui_alert div.default img.icon{
+	display: inline-block;
+	vertical-align: middle;
+	padding-right: 15px;
+}
+.ui_alert .ui_alert_button{
+	text-align:center;	
+	overflow:hidden;
+	background: #fff;
+}
+.ui_alert .ui_alert_button button{
+	@include btn-light-auto($padding:0 25px,$height:34px,$btn-border-radius:5px,$font-size:14px);
+	margin: 0 10px;
+}
+.ui_alert .ui_alert_button button.cancel{
+	@include btn-normal-auto($padding:0 25px,$height:34px,$btn-border-radius:5px,$font-size:14px,$border:1px solid $light-lighter-on);
+}
+.ui_alert .ui_alert_button button[type="submit"],
+.ui_alert .ui_alert_button button.btn_submit,
+.ui_alert .ui_alert_button button.ui_alert_btn{
+	border:none;	
+	@extend .btn-light;
+	font-size: 15px;
+	margin: 0 10px;
+}
+.ui_alert_cover{
+	position:fixed;
+	width:100%;
+	height:100%;	
+	background-color: #000;
+    filter:alpha(opacity=50); 
+	background: rgba(0,0,0,0.5);
+	top:0;
+	left:0;
+	z-index:9999;
+}
+.ui_alert_show{
+	/*top:50% !important;*/
+}
+.ui_alert .ui_alert_button .ui_alert_btn{
+	display: inline-block;
+	margin:0 10px;
+	float:none;
+}
+.ui_alert #content{
+	padding-bottom: 20px;
+}
+.ui_alert #content #error,.ui_alert #content #confirm,.ui_alert #content #prompt,.ui_alert #content #info{
+	width: 30px;
+	height: 35px;
+	display: inline-block;
+	background: url(../images/dialog-error.png) no-repeat;
+	vertical-align: middle;
+	padding-right: 10px;
+}
+.ui_alert #content #confirm{
+	background: url(../images/dialog-confirm.png) no-repeat;
+}
+.ui_alert #content #prompt{
+	background: url(../images/dialog-prompt.png) no-repeat;
+}
+.ui_alert #content #info{
+	background: url(../images/alerttip.jpg) no-repeat;
+	background-size: 30px 30px;
+}
+.ui_alert #content #no-icon{
+	background: none;
+	width:1px;
+}
+.ui_alert #content #contDetail{
+	display: inline-block;
+	vertical-align: top;
+  	padding-top: 6px;
+  	text-align: left;
+  	line-height: 20px;
+}
+
+#popupDialog.payment{
+	width: 780px;
+}

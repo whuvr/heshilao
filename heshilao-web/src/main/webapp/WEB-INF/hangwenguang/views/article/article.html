@@ -1,0 +1,33 @@
+
+<div ng-controller="articleCtrl" id="main-cont" class="grid-s20m0">
+	
+	<div class="col-main">
+		<div class="mod-panel mod-article">		
+			<div class="dir-tabs mt10">
+				<div class="tabs-nav2">
+					<a class="active" ng-if="$state.is('article.aboutus')">平台简介</a>
+					<a class="active" ng-if="$state.is('article.webtips')">网站公告<span></span></a>
+					<!-- <a class="active" ng-if="$state.is('article.news')">前沿资讯<span></span></a> -->
+					<a class="active" ng-if="$state.is('article.faq')">常见问题<span></span></a>
+					<a class="active" ng-if="$state.is('article.law')">法律声明<span></span></a>
+					<a class="active" ng-if="$state.is('article.contactus')">联系我们<span></span></a>
+					<a class="active" ng-if="$state.is('article.articleDetail')">内容详情<span></span></a>
+					<!-- <a class="active" ng-if="$state.is('article.security')">安全保障</a>
+					<a class="active" ng-if="$state.is('article.recruit')">招贤纳士</a> -->
+				</div>
+				<div ui-view class="views">
+					
+				</div>
+			</div>		
+		</div>
+		
+	</div>
+	<div class="col-sub">
+		<div class="article-nav-list">
+			<ul>
+				<li id="about">关于我们</li>
+				<li ng-repeat="item in subNavs" ng-if="item.isNavItem !== false"><a ng-class="{active: $state.is(item.state) || $stateParams.type == item.articleType}" ui-sref="{{item.state}}">{{item.name}}</a></li>
+			</ul>
+		</div>
+	</div>
+</div>

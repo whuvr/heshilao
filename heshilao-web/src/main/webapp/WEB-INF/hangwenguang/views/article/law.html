@@ -1,0 +1,27 @@
+
+<div ng-controller="lawCtrl" class="mod-law-list mt20">
+	<ul class="law-list">
+		<li ng-repeat="item in data">
+			<h4><span class="title inlineblock" ng-bind="item.title"></span></h4>
+			<div class="content" ng-bind-html="item.content|html">
+			</div>
+		</li>
+	</ul>				
+
+	<div id="page">
+		<div paging
+		class="small"
+		page="page" 
+		page-size="pageSize" 
+		total="total"
+		adjacent="2"
+		dots="..."
+		scroll-top="false" 
+		hide-if-empty="true"
+		ul-class="pagination"
+		active-class="active"
+		disabled-class="disabled"
+		show-prev-next="true"
+		paging-action="pageSerch(page)">
+	</div>
+</div>

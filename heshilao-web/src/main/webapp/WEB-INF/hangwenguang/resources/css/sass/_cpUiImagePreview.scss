@@ -1,0 +1,56 @@
+.rd-mask{
+	position: absolute;
+	left: 0;
+	top: 0;
+	z-index: 999;
+	width: 100%;
+	height: 100%;
+	background: url(../images/mask-bg.png) repeat;
+}
+.rd-image-preview-box{
+	position: absolute;
+	left: 0;
+	top: 50px;
+	z-index: 1000;
+	width: 100%;
+}
+.rd-image-preview-conta{
+	position: relative;
+	width: 800px;
+	border: 5px solid #fff;
+	height: auto;
+	margin: 0 auto;
+}
+.rd-image-preview-conta .close_btn{
+	position: absolute;
+	top: -12px;
+	right: -12px;
+	border-radius: 50%;
+	background: #fff;
+	width: 20px;
+	height: 20px;
+	text-align: center;
+	font-size: 10px;
+	line-height: 20px;
+	cursor: pointer;
+}
+.rd-image-preview-conta img{
+	width: 100%;
+	height: 100%;
+}
+.rd-image-preview-conta .prev-btn,.rd-image-preview-conta .next-btn{
+	position: absolute;
+	top: 50%;
+	width: 64px;
+	height: 64px;
+	margin-top: -20px;
+	
+}
+.rd-image-preview-conta .prev-btn{
+	left: -80px;	
+	background: url(../images/prev-img.png) no-repeat center center;
+}
+.rd-image-preview-conta .next-btn{
+	right: -80px;	
+	background: url(../images/next-img.png) no-repeat center center;
+}

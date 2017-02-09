@@ -1,0 +1,1 @@
+define(["modules/share/shareCtrl","text!htmlModule/share/share.html"],function(e,t){return function(n,r,h,a){e(n,r,h,a),r.append(t)}});

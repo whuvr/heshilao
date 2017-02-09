@@ -1,0 +1,1 @@
+define(["modules/article/aboutusCtrl","modules/article/aboutusService","text!htmlModule/article/aboutus.html"],function(t,e,u){return function(l,o,a,i){t(l,o,a,i),e(l,o,a,i),o.append(u)}});

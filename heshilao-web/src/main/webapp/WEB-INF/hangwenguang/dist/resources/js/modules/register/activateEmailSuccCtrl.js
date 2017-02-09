@@ -1,0 +1,1 @@
+define(["angular"],function(n){return function(n,c,o,t){n.controller("activateEmailSuccCtrl",["$scope",function(n){n.countdown=4;var c=setInterval(function(){n.countdown--,n.$apply(),0==n.countdown&&(clearInterval(c),window.location.href="#/account/myaccount")},1e3);n.jumpLogin=function(){clearInterval(c),window.location.href="#/account/myaccount"}}])}});

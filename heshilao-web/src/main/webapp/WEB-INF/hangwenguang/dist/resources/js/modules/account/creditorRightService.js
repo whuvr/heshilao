@@ -1,0 +1,1 @@
+define(["angular"],function(n){return function(n,e,t,o){n.factory("creditorRightService",["cService",function(n){return{sellBondDetail:function(e){return n.ajax({url:"bond/userBonds/sellBond",method:"get",params:{id:e}})},boughtBondDetail:function(e){return n.ajax({url:"bond/userBonds/boughtBondDetail/"+e,method:"get"})}}}])}});

@@ -1,0 +1,1 @@
+define(["angular"],function(t){return function(e,a,c,n){e.controller("articleCtrl",["$scope","cService","navData","$state","$rootScope",function(e,a,c,n,r){"use strict";e.subNavs=[],t.forEach(c,function(t,a){"article"==t.state&&(e.subNavs=t.subState)})}])}});

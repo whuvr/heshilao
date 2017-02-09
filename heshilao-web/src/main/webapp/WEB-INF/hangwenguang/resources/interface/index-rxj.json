@@ -1,0 +1,59 @@
+{
+    "apistatus": 1,
+    "result":{
+        "list":[{
+            "title":"我要借钱借钱 654321",
+            "number": "150429101638",
+            "apply": "10,000.00",
+            "applyuse": "1个月",
+            "status": "20%",
+            "type": "101",
+            "statuss":"1",
+            "types":"1",
+            "src":"resources/images/hengsheng.jpg",
+            "src1":"resources/images/banner.jpg",
+            "remark": "简介简介简介简介简介，简介简介简介简介简介简介简介简介。",
+            "apply1": "10.00%"
+        },{
+            "title":"我要借钱借钱 654321",
+            "number": "150429101638",
+            "apply": "20,000.00",
+            "applyuse": "2个月",
+            "status": "40%",
+            "type": "103",
+            "statuss":"1",
+            "types":"1",
+            "src":"resources/images/hengsheng.jpg",
+            "src1":"resources/images/safeguard1.jpg",
+            "remark": "简介简介简介简介，简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介。",
+            "apply1": "10.00%"
+        },{
+            "title":"我要借钱借钱 654321",
+            "number": "150429101638",
+            "apply": "15,000.00",
+            "applyuse": "4个月",
+            "status": "70%",
+            "type": "102",
+            "statuss":"1",
+            "types":"1",
+            "src":"resources/images/hengsheng.jpg",
+            "src1":"resources/images/banner.jpg",
+            "remark": "简介简介简介，简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介。",
+            "apply1": "10.00%"
+        },{
+            "title":"我要借钱借钱 654321",
+            "number": "150429101638",
+            "apply": "40,000.00",
+            "applyuse": "3个月",
+            "status": "100%",
+            "type": "104",
+            "statuss":"1",
+            "types":"1",
+            "src":"resources/images/hengsheng.jpg",
+            "src1":"resources/images/safeguard1.jpg",
+            "remark": "简介简介简介简介简介，简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介。",
+            "apply1": "11.00%"
+        }],
+        "total": 4
+    }
+}

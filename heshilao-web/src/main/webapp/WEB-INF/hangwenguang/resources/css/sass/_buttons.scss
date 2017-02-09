@@ -1,0 +1,143 @@
+﻿//变量来自variables1
+//普通红色按钮
+.btn-light{
+	text-align: center;
+	background-color: $btn-light-bg;
+	color: $btn-light-color;
+	cursor: pointer;
+	outline: none;
+	margin: 0;
+}
+//普通白色按钮
+.btn-normal{
+	text-align: center;
+	background-color: $btn-normal-bg;
+	color: $btn-normal-color;
+	border-radius: $btn-border-radius;
+	cursor: pointer;
+	outline: none;
+	margin: 0;
+}
+.btn-disable{
+	@extend .btn-normal;
+	background-color: $gray-bg;
+}
+//可控制大小的红色按钮 
+@mixin btn-light($width:193px,$height:35px,$btn-border-radius:3px,$font-size:16px,$border: none){
+    @extend .btn-light;
+	display:inline-block;
+	width: $width;
+	height: $height;	
+	border-radius: $btn-border-radius;
+	line-height: $height;
+	font-size: $font-size;
+	border: $border;
+}
+//可控制的白色按钮
+@mixin btn-normal($width:193px,$height:35px,$btn-border-radius:3px,$font-size:16px,$border: none){
+    @extend .btn-normal;
+	display:inline-block;
+	width: $width;
+	height: $height;
+	border-radius: $btn-border-radius;
+	line-height: $height;
+	font-size: $font-size;
+	border: $border;
+}
+//可控灰色按钮
+@mixin btn-disable($width:193px,$height:35px,$btn-border-radius:3px,$font-size:16px,$border: none){
+	@extend .btn-disable;
+	display:inline-block;
+	width: $width;
+	height: $height;
+	line-height: $height;
+	border-radius: $btn-border-radius;
+	line-height: $height;
+	font-size: $font-size;
+	border: $border;
+}
+//自适应大小红色按钮
+@mixin btn-light-auto($padding:0px,$height:auto,$btn-border-radius:3px,$font-size:16px,$border: none){
+	@extend .btn-light;
+	padding: $padding;
+	height: $height;
+	line-height: $height;
+	border-radius: $btn-border-radius;
+	font-size: $font-size;
+	border: $border;
+}
+//自适应大小白色按钮
+@mixin btn-normal-auto($padding:0px,$height:auto,$btn-border-radius:3px,$font-size:16px,$border: none){
+	@extend .btn-normal;
+	padding: $padding;
+	height: $height;
+	line-height: $height;
+	border-radius: $btn-border-radius;
+	font-size: $font-size;
+	border: $border;
+}
+//自适应大小灰色色按钮
+@mixin btn-disable-auto($padding:0px,$height:auto,$btn-border-radius:3px,$font-size:16px,$border: none){
+	@extend .btn-disable;
+	padding: $padding;
+	height: $height;
+	line-height: $height;
+	border-radius: $btn-border-radius;
+	font-size: $font-size;
+	border: $border;
+}
+
+.btn-light-small{
+	@include btn-light(auto,28px);
+	padding: 2px 10px;
+	margin: 0 3px;
+}
+.btn-normal-small{
+	@include btn-normal(auto,28px);
+	padding: 2px 10px;
+	margin: 0 3px;
+}
+.btn-light-middle{
+	@include btn-light();
+}
+//灰色按钮
+.btn-normal-middle{
+	@include btn-normal();
+	background-color: $gray-bg;
+}
+
+//常用大小
+.btn-light-biger{
+	@include btn-light(170px,45px,5px,16px);
+}
+.btn-normal-biger{
+	@include btn-normal(170px,45px,5px,16px);
+	font-size: 16px;
+	border-radius: 5px;
+}
+//常用大小
+.btn-lighter{
+	@include btn-light(auto,28px);
+	background-color: $light-lighter-on;
+	padding: 2px 10px;
+	margin: 0 20px;
+}
+//常用大小
+.btn-lightest{
+	@include btn-light(167px,38px);
+	background-color: $light-lightest-on;
+}
+//登录
+.btn-light-login{
+	@include btn-light(240px,50px,3px,18px);
+	border: none;
+}
+//hover时红色按钮
+.btn-light-middle:hover,.btn-light-small:hover,.btn-light:hover{
+	background: $light-on;
+	color: $white;
+}
+
+
+
+

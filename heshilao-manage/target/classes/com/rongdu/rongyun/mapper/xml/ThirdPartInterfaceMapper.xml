@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rongdu.rongyun.mapper.ThirdPartInterfaceMapper" >
+  <resultMap id="BaseResultMap" type="com.rongdu.rongyun.domain.ThirdPartInterface" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="interfaceCode" property="interfaceCode" jdbcType="VARCHAR" />
+    <result column="interfaceName" property="interfaceName" jdbcType="VARCHAR" />
+    <result column="interfaceType" property="interfaceType" jdbcType="INTEGER" />
+    <result column="interfaceUrl" property="interfaceUrl" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, interfaceCode, interfaceName, interfaceType, interfaceUrl, description
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from thirdPartInterface
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from thirdPartInterface
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.rongdu.rongyun.domain.ThirdPartInterface" >
+    insert into thirdPartInterface (id, interfaceCode, interfaceName, 
+      interfaceType, interfaceUrl, description
+      )
+    values (#{id,jdbcType=INTEGER}, #{interfaceCode,jdbcType=VARCHAR}, #{interfaceName,jdbcType=VARCHAR}, 
+      #{interfaceType,jdbcType=INTEGER}, #{interfaceUrl,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.rongdu.rongyun.domain.ThirdPartInterface" >
+    insert into thirdPartInterface
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="interfaceCode != null" >
+        interfaceCode,
+      </if>
+      <if test="interfaceName != null" >
+        interfaceName,
+      </if>
+      <if test="interfaceType != null" >
+        interfaceType,
+      </if>
+      <if test="interfaceUrl != null" >
+        interfaceUrl,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="interfaceCode != null" >
+        #{interfaceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="interfaceName != null" >
+        #{interfaceName,jdbcType=VARCHAR},
+      </if>
+      <if test="interfaceType != null" >
+        #{interfaceType,jdbcType=INTEGER},
+      </if>
+      <if test="interfaceUrl != null" >
+        #{interfaceUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.rongdu.rongyun.domain.ThirdPartInterface" >
+    update thirdPartInterface
+    <set >
+      <if test="interfaceCode != null" >
+        interfaceCode = #{interfaceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="interfaceName != null" >
+        interfaceName = #{interfaceName,jdbcType=VARCHAR},
+      </if>
+      <if test="interfaceType != null" >
+        interfaceType = #{interfaceType,jdbcType=INTEGER},
+      </if>
+      <if test="interfaceUrl != null" >
+        interfaceUrl = #{interfaceUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.rongdu.rongyun.domain.ThirdPartInterface" >
+    update thirdPartInterface
+    set interfaceCode = #{interfaceCode,jdbcType=VARCHAR},
+      interfaceName = #{interfaceName,jdbcType=VARCHAR},
+      interfaceType = #{interfaceType,jdbcType=INTEGER},
+      interfaceUrl = #{interfaceUrl,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <!-- findInterfaceByCodeType -->
+  <resultMap type="com.rongdu.rongyun.model.ThirdPartInterfaceRes" id="interfaceResultMap">
+  <result column="interfaceCode" property="interfaceCode"/>
+  <result column="interfaceName" property="interfaceName"/>
+  <result column="interfaceType" property="interfaceType"/>
+   	<result column="interfaceUrl" property="interfaceUrl"/>
+   	<collection property="params" column="params" ofType="com.rongdu.rongyun.domain.ThirdPartInterfaceParams">
+   		<result column="paramKey" property="paramKey"/>
+   		<result column="paramValue" property="paramValue"/>
+   		<result column="paramSort" property="paramSort"/>
+   	</collection>
+  </resultMap>
+  <select id="findInterfaceByCodeType" resultMap="interfaceResultMap" >
+    select a.interfaceCode,a.interfaceName,a. interfaceType,a.interfaceUrl,b.paramKey,b.paramValue,b.paramSort
+    from thirdPartInterface a
+    left join thirdPartInterfaceParams b
+    on a.id = b.thirdPartInterfaceId 
+   and a.interfaceCode = #{0}
+   and a.interfaceType = #{1}
+    order by a.id,b.paramSort
+  </select>
+  
+  <!-- findYeePayMerKey -->
+  <select id="findYeePayMerKey" resultType="java.lang.String" >
+    select b.paramValue
+    from thirdPartInterface a
+    left join thirdPartInterfaceParams b
+    on a.id = b.thirdPartInterfaceId 
+   and a.interfaceCode = 'YEEPAY'
+   and a.interfaceType = 1
+   and b.paramKey = 'hmac_merKey'
+  </select>
+  
+</mapper>

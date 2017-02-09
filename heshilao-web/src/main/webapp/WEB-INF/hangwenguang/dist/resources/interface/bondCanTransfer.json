@@ -1,0 +1,52 @@
+{
+	"total" : 20,
+	"pageSize" : 8,
+	"rows"	:[{
+		"borrowName" : "测试1",
+		"rateYear" : "10%",
+		"bondCapital" : "1000",
+		"addTime" : "2015-7-16 12:00:00"
+	},
+	{
+		"borrowName" : "测试1",
+		"rateYear" : "10%",
+		"bondCapital" : "1000",
+		"addTime" : "2015-7-16 12:00:00"
+	},
+	{
+		"borrowName" : "测试1",
+		"rateYear" : "10%",
+		"bondCapital" : "1000",
+		"addTime" : "2015-7-16 12:00:00"
+	},
+	{
+		"borrowName" : "测试1",
+		"rateYear" : "10%",
+		"bondCapital" : "1000",
+		"addTime" : "2015-7-16 12:00:00"
+	},
+	{
+		"borrowName" : "测试1",
+		"rateYear" : "10%",
+		"bondCapital" : "1000",
+		"addTime" : "2015-7-16 12:00:00"
+	},
+	{
+		"borrowName" : "测试1",
+		"rateYear" : "10%",
+		"bondCapital" : "1000",
+		"addTime" : "2015-7-16 12:00:00"
+	},
+	{
+		"borrowName" : "测试1",
+		"rateYear" : "10%",
+		"bondCapital" : "1000",
+		"addTime" : "2015-7-16 12:00:00"
+	},
+	{
+		"borrowName" : "测试1",
+		"rateYear" : "10%",
+		"bondCapital" : "1000",
+		"addTime" : "2015-7-16 12:00:00"
+	}]
+}

@@ -1,0 +1,3 @@
+<div ng-controller="payResultCtrl" class="payResult" ui-view=""><div id="payResult"><div class="info" ng-class="{'success-info': operateSuccess,'fail-info': !operateSuccess,'payRes':loading}"><div class="content"><div ng-show="operateSuccess"><i ng-class="{'success-icon': succ,'fail-icon': error,'icon':true}"></i> <span class="text">{{message}}</span></div><div ng-show="operateErr"><i class="fail-icon icon"></i> <span class="text">{{messageError}}</span></div></div><div class="operate" ng-show="!loading"><input type="button" class="button-green" value="确定" ng-click="closeWindow()"></div><!-- <form id="formPay" method="post" action="" >
+				<input type="submit" value="提交">
+			</form> --></div></div></div>

@@ -1,0 +1,28 @@
+<div ng-controller="activateEmailSuccCtrl" style="height:700px;">
+  <div class="register-bg"></div>
+  <div class="col-sub">
+    <ul class="reg-suss">
+      <li>填写账户信息<i class="suss1"></i></li>
+      <li id="light" class="suss2">账户注册成功<i></i></li>
+    </ul>
+  </div>
+  <div class="register-nav">
+    <h2>账户注册</h2>
+  </div>
+  <div class="col-main" id="col-main">
+    <div class="reg-content reg-spacing">
+      <div class="reg-title">
+        <div id="reg-email1"></div>
+        <span class="reg-font1 reg-third">恭喜您，用户注册成功！</span>
+      </div>
+      <p>
+        <span class="reg-font2">您已经完成网站账户的注册，</span>
+        <span class="reg-font6">{{countdown}}</span>
+        <span class="reg-font2">秒钟后进入账户中心！请尽快完善其他信息的设置。</span>
+      </p>
+      <p class="reg-font2">也可以手动点击</p>
+      <a class="regThird-btn" ng-click="jumpLogin()">进入我的账户</a>
+      <!-- ui-sref="account.myaccount" -->
+    </div>
+  </div>
+</div>

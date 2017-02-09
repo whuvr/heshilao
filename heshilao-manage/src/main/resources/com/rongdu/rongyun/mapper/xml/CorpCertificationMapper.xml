@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rongdu.rongyun.mapper.CorpCertificationMapper">
+	<resultMap id="BaseResultMap" type="corpCertificationRes">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="corpId" property="corpId" jdbcType="INTEGER" />
+		<result column="pictureType" property="pictureType" jdbcType="INTEGER" />
+		<result column="state" property="state" jdbcType="INTEGER" />
+	</resultMap>
+	<resultMap id="ResultMapWithBLOBs" type="corpCertificationRes"
+		extends="BaseResultMap">
+		<result column="picture" property="picture" jdbcType="LONGVARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, corpId, pictureType, state
+	</sql>
+	<sql id="Blob_Column_List">
+		picture
+	</sql>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		corpCertification
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="corpCertificationReq">
+		insert into corpCertification
+		(id, corpId, pictureType,
+		state, picture)
+		values
+		(#{id,jdbcType=INTEGER}, #{corpId,jdbcType=INTEGER},
+		#{pictureType,jdbcType=INTEGER},
+		#{state,jdbcType=INTEGER},
+		#{picture,jdbcType=LONGVARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="corpCertificationReq">
+		insert into corpCertification
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="corpId != null">
+				corpId,
+			</if>
+			<if test="pictureType != null">
+				pictureType,
+			</if>
+			<if test="state != null">
+				state,
+			</if>
+			<if test="picture != null">
+				picture,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="corpId != null">
+				#{corpId,jdbcType=INTEGER},
+			</if>
+			<if test="pictureType != null">
+				#{pictureType,jdbcType=INTEGER},
+			</if>
+			<if test="state != null">
+				#{state,jdbcType=INTEGER},
+			</if>
+			<if test="picture != null">
+				#{picture,jdbcType=LONGVARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="corpCertificationReq">
+		update corpCertification
+		<set>
+			<if test="corpId != null">
+				corpId = #{corpId,jdbcType=INTEGER},
+			</if>
+			<if test="pictureType != null">
+				pictureType = #{pictureType,jdbcType=INTEGER},
+			</if>
+			<if test="state != null">
+				state = #{state,jdbcType=INTEGER},
+			</if>
+			<if test="picture != null">
+				picture = #{picture,jdbcType=LONGVARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="corpCertificationReq">
+		update
+		corpCertification
+		set corpId = #{corpId,jdbcType=INTEGER},
+		pictureType =
+		#{pictureType,jdbcType=INTEGER},
+		state = #{state,jdbcType=INTEGER}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+
+	<!--添加图片 -->
+	<insert id="insertPicture" parameterType="corpCertificationReq">
+		insert into
+		corpCertification (corpId, pictureType, picture)
+		values
+		(#{corpId,jdbcType=INTEGER}, #{pictureType,jdbcType=INTEGER},
+		#{picture,jdbcType=LONGVARCHAR})
+	</insert>
+
+	<!-- 修改图片 -->
+	<update id="updatePicture" parameterType="corpCertificationReq">
+		update
+		corpCertification
+		set
+		picture = #{picture,jdbcType=LONGVARCHAR}
+		where
+		pictureType =
+		#{pictureType,jdbcType=INTEGER} and
+		corpId =
+		#{corpId,jdbcType=INTEGER}
+	</update>
+
+	<select id="selectPictureById" resultMap="ResultMapWithBLOBs"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from corpCertification
+		where corpId = #{corpId,jdbcType=INTEGER}
+	</select>
+
+</mapper>

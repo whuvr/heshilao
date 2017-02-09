@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rongdu.rongyun.mapper.ManageAccountNoticeMapper">
+	<resultMap id="BaseResultMap" type="com.rongdu.rongyun.domain.ManageAccountNotice">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="manageAccountId" property="manageAccountId"
+			jdbcType="INTEGER" />
+		<result column="noticeTemplateId" property="noticeTemplateId"
+			jdbcType="INTEGER" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, manageAccountId, noticeTemplateId
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from manageAccountNotice
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from manageAccountNotice
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.rongdu.rongyun.domain.ManageAccountNotice">
+		insert into manageAccountNotice (id, manageAccountId, noticeTemplateId
+		)
+		values (#{id,jdbcType=INTEGER}, #{manageAccountId,jdbcType=INTEGER},
+		#{noticeTemplateId,jdbcType=INTEGER}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.rongdu.rongyun.domain.ManageAccountNotice">
+		insert into manageAccountNotice
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="manageAccountId != null">
+				manageAccountId,
+			</if>
+			<if test="noticeTemplateId != null">
+				noticeTemplateId,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="manageAccountId != null">
+				#{manageAccountId,jdbcType=INTEGER},
+			</if>
+			<if test="noticeTemplateId != null">
+				#{noticeTemplateId,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.rongdu.rongyun.domain.ManageAccountNotice">
+		update manageAccountNotice
+		<set>
+			<if test="manageAccountId != null">
+				manageAccountId = #{manageAccountId,jdbcType=INTEGER},
+			</if>
+			<if test="noticeTemplateId != null">
+				noticeTemplateId = #{noticeTemplateId,jdbcType=INTEGER},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.rongdu.rongyun.domain.ManageAccountNotice">
+		update manageAccountNotice
+		set manageAccountId = #{manageAccountId,jdbcType=INTEGER},
+		noticeTemplateId = #{noticeTemplateId,jdbcType=INTEGER}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+</mapper>

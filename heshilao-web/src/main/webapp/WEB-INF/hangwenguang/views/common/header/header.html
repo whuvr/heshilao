@@ -1,0 +1,197 @@
+<div ng-controller="headerCtrl" id="header" ng-show="header">
+	<!-- qq等图标在左边
+	<div class="top top-head">
+		<div class="top-cont">
+			<div class="left">
+				<span>欢迎致电：{{corpInfo.webPhone}}</span>
+				<span>服务时间：{{corpInfo.serviceTime}}</span>
+
+			    <a id="header-wechat" class="header-icons"  >
+					<div id="wechatbox" >
+						<i class="header-arrow"></i>
+						<div id="wechatContent">
+							<img ng-src="{{headerLogo}}" />
+						</div>
+					</div>
+				</a>
+				<a id="header-microblog" target="_blank" class="header-icons" ng-href="{{corpInfo.weiboUrl}}"> </a>
+			</div>
+		    <div class="right" ng-show="login.beforeLogin">
+		    	<a ui-sref="login">登录</a>
+		    	<a id="register" ng-click="register()">注册</a>
+		    	<a ui-sref="article.faq">常见问题</a>
+		    </div>
+		    <div class="right" ng-show="login.afterLogin">
+		    	<a id="login"  ng-click="logout()">退出登录</a>
+		    	<a ui-sref="article.faq">常见问题</a>
+		    	<a class="user-info">您好：{{user.username}}</a>
+		    </div>
+	    </div>
+	</div> -->
+	<!-- qq等图标在右边 -->
+	<div class="top top-head">
+		<div class="top-cont">
+					<div class="right" ng-show="login.beforeLogin">
+						<a class="" target="_blank" ui-sref="app_down">APP下载</a>
+					  <a id="register" ng-click="register()">免费注册</a>
+					  <span class="web-phone">{{corpInfo.webPhone}}</span>
+					  <a ng-show="headerLogo" class="header-wechat" class="header-icons">
+					    <div id="wechatbox">
+					      <i class="header-arrow"></i>
+					      <div id="wechatContent">
+					        <img ng-src="{{corpInfo.QRCodeUrl}}" alt="">
+					      </div>
+					    </div>
+					  </a>
+					  <div class="online-service">
+					    <span>在线客服</span>
+					    <div id="servicebox">
+					      <i class="header-arrow"></i>
+					      <div id="serviceContent">
+					        <p ng-repeat="items in qqs">在线客服：
+					          <a ng-if="items[1]" target="_blank" ng-href="http://wpa.qq.com/msgrd?v=3&uin={{items[0]}}">{{items[1]}}</a>
+					          <a ng-if="!items[1]" target="_blank" ng-href="http://wpa.qq.com/msgrd?v=3&uin={{items[0]}}">{{items[0]}}</a>
+					        </p>
+					      </div>
+					    </div>
+					  </div>
+					</div>
+
+					<div class="right" ng-show="login.afterLogin">
+						<a class="" target="_blank" ui-sref="app_down">APP下载</a>
+					  <span class="user-info" ui-sref="account.myaccount">您好：{{user.username}}</span>
+					  <a id="login" ng-click="logout()">退出登录</a>
+					  <span class="web-phone">{{corpInfo.webPhone}}</span>
+					  <a ng-show="headerLogo" class="header-wechat" class="header-icons">
+					    <div id="wechatbox">
+					      <i class="header-arrow"></i>
+					      <div id="wechatContent">
+					        <img ng-src="{{corpInfo.QRCodeUrl}}" alt="">
+					      </div>
+					    </div>
+					  </a>
+					  <div class="online-service">
+					    <span>在线客服</span>
+					    <div id="servicebox">
+					      <i class="header-arrow"></i>
+					      <div id="serviceContent">
+					        <p ng-repeat="items in qqs">在线客服：
+					          <a ng-if="items[1]" target="_blank" ng-href="http://wpa.qq.com/msgrd?v=3&uin={{items[0]}}">{{items[1]}}</a>
+					          <a ng-if="!items[1]" target="_blank" ng-href="http://wpa.qq.com/msgrd?v=3&uin={{items[0]}}">{{items[0]}}</a>
+					        </p>
+					      </div>
+					    </div>
+					  </div>
+					</div>
+
+	    </div>
+	</div>
+	<div class="top head-middle">
+		<div class="top-cont">
+	    	<div class="left">
+	    		<div id="logo-wrap"><a ui-sref="home"><img ng-src="{{corpLogo}}" alt=""></a></div><!-- <img ng-src="resources/images/logo.png" alt=""> -->
+	    		<div class="nav">
+	    			<a ng-class="{active: $state.includes('home')}" ui-sref="home">首页</a>
+	    			<a ng-class="{active: $state.includes('invest'),active1: $state.includes('borrowDetail')}" ui-sref="invest">投资</a>
+	    			<a ng-class="{active: $state.includes('borrow')}" ui-sref="borrow">借款</a>
+	    			<a ng-class="{active: $state.includes('newuser')}" ui-sref="newuser">指引</a>
+	    			<a ng-class="{active: $state.includes('art')}" ui-sref="art">艺术品交易</a>
+	    			<!-- <a ng-class="{active: $state.includes('article')}" ui-sref="article.aboutus">关于我们</a>	    	 -->
+	    		</div>
+	    	</div>
+	    	<div class="right navright" ng-mouseover="getAmount()" ng-mouseleave="resetAmount()">
+	    		<img ng-src="{{user.headPortraitUrl}}?imageView2/1/w/100/" alt="">
+	    		<a class="myaccount"  ng-click='subShow_myaccount()' ui-sref="account.myaccount" ng-click="$state.go('account.myaccount',null,{reload:true});">我的账户<!-- <span class="arrow"></span> --></a>
+	    		<div ng-show="login.beforeLogin" class="account-detail">
+	    			<div class="login-p"></div>
+	    			<a class="login" ui-sref="login">请先登录</a>
+	    			<div class="login-p"></div>
+	    		</div>
+	    		<div ng-show="login.afterLogin" class="account-detail account-detail-logined">
+	    			<div class="login-p"></div>
+	    			<a ng-click='subshow_accountSet()'>账户设置</a>
+	    			<a ng-click='subshow_accountRecord()'>资金记录</a>
+	    			<div class="clear"></div>
+	    			<div class="account-total">
+	    				账户余额<span>{{totalAmount| number: 2}}元</span>
+	    			</div>
+	    			<a ui-sref="account.recharge">账户充值</a>
+	    			<a ui-sref="account.withdrawals">账户提现</a>
+	    			<div class="clear"></div>
+	    			<div class="login-p"></div>
+	    		</div>
+	    	</div>
+	    </div>
+	</div>
+</div>
+<!-- 简单头部 -->
+<div ng-controller="headerCtrl" id="header" ng-show="headerSimply">
+	<div class="top top-head">
+		<div class="top-cont">
+			<div class="left">
+				<span>欢迎致电：{{corpInfo.webPhone}}</span>
+				<span>服务时间：{{corpInfo.serviceTime}}</span>
+
+			    <a id="header-wechat" class="header-icons"  >
+					<div id="wechatbox" >
+						<i class="header-arrow"></i>
+						<div id="wechatContent">
+							<img ng-src="{{headerLogo}}" />
+						</div>
+					</div>
+				</a>
+				<a id="header-microblog" target="_blank" class="header-icons" ng-href="{{corpInfo.weiboUrl}}"> </a>
+			</div>
+		    <div class="right">
+		    	还没有账户？
+		    	<a id="register" ng-click="register()">点此注册</a>
+		    	<a ui-sref="login.getbackEma">忘记密码</a>
+		    </div>
+	    </div>
+	</div>
+	<div class="top head-middle">
+		<div class="top-cont">
+	    	<div class="left">
+	    		<div id="logo-wrap"><a ui-sref="home"><img ng-src="{{corpLogo}}" alt=""></a></div><!-- <img ng-src="resources/images/logo.png" alt=""> -->
+	    		<div class="nav">
+	    				<h2 class="title" ng-bind="stateName"></h2>
+	    		</div>
+	    	</div>
+	    </div>
+	</div>
+</div>
+<!-- 注册页头部 -->
+<div ng-controller="headerCtrl" id="header" ng-show="registHead">
+	<div class="top top-head">
+		<div class="top-cont">
+			<div class="left">
+				<span>欢迎致电：{{corpInfo.webPhone}}</span>
+				<span>服务时间：{{corpInfo.serviceTime}}</span>
+
+			    <a id="header-wechat" class="header-icons"  >
+					<div id="wechatbox" >
+						<i class="header-arrow"></i>
+						<div id="wechatContent">
+							<img ng-src="{{headerLogo}}" />
+						</div>
+					</div>
+				</a>
+				<a id="header-microblog" target="_blank" class="header-icons" ng-href="{{corpInfo.weiboUrl}}"> </a>
+			</div>
+		    <div class="right">
+		    	已有账号？
+		    	<a ui-sref="login">立即登录</a>
+		    </div>
+	    </div>
+	</div>
+	<div class="top head-middle">
+		<div class="top-cont">
+	    	<div class="left">
+	    		<div id="logo-wrap"><a ui-sref="home"><img ng-src="{{corpLogo}}" alt=""></a></div><!-- <img ng-src="resources/images/logo.png" alt=""> -->
+	    		<div class="nav">
+	    			<h2 class="title">注册</h2>
+	    		</div>
+	    	</div>
+	    </div>
+	</div>
+</div>

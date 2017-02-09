@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rongdu.rongyun.mapper.WorkOrderInfoMapper">
+	<resultMap id="BaseResultMap" type="workOrderInfoRes">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="workOrderId" property="workOrderId" jdbcType="INTEGER" />
+		<result column="info" property="info" jdbcType="VARCHAR" />
+		<result column="recordTime" property="recordTime" jdbcType="TIMESTAMP" />
+		<result column="recordType" property="recordType" jdbcType="INTEGER" />
+		<result column="recordName" property="recordName" jdbcType="VARCHAR" />
+		<result column="recordImg" property="recordImg" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, workOrderId, info,
+		recordTime,recordType,recordName,receiveName,recordImg
+	</sql>
+
+	<!-- 增加一条工单信息记录 -->
+	<insert id="insertSelective" parameterType="workOrderInfoRes">
+		insert into workOrderInfo
+		<selectKey resultType="java.lang.Long" keyProperty="id"
+			order="AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="workOrderId != null">
+				workOrderId,
+			</if>
+			<if test="info != null">
+				info,
+			</if>
+			<if test="recordTime != null">
+				recordTime,
+			</if>
+			<if test="recordType != null">
+				recordType,
+			</if>
+			<if test="recordName != null">
+				recordName,
+			</if>
+			<if test="recordImg != null">
+				recordImg,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="workOrderId != null">
+				#{workOrderId,jdbcType=INTEGER},
+			</if>
+			<if test="info != null">
+				#{info,jdbcType=VARCHAR},
+			</if>
+			<if test="recordTime != null">
+				#{recordTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="recordType != null">
+				#{recordType,jdbcType=INTEGER},
+			</if>
+			<if test="recordName != null">
+				#{recordName,jdbcType=VARCHAR},
+			</if>
+			<if test="recordImg != null">
+				#{recordImg,jdbcType=VARCHAR},
+			</if>
+
+		</trim>
+	</insert>
+
+
+	<resultMap type="com.rongdu.rongyun.model.workOrder.WorkOrderInfoRes"
+		id="workOrderInfoRes">
+		<result column="workOrderId" property="workOrderId" jdbcType="INTEGER" />
+		<result column="info" property="info" jdbcType="VARCHAR" />
+		<result column="recordTime" property="recordTime" jdbcType="TIMESTAMP" />
+		<result column="recordType" property="recordType" jdbcType="INTEGER" />
+		<result column="recordName" property="recordName" jdbcType="VARCHAR" />
+		<result column="receiveName" property="receiveName" jdbcType="VARCHAR" />
+		<result column="recordImg" property="recordImg" jdbcType="VARCHAR" />
+		<collection property="workOrderImage" column="workOrderInfoId"
+			ofType="com.rongdu.rongyun.model.workOrder.WorkOrderImageRes">
+			<result column="workOrderInfoId" property="workOrderInfoId" />
+			<result column="imageUrl" property="imageUrl" />
+		</collection>
+	</resultMap>
+	<select id="selectOrderInfo" resultMap="workOrderInfoRes"
+		parameterType="int">
+		select info.*,image.imageUrl from workOrderInfo info
+		left join
+		workOrderImage image on
+		info.id=image.workOrderInfoId where
+		info.workOrderId=#{workOrderId,jdbcType=INTEGER}
+		order by recordTime
+	</select>
+
+
+</mapper>

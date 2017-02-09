@@ -1,0 +1,1 @@
+define(["angular"],function(o){return function(o,t,e,n){o.controller("homeActivityCtrl",["$scope","$stateParams","navData","cService","$rootScope","$location","$cookieStore","$state",function(o,t,e,n,c,r,a,i,s){"use strict";var l=t.id;n.ajax({url:"column/scrollImages/getContent/"+l}).success(function(t,e,n,c){o.data=t}).error(function(o,t,e,n){console.log(o)})}])}});

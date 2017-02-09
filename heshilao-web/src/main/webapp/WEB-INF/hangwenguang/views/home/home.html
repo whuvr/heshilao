@@ -1,0 +1,433 @@
+<div ng-controller="homeCtrl" class="home" id="home">
+	<!-- 滚动图 -->
+	<div id="banner" data="data">
+		<ul id="ul1" class="banner" rd-fly items="data" move-name="left" triggers="true" triggers-class="ol1">
+			<li ng-repeat="item in data" rd-fly-item>
+				<div ng-if="item.url" style="height:350px;">
+					<a target="_black"  href="{{item.url}}" style="cursor:pointer;" ng-style="{background:'url({{domain + item.imageUrl}}) no-repeat center'}"></a>
+				</div>
+				<div ng-if="!item.url && !item.hasContent" style="height:350px;">
+					<a  href="" ng-style="{background:'url({{domain + item.imageUrl}}) no-repeat center'}"></a>
+				</div>
+				<div ng-if="!item.url && item.hasContent" style="height:350px;">
+					<a  ui-sref="homeActivity({id:item.id})" style="cursor:pointer;" ng-style="{background:'url({{domain + item.imageUrl}}) no-repeat center'}"></a>
+				</div>
+			</li>
+		</ul>
+		<div class="container banner-extend">
+			<div class="banner-login">
+				<div ng-if="login.beforeLogin">
+					<h2>快速登录</h2>
+					<div ng-show="sendAgainShow" id="send-mail-again">请先激活邮箱 <a ng-click="sendAgain()">发送邮件</a></div>
+					<p class="quicklogin" ng-show="serverError"><span  class="help-block call-error errorRed" ng-bind="callError"></span></p>
+					<div class="form">
+						<form class="login-fields" name="form"  ng-submit="submit()" novalidate="novalidate" >
+							<div class="field fields" id="loginName">
+								<input  ng-focus="focus()" class="w-fill-textbox username" autocomplete="off" required ng-required-err-type="loginError" ng-model="user.username1" type="text"  name="username" ie-placeholder="用户名/手机号/邮箱" />
+							</div>
+							<div class="field fields">
+								<input ng-focus="focus()" ng-change="focus()" type="password" class="w-fill-textbox password" autocomplete="off"  id="password" required ng-required-err-type="loginError" ng-model="user.password" ng-model-options="{updateOn: 'blur'}" name="password"  ie-placeholder="密码" />
+								<a class="forget" href="#login/getbackEma">忘记密码？</a>
+							</div>
+							<div class="field fields"  ng-if="loginNum" > <!--  -->
+								<input class="text-btn" ng-focus="focus()" size="18" required ng-required-err-type="validateError" autocomplete="off" ng-model="user.validCode1" type="text" name="validCode" ie-placeholder="输入验证码"/>
+								<img class="captcha hand" id="reg-validatecode" ng-src="{{captcha}}"  ng-click="validCodeFn()"  />
+							</div>
+							<div class="field fields">
+								<input type="submit" class="w-fill-button comeIn hand" value="立即登录" />
+							</div>
+						</form>
+					</div>
+					<div class="operate">
+						没有账号？<a href="#/register">免费注册</a>
+					</div>
+				</div>
+				<div class="tc dark f16" ng-if="login.afterLogin">
+					<h2 class="loginTitle mt40">欢迎来<span ng-bind="corpInfo.webName"></span>!</h2>
+					<p class="loginamout">您当前的登录账户是</p>
+					<p class="fred loginUser">{{user.username}}</p>
+					<a class="comeIn hand btn-light-login"  ui-sref="account.myaccount" >进入账户中心</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- 网站公告 -->
+	<div id="web_notify">
+		<div class="container">
+			<div class="web-anounce" ng-repeat="item in articleData">
+				<label class="darks f16">网站公告</label>
+				<span class="gray-lighter ml5 mr5">|</span>
+				<a class="fr gray-light view-more" href="#/article/webtips">更多></a>
+				<a class="dark-color" ui-sref="article.articleDetail({id:item.id,type:'website'})" ng-bind='item.title'></a>
+			</div>
+
+		</div>
+	</div>
+
+	<!-- 安全保障 -->
+	<div id="web_advertise" class="clearfix">
+		<div class="container">
+			<div class="promise clearfix">
+				<ul>
+					<li>
+						<!-- <i class="promise1"></i>
+						<h2>安全有保障</h2>
+						<p><span class="blue">第三方</span>资金托管</p>
+						<p>借贷资金一分不碰</p> -->
+					</li>
+					<li >
+						<!-- <i class="promise2"></i>
+						<h2>理财更轻松</h2>
+						<p>简单<span class="blue">3</span>步</p>
+						<p>享受高利率收益</p> -->
+					</li>
+					<li>
+						<!-- <i class="promise3"></i>
+						<h2>投资无门槛</h2>
+						<p><span class="blue">100元</span>起步</p>
+						<p>轻松开启财富人生</p> -->
+					</li>
+					<li></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<!-- 累计数据 -->
+	<div class="invest-summary">
+		<div class="container">
+		<div class="cont">
+			<ul class="webdata">
+				<li>
+					<p class="gray"><i class="icon1"></i>累计交易</p>
+					<p class="gray-light"><span class="f20 light-lightest-on" ng-bind='countData.sumInvestmentAmount | number: 2'></span>元</p>
+				</li>
+				<li>
+					<p class="gray"><i class="icon2"></i>累计收益金额</p>
+					<p class="gray-light"><span class="f20 light-lightest-on" ng-bind='countData.sumInterestAmount | number: 2'></span>元</p>
+				</li>
+				<!--<li>
+					<p class="gray"><i class="icon3"></i>累计注册用户</p>
+					<p class="gray-light"><span class="f20" ng-bind='countData.countRegister | number: 0'></span>人</p>
+				</li>-->
+			</ul>
+		</div>
+		</div>
+	</div>
+
+	<!-- 推荐标 -->
+	<div class="new-zone">
+		<div class="container">
+			<!-- <h2 class="module-title"></h2> -->
+			<div class="inves-apartment">
+				<p>Newbie zone</p>
+		        <h2>新手专区<span class="index-title">初次相识，福利请收下</span></h2>
+		    </div>
+			<div class="cont">
+				<a ui-sref="newTask"></a><a ui-sref="account.discount"></a>
+			</div>
+		</div>
+		<div class="container">
+			<!-- <h2 class="module-title"></h2> -->
+			<div class="inves-apartment">
+				<p>High-quality goods project</p>
+		        <h2>精品项目<span class="index-title">只挑选你最钟爱的那款</span></h2>
+		    </div>
+			<div id="web_hot_invest" ng-class="{hidden:expBorrowData==undefined}">
+<!--				<div class="item expborrow">
+					<div class="itemleft"></div>
+					<div class="itemright" ng-show="!expBorrowData">
+						<div class="" id="page" style="padding: 0">
+							<div  class="no-data" >暂时没有数据</div>
+						</div>
+					</div>
+					<div class="itemright" ng-show="expBorrowData">
+						<div>
+							<a ui-sref="expBorrowsDetail({id:expBorrowData.id})" title="{{expBorrowData.name}}" class="title" ng-bind="expBorrowData.name"></a>
+							<i class="invest-type exp-type"></i>
+						</div>
+						<table>
+							<tr>
+								<td width="26%">预期年化利率<br><span class="f30 light-lightest-on" ng-bind="expBorrowData.rateYear+'%'"></span></td>
+								<td width="12%">项目期限<br><span class="f24 gray">{{expBorrowData.timeLimit}}</span><span ng-if="expBorrowData.timeType==1">天</span><span ng-if="expBorrowData.timeType==0">个月</span></td>
+								<td width="14%" class="ta-center" rowspan="2">
+									<i class="knob" knob="expBorrowData.progressPercentage" width="90" height="90" line-width="6">
+										<span class="per-val f12 gray-light"><span>{{expBorrowData.progressPercentage}}</span>%</span>
+									</i>
+								</td>
+								<td width="26%">借款金额<br><span class="f24 gray">{{expBorrowData.amountBorrow}}</span>元</td>
+
+								<td class="ta-right ft16" width="22%" rowspan="2">
+									<a ui-sref="expBorrowsDetail({id:expBorrowData.id})">
+										<span class="btn-light button" ng-if="expBorrowData.status==1">立即投标</span>
+										<span class="btn-gray1" ng-if="expBorrowData.status==2">招标结束</span>
+										<span class="btn-gray1" ng-if="expBorrowData.status==3">已还款</span>
+									</a>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+				<div class="clearfix"></div>-->
+				<div class="item novice">
+					<div class="itemleft"></div>
+					<div class="itemright" ng-show="!newPalyerData">
+						<div class="" id="page" style="padding: 0">
+							<div  class="no-data" >暂时没有数据</div>
+						</div>
+					</div>
+					<div class="itemright" ng-show="newPalyerData">
+						<div ng-class="{head:true,danbg:newPalyerData.type==101,dibg:newPalyerData.type==102,xinbg:newPalyerData.type==103,miaobg:newPalyerData.type==104}" >
+							<a ui-sref="borrowDetail({id:newPalyerData.id})" title="{{newPalyerData.name}}" class="title" ng-bind="newPalyerData.name"></a>
+							<i class="invest-type"></i>
+							<span class="red-packetbg"></span>
+						</div>
+						<table>
+							<tr>
+								<td width="26%">预期年化利率<br><span class="f30 light-lightest-on" ng-if="newPalyerData.classify==1&&newPalyerData.isRegionConfirm==0" ng-bind="newPalyerData.rateYearMin+'%'+'~'+newPalyerData.rateYear+'%'"></span><span class="f30 light-lightest-on" ng-if="newPalyerData.classify!=1||newPalyerData.isRegionConfirm==1" ng-bind="newPalyerData.rateYear+'%'"></span><em ng-if="newPalyerData.platformRateYear">+<span ng-bind="newPalyerData.platformRateYear | number: 2"></span>%</em></td>
+								<td width="12%">项目期限<br><span class="f24 gray">{{newPalyerData.timeLimit}}</span><span ng-if="newPalyerData.timeType==1">天</span><span ng-if="newPalyerData.timeType==0">个月</span></td>
+								<td width="14%" class="ta-center" rowspan="2">
+									<i class="knob" knob="newPalyerData.progressPercentage" width="90" height="90" line-width="6">
+										<span class="per-val f12 gray-light"><span>{{newPalyerData.progressPercentage}}</span>%</span>
+									</i>
+								</td>
+								<td width="26%">借款金额<br><span class="f24 gray">{{newPalyerData.amountBorrow}}</span>元</td>
+
+								<td class="ta-right ft16" width="22%" rowspan="2">
+									<a ng-if="newPalyerData.countDown <= 0"  ui-sref="borrowDetail({id:newPalyerData.id})">
+										<span class="btn-light button" ng-if="newPalyerData.status==1">立即投标</span>
+										<span class="btn-gray1" ng-if="newPalyerData.status==3">招标结束</span>
+										<span class="btn-gray1" ng-if="newPalyerData.status==4">还款中</span>
+										<span class="btn-gray1" ng-if="newPalyerData.status==8">已还款</span>
+									</a>
+									<p class="tc" ng-if="newPalyerData.countDown > 0">开标倒计时</p><a ui-sref="borrowDetail({id:newPalyerData.id})"  ng-if="newPalyerData.countDown > 0"  class="btn-gray"><span countdown="newPalyerData.countDown"></span></a>
+								</td>
+							</tr>
+						</table>
+						<p class="payback">
+							<span class="limit1">起购金额：<em ng-bind="newPalyerData.investMin"></em>元</span>
+							<span class="limit" >还款方式：<em ng-if="newPalyerData.repayWay == 1">按月分期还款</em><em ng-if="newPalyerData.repayWay == 2">一次性还款</em><em ng-if="newPalyerData.repayWay == 3">每月还息到期还本</em></span>
+						</p>
+					</div>
+				</div>
+				<div class="clearfix"></div>
+				<div class="item recommend">
+					<div>
+						<div class="itemleft"></div>
+						<div class="itemright" ng-show="!recommendData">
+							<div class="" id="page" style="padding: 0">
+								<div  class="no-data" >暂时没有数据</div>
+							</div>
+						</div>
+						<div class="itemright" ng-show="recommendData">
+							<div ng-class="{head:true,danbg:recommendData.type==101,dibg:recommendData.type==102,xinbg:recommendData.type==103,miaobg:recommendData.type==104}" >
+								<a ui-sref="borrowDetail({id:recommendData.id})" class="title" titlt="{{recommendData.name}}" ng-bind="recommendData.name"></a>
+								<i class="invest-type"></i>
+
+							</div>
+							<table>
+								<tr>
+									<td width="26%">预期年化利率<br><span class="f30 light-lightest-on" ng-if="recommendData.classify==1&&recommendData.isRegionConfirm==0" ng-bind="recommendData.rateYearMin+'%'+'~'+recommendData.rateYear+'%'"></span><span class="f30 light-lightest-on" ng-if="recommendData.classify!=1||recommendData.isRegionConfirm==1" ng-bind="recommendData.rateYear+'%'"></span><em ng-if="recommendData.platformRateYear">+<span ng-bind="recommendData.platformRateYear | number: 2"></span>%</em></td>
+									<td width="12%">项目期限<br><span class="f24 gray">{{recommendData.timeLimit}}</span><span ng-if="recommendData.timeType==1">天</span><span ng-if="recommendData.timeType==0">个月</span></td>
+									<td width="14%" class="ta-center" rowspan="2">
+										<i class="knob" knob="recommendData.progressPercentage" width="90" height="90" line-width="6">
+											<span class="per-val f12 gray-light"><span>{{recommendData.progressPercentage}}</span>%</span>
+										</i>
+									</td>
+									<td width="26%">借款金额<br><span class="f24 gray">{{recommendData.amountBorrow}}</span>元</td>
+
+									<td class="ta-right ft16" width="22%" rowspan="2">
+										<a ng-if="recommendData.countDown <= 0"  ui-sref="borrowDetail({id:recommendData.id})">
+											<span class="btn-light button" ng-if="recommendData.status==1">立即投标</span>
+											<span class="btn-gray1" ng-if="recommendData.status==3">招标结束</span>
+											<span class="btn-light button" ng-if="recommendData.status==4">还款中</span>
+											<span class="btn-gray1" ng-if="recommendData.status==8">已还款</span>
+										</a>
+										<p class="tc" ng-if="recommendData.countDown > 0">开标倒计时</p><a ui-sref="borrowDetail({id:recommendData.id})"  ng-if="recommendData.countDown > 0"  class="btn-gray"><span countdown="recommendData.countDown"></span></a>
+									</td>
+								</tr>
+							</table>
+							<p class="payback">
+								<span class="limit1">起购金额：<em ng-bind="recommendData.investMin"></em>元</span>
+								<span class="limit">还款方式：<em ng-if="recommendData.repayWay == 1">按月分期还款</em><em ng-if="recommendData.repayWay == 2">一次性还款</em><em ng-if="recommendData.repayWay == 3">每月还息到期还本</em></span>
+							</p>
+						</div>
+					</div>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+		</div>
+	</div>
+
+	<!-- 理财项目 -->
+	<div id="project">
+		<div class="container">
+			<!-- <h2 class="module-title"> <a ng-show="investData" class="new-more floatright" ui-sref="invest({type:'invest'})">更多>></a></h2> -->
+			<div class="inves-apartment">
+				<p>The latest product</p>
+		        <h2>最新产品<span class="index-title">投资先人一步</span> <a ng-show="investData" class="new-more floatright" ui-sref="invest({type:'invest'})">更多>></a></h2>
+		    </div>
+			<div tabs class="invest-list" >
+				<!-- <div>
+					<div class="tc">
+						<a class="tab-title"><span>投资项目</span></a>
+						<a class="tab-title last" >债权转让</a>
+					</div>
+				</div> -->
+				<div>
+					<div>
+						<div class="none-bg" id="page" ng-show="investData==''">
+							<div class="no-data" >暂时没有数据</div>
+						</div>
+						<div class="list item recommend" ng-show="investData">
+							<div ng-repeat="item in investData" class="itemright">
+								<div class="pl50" ng-class="{head:true,danbg:item.type==101,dibg:item.type==102,xinbg:item.type==103,miaobg:recommendData.type==104}" >
+									<a ui-sref="borrowDetail({id:item.id})" class="title" titlt="{{item.name}}" ng-bind="item.name"></a>
+									<i class="invest-type"></i><span class="ml10" ng-bind="item.categoryRemark"></span>
+								</div>
+								<table>
+									<tr>
+										<td width="28%" class=" pl50"><p class="f16">预期年化利率</p>
+										<!-- <span class="f18"  ng-bind="item.rateYearMin+'~'+item.rateYear+'%'"></span>
+										 -->
+										<span class="f30 light-lightest-on" ng-if="item.classify!=1||item.isRegionConfirm==1" ng-bind="item.rateYear+'%'"></span>
+										<span class="f30 light-lightest-on" ng-if="item.classify==1&&item.isRegionConfirm==0" ng-bind="item.rateYearMin+'%'+'~'+item.rateYearMax+'%'"></span><em ng-if="item.platformRateYear">+<span ng-bind="item.platformRateYear | number: 2"></span>%</em>
+										</td>
+										<td width="12%"><span class="f30 gray"><p class="f16">项目期限</p>{{item.timeLimit}}</span><span ng-if="item.timeType==1">天</span><span ng-if="item.timeType==0">个月</span></td>
+										<td width="12%"><span class="f30 gray"><p class="f16">起购金额</p>{{item.investMin}}</span>元</td>
+										<td width="14%" class="ta-center" >
+											<i class="knob" knob="item.progressPercentage">
+												<span class="per-val f12 gray-light"><span>{{item.progressPercentage}}</span>%</span>
+											</i>
+										</td>
+										<td width="27%"><span class="f30 gray"><p class="f16">剩余可投</p>{{item.amountInvestable}}</span>元</td>
+										<td class="ta-right ft16 pr40" width="19%">
+											<a ng-if="item.countDown <= 0"  ui-sref="borrowDetail({id:item.id})">
+												<span class="btn-light button" ng-if="item.status==1">立即投标</span>
+												<span class="btn-gray1" ng-if="item.status==3">招标结束</span>
+												<span class="btn-gray1" ng-if="item.status==4">还款中</span>
+												<span class="btn-gray1" ng-if="item.status==8">已还款</span>
+											</a>
+											<p class="tc" ng-if="item.countDown > 0">开标倒计时</p><a ui-sref="borrowDetail({id:item.id})"  ng-if="item.countDown > 0"  class="btn-gray"><span countdown="item.countDown"></span></a>
+										</td>
+									</tr>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	<!--产品分类-->
+	<div class="classification">
+		<div class="container">
+			<div class="inves-apartment">
+				<p>Product categories</p>
+		        <h2>产品分类<span class="index-title">为您选择合适的</span></h2>
+		    </div>
+			<div class="invest-list" >
+				<div class="list">
+					<ul class="clearfix">
+						<li ng-repeat="item in investData1">
+							<h3 title="{{item.name}}" ng-bind="item.name|limitTo:5" ><span class="clearfix"></span></h3>
+							<div class="content">
+								<div class="basic">
+									<div class="rate tc" >
+										<p>预期年化利率</p>
+										<h4><span class="ft24 light-lightest-on" ng-bind="item.rateYearMin|number:2"></span><span class="ft14 light-lightest-on">%</span><span class="light-lightest-on">~</span><span class="ft30 light-lightest-on" ng-bind="item.rateYearMax|number:2"></span><span class="ft14 light-lightest-on">%</span></h4>
+									</div>
+								</div>
+								<div class="title" ng-bind="item.borrowName|limitTo:10"></div>
+							</div>
+							<div class="operate">
+								<a class="buttonBlue" ng-if="item.borrowName" ui-sref="invest">
+									<span>立即抢购</span>
+								</a>
+								<a class="disabled" href="javascript:;" ng-if="!item.borrowName">
+									<span>敬请期待</span>
+								</a>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+	<!-- 行业资讯 网站公告 -->
+	<div class="web-article">
+		<div class="container clearfix">
+			<div class="news floatleft">
+				<!-- <h2 class="module-title"><a ng-if="article2Data" class="view-more floatright" href="#/article/news">更多>></a></h2>	 -->
+				<div class="inves-apartment">
+					<p>The latest news</p>
+			        <h2>最新动态<a ng-if="article2Data" class="view-more floatright" href="#/article/news">更多>></a></h2>
+			    </div>
+				<div id="page" ng-show="article2Data==''">
+					<div  class="no-data" ng-class="noData">暂时没有数据</div>
+				</div>
+				<ul>
+					<li ng-repeat="item in article2Data">
+						<div ng-if="$index==0" class="mb20">
+							<img ng-if="item.imageUrl" class="floatleft" ng-src="{{domain + item.imageUrl}}" alt="文章图片" />
+							<img ng-if="!item.imageUrl" class="floatleft" src="resources/images/default-zixun.jpg" alt="文章图片" />
+							<div class="floatleft first-content">
+								<h4><span class="title-wrap-sn uni">1</span><a ng-bind='item.title' ui-sref="article.articleDetail({id:item.id,type:'news'})"></a></h4>
+								<p ng-bind="item.introduction"></p>
+							</div>
+							<div class="clear"></div>
+						</div>
+						<div ng-if="$index!=0">
+							<p class="title-wrap">
+								<span class="title-wrap-sn">{{$index+1}}</span>
+								<a class="title-wrap-title" ng-bind='item.title' ui-sref="article.articleDetail({id:item.id,type:'news'})"></a>
+								<span class="floatright" ng-bind="item.publishTime | date:'yyyy-MM-dd'"></span>
+							</p>
+						</div>
+					</li>
+				</ul>
+			</div>
+			<div class="article-slice floatleft"></div>
+			<div class="notice floatleft">
+				<!-- <h3><a ng-if="articlesData" class="view-more  floatright" href="#/article/webtips">更多>></a></h3> -->
+				<div class="inves-apartment">
+					<p>Web site announcement</p>
+			        <h2>网站公告<a ng-if="articlesData" class="view-more  floatright" href="#/article/webtips">更多>></a></h2>
+			    </div>
+				<div id="page" ng-show="articlesData==''">
+					<div  class="no-data" ng-class="noData">暂时没有数据</div>
+				</div>
+				<ul>
+					<li ng-repeat="item in articlesData">
+						<p class="title-wrap">
+							<span class="title-wrap-sn">{{$index+1}}</span>
+							<a class="title-wrap-title" ng-bind='item.title' ui-sref="article.articleDetail({id:item.id,type:'website'})"></a>
+							<i ng-if="item.isNew" class="title-wrap-new ml5"></i>
+							<span class="floatright" ng-bind="item.publishTime | date:'yyyy-MM-dd'"></span>
+						</p>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<!-- 合作伙伴 -->
+	<div class="web-corp">
+		<div class="container">
+			<h2 class="module-title "></h2>
+			<!-- <span class="left"></span>
+			<span class="right"></span> -->
+			<div class="corp-box" >
+				<ul cp-ui-fly items="data1" item-tag="li" move-name="left" delay-time="2000" move-time="2000" class="corp-list clearfix">
+					<li ng-repeat="item in data1"  rd-fly-item>
+						<a ng-href="{{item.url}}" target="_blank"><img ng-src="{{'data:image/png;base64,' + item.image}}" /></a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+</div>

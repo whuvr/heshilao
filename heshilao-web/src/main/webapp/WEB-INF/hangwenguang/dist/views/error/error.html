@@ -1,0 +1,1 @@
+<div ng-controller="errorCtrl" class="error-page"><div class="error-page-cont"><div ng-class="{status404:status == 404 || !status,status500: status == 500}"></div><p class="tip" ng-if="status == 404 || !status">错误信息404，找不到页面</p><p class="tip" ng-if="status == 500">尊敬的用户，服务器连接异常，请您稍后再试。</p><div class="operate mt20"><a class="button-orange" ui-sref="home">返回</a></div></div></div>

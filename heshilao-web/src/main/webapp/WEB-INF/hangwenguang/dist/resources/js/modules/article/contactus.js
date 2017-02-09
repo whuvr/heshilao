@@ -1,0 +1,1 @@
+define(["modules/article/contactusCtrl","modules/article/contactusService","text!htmlModule/article/contactus.html"],function(t,e,c){return function(n,l,u,o){t(n,l,u,o),e(n,l,u,o),l.append(c)}});

@@ -1,0 +1,158 @@
+<div class="activities_page" ng-controller="activitiesCtrl">
+  <div class="sect01">
+    <div class="mid">
+      <img class="bg1-1" src="resources/images/activities/bg1-1.png" alt="">
+      <form name="form" novalidate ng-submit="submit(form,$event)" class="m-form">
+        <div class="form-group" style="display: none">
+          <input type="text" class="register-input" id="username" ng-model="formData.username"/>
+        </div>
+        <div class="form-group phone">
+            <i class="input-unit"></i>
+          <input type="text" name="phone" id="phone" class="register-input" ng-pattern="/^1[3|5|7|8|4]\d{9}$/" maxlength="11" ng-model="formData.phone" required remote-validation="users/checkPhone" remote="phone/remote-phone" pattern-err-type="PhoneError" ie-placeholder="手机号" />
+        </div>
+        <div id="" class="form-group validImgCode">
+        <i class="input-unit"></i>
+          <input ng-change="validImg()" class="register-input short" ng-focus="hideError()" required ng-required-err-type="validateError" ng-model="formData.imageCode" class="text-btn" type="text" name="validCode" ie-placeholder="图片验证码">
+          <div class="u-validatebox">
+            <img class="validatebox" ng-click="validCode()" id="" ng-src="{{valid}}" style="display:inline">
+          </div>
+          <span id="" class="has-error" ng-show="serverError" ng-bind="callError"></span>
+        </div>
+        <div class="form-group validCode" id="">
+          <div class="input-group" id="">
+          <i class="input-unit"></i>
+            <input id="" type="text" class="register-input  short" maxlength="6" required ng-model="formData.validCode" ie-placeholder="验证码" />
+          </div>
+          <div class="u-validatebox">
+            <input type="button" disabled="disabled" class="register-getcode disabled" value="获取验证码" ng-click="getCode(form)" id="getcode" />
+          </div>
+        </div>
+        <div class="form-group password">
+        <i class="input-unit"></i>
+          <input id="password" type="password" class="register-input" ng-pattern="/^(?![a-zA-Z]+$)(?!\d+$)[0-9A-Za-z]{8,16}$/" ng-minlength="8" maxlength="16" ng-model="formData.password" required pattern-err-type="PasswordError" ie-placeholder="设置登录密码" />
+        </div>
+        <div class="form-group" style="display: none">
+          <input id="password2" type="password" class="register-input" />
+        </div>
+        <div class="form-group agreement" id="">
+          <input type="checkbox" ng-model="formData.isAgree" class="registerMargin" required ng-required-err-type="ProtocolError" />
+          <label class="register-protocol1">我已阅读并且同意</label>
+          <span class="register-protocol-font1" cp-do-register-protocol>《用户服务协议》</span>
+        </div>
+        <input type="hidden" name="sourceCode" ng-value="formData.sourceCode">
+        <input type="hidden" name="leid" ng-value="formData.leid">
+        <input type="hidden" name="luid" ng-value="formData.luid">
+        <input type="submit" class="btn" id="register_button" value="注册送288元理财红包 " />
+        <div class="link_field">
+          <label class="label">&nbsp;</label>
+          <span class="login-tip">已经是平台会员了？<a id="light" ng-click="$state.go('login')">立即登录</a></span>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="sect02">
+    <div class="mid">
+      <a class="a1" ui-sref="invest"></a>
+      <a class="a2" ui-sref="invest"></a>
+    </div>
+  </div>
+  <div class="sect03">
+    <div class="mid">
+        <div class="title_img"></div>
+      <div id="web_hot_invest">
+        <div class="item novice">
+          <div class="itemleft"></div>
+          <div class="itemright" ng-show="!newPalyerData">
+            <div class="" id="page" style="padding: 0">
+              <div class="no-data">暂时没有数据</div>
+            </div>
+          </div>
+          <div class="itemright" ng-show="newPalyerData">
+            <div ng-class="{head:true,danbg:newPalyerData.type==101,dibg:newPalyerData.type==102,xinbg:newPalyerData.type==103,miaobg:newPalyerData.type==104}">
+              <a ui-sref="borrowDetail({id:newPalyerData.id})" title="{{newPalyerData.name}}" class="title" ng-bind="newPalyerData.name"></a>
+              <i class="invest-type"></i>
+              <span class="red-packetbg"></span>
+            </div>
+            <table>
+              <tr>
+                <td width="26%">预期年化利率
+                  <br><span class="f30 light-lightest-on" ng-if="newPalyerData.classify==1&&newPalyerData.isRegionConfirm==0" ng-bind="newPalyerData.rateYearMin+'%'+'~'+newPalyerData.rateYear+'%'"></span><span class="f30 light-lightest-on" ng-if="newPalyerData.classify!=1||newPalyerData.isRegionConfirm==1" ng-bind="newPalyerData.rateYear+'%'"></span><em ng-if="newPalyerData.platformRateYear">+<span ng-bind="newPalyerData.platformRateYear | number: 2"></span>%</em></td>
+                <td width="12%">项目期限
+                  <br><span class="f24 gray">{{newPalyerData.timeLimit}}</span><span ng-if="newPalyerData.timeType==1">天</span><span ng-if="newPalyerData.timeType==0">个月</span></td>
+                <td width="14%" class="ta-center" rowspan="2">
+                  <i class="knob" knob="newPalyerData.progressPercentage" width="90" height="90" line-width="6">
+                                    <span class="per-val f12 gray-light"><span>{{newPalyerData.progressPercentage}}</span>%</span>
+                                </i>
+                </td>
+                <td width="26%">借款金额
+                  <br><span class="f24 gray">{{newPalyerData.amountBorrow}}</span>元</td>
+                <td class="ta-right ft16" width="22%" rowspan="2">
+                  <a ng-if="newPalyerData.countDown <= 0" ui-sref="borrowDetail({id:newPalyerData.id})">
+                    <span class="btn-light button" ng-if="newPalyerData.status==1">立即投标</span>
+                    <span class="btn-gray1" ng-if="newPalyerData.status==3">招标结束</span>
+                    <span class="btn-gray1" ng-if="newPalyerData.status==4">还款中</span>
+                    <span class="btn-gray1" ng-if="newPalyerData.status==8">已还款</span>
+                  </a>
+                  <p class="tc" ng-if="newPalyerData.countDown > 0">开标倒计时</p><a ui-sref="borrowDetail({id:newPalyerData.id})" ng-if="newPalyerData.countDown > 0" class="btn-gray"><span countdown="newPalyerData.countDown"></span></a>
+                </td>
+              </tr>
+            </table>
+            <p class="payback">
+              <span class="limit1">起购金额：<em ng-bind="newPalyerData.investMin"></em>元</span>
+              <span class="limit">还款方式：<em ng-if="newPalyerData.repayWay == 1">按月分期还款</em><em ng-if="newPalyerData.repayWay == 2">一次性还款</em><em ng-if="newPalyerData.repayWay == 3">每月还息到期还本</em></span>
+            </p>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="item recommend">
+          <div>
+            <div class="itemleft"></div>
+            <div class="itemright" ng-show="!recommendData">
+              <div class="" id="page" style="padding: 0">
+                <div class="no-data">暂时没有数据</div>
+              </div>
+            </div>
+            <div class="itemright" ng-show="recommendData">
+              <div ng-class="{head:true,danbg:recommendData.type==101,dibg:recommendData.type==102,xinbg:recommendData.type==103,miaobg:recommendData.type==104}">
+                <a ui-sref="borrowDetail({id:recommendData.id})" class="title" titlt="{{recommendData.name}}" ng-bind="recommendData.name"></a>
+                <i class="invest-type"></i>
+              </div>
+              <table>
+                <tr>
+                  <td width="26%">预期年化利率
+                    <br><span class="f30 light-lightest-on" ng-if="recommendData.classify==1&&recommendData.isRegionConfirm==0" ng-bind="recommendData.rateYearMin+'%'+'~'+recommendData.rateYear+'%'"></span><span class="f30 light-lightest-on" ng-if="recommendData.classify!=1||recommendData.isRegionConfirm==1" ng-bind="recommendData.rateYear+'%'"></span><em ng-if="recommendData.platformRateYear">+<span ng-bind="recommendData.platformRateYear | number: 2"></span>%</em></td>
+                  <td width="12%">项目期限
+                    <br><span class="f24 gray">{{recommendData.timeLimit}}</span><span ng-if="recommendData.timeType==1">天</span><span ng-if="recommendData.timeType==0">个月</span></td>
+                  <td width="14%" class="ta-center" rowspan="2">
+                    <i class="knob" knob="recommendData.progressPercentage" width="90" height="90" line-width="6">
+                                        <span class="per-val f12 gray-light"><span>{{recommendData.progressPercentage}}</span>%</span>
+                                    </i>
+                  </td>
+                  <td width="26%">借款金额
+                    <br><span class="f24 gray">{{recommendData.amountBorrow}}</span>元</td>
+                  <td class="ta-right ft16" width="22%" rowspan="2">
+                    <a ng-if="recommendData.countDown <= 0" ui-sref="borrowDetail({id:recommendData.id})">
+                      <span class="btn-light button" ng-if="recommendData.status==1">立即投标</span>
+                      <span class="btn-gray1" ng-if="recommendData.status==3">招标结束</span>
+                      <span class="btn-light button" ng-if="recommendData.status==4">还款中</span>
+                      <span class="btn-gray1" ng-if="recommendData.status==8">已还款</span>
+                    </a>
+                    <p class="tc" ng-if="recommendData.countDown > 0">开标倒计时</p><a ui-sref="borrowDetail({id:recommendData.id})" ng-if="recommendData.countDown > 0" class="btn-gray"><span countdown="recommendData.countDown"></span></a>
+                  </td>
+                </tr>
+              </table>
+              <p class="payback">
+                <span class="limit1">起购金额：<em ng-bind="recommendData.investMin"></em>元</span>
+                <span class="limit">还款方式：<em ng-if="recommendData.repayWay == 1">按月分期还款</em><em ng-if="recommendData.repayWay == 2">一次性还款</em><em ng-if="recommendData.repayWay == 3">每月还息到期还本</em></span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="sect04">
+    <div class="mid"></div>
+    <div class="cover"></div>
+  </div>
+</div>

@@ -1,0 +1,1 @@
+define(["angular"],function(t){return function(t,o,n,r){t.controller("errorCtrl",["$rootScope","$scope","$location","$stateParams",function(t,o,n,r){o.status=r.status}])}});

@@ -1,0 +1,1 @@
+define(["modules/article/lawCtrl","modules/article/lawService","directives/opPagingDirective","text!htmlModule/article/law.html"],function(e,t,i,l){return function(r,a,c,n){e(r,a,c,n),t(r,a,c,n),i(r,a,c,n),a.append(l)}});

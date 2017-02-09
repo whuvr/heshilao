@@ -1,0 +1,101 @@
+﻿html {
+	font-family: "Microsoft Yahei", Avenir, "Hiragino Sans GB", "Noto Sans S Chinese","Microsoft Sans Serif", "WenQuanYi Micro Hei", sans-serif;
+	-ms-text-size-adjust: 100%;
+	-webkit-text-size-adjust: 100%;
+}
+body {
+	margin: 0;
+}
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+menu,
+nav,
+section,
+summary {
+	display: block;
+}
+a {
+	background-color: transparent;
+	&:active {
+		outline: 0;
+	}
+	&:hover {
+		outline: 0;
+	}
+}
+sub,
+sup {
+	font-size: 75%;
+	line-height: 0;
+	position: relative;
+	vertical-align: baseline;
+}
+
+sup {
+	top: -0.5em;
+}
+
+sub {
+	bottom: -0.25em;
+}
+img {
+ 	border: 0;
+}
+button,
+input,
+optgroup,
+select,
+textarea {
+	color: inherit; // 1
+	font: inherit; // 2
+	margin: 0; // 3
+}
+button,
+select {
+	text-transform: none;
+}
+button,
+html input[type="button"], // 1
+input[type="reset"],
+input[type="submit"] {
+	-webkit-appearance: button; // 2
+	cursor: pointer; // 3
+}
+button[disabled],
+html input[disabled] {
+	cursor: default;
+}
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+	border: 0;
+	padding: 0;
+}
+input[type="checkbox"],
+input[type="radio"] {
+	box-sizing: border-box; // 1
+	padding: 0; // 2
+}
+em{
+	font-style:normal;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+td,
+th {
+	padding: 0;
+}
+
+// 重置火狐默认样式 2016-9-12  wyk@erongdu.com
+:-moz-ui-invalid:not(output) {
+  box-shadow: none;
+}

@@ -1,0 +1,1 @@
+define(["modules/borrow/borrowCtrl","text!htmlModule/borrow/borrow.html","directives/areaDirective"],function(r,e,o){return function(t,i,n,d){r(t,i,n,d),i.append(e),o(t,i,n,d)}});

@@ -1,0 +1,34 @@
+<div ng-controller="loginCtrl">
+	<div id="content-top" ui-view>
+		<div class="top login">
+			<div class="top-cont ">
+				<form name="form"  ng-submit="submit()" novalidate="novalidate" class="form-horizontal" role="form">
+					<div id="login" >
+						<div class="login-content">
+						    <div class="" style="position:relative">
+								<div class="login-part form-group" id="username">
+									<input  ng-focus="hideError()" autocomplete="off" required ng-required-err-type="loginRequired1" ng-model="user.username" class="text-btn" type="text" name="username" ie-placeholder="用户名/邮箱/手机号">
+								</div>
+								<div class="login-part form-group" id="passwordimg">
+									<input  ng-focus="hideError()" ng-change="hideError()" id="password" required ng-required-err-type="loginRequired2" ng-model="user.password" class="text-btn" type="password" name="password" ie-placeholder="密码">
+								</div>
+							</div>
+							<div id="identifyCode" class="form-group" ng-if="loginNum">
+								<div class="input-group identifyCode">
+									<input  ng-focus="hideError()" ng-change="hideError()" required ng-required-err-type="validateError" ng-model="user.validCode" class="text-btn" type="text" name="validCode" ie-placeholder="验证码">
+								</div>
+								<div class="reg-validatebox">
+							    	<img class="validatebox" ng-click="validCode()" id="reg-validatecode" ng-src="{{valid}}" src="" style="display:inline">
+							    </div>
+							</div>
+							<span ng-show="serverError" class="help-block call-error">{{callError}}</span>
+							<!-- <div class="input-group" ng-show="sendAgainShow" id="send-mail-again">请先激活邮箱 <a ng-click="sendAgain()">发送邮件</a></div> -->
+							<input id="submit-login" type="submit"   value="立即登录">
+							<div class="remember"><a class="login-font"  id="forget" target="_blank" ui-sref="login.getbackEma">忘记密码?</a>  &nbsp;&nbsp;<a class="login-font"  id="forget" target="_blank" ui-sref="register">立即注册?</a></div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>

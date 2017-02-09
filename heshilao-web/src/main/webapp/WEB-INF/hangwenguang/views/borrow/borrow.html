@@ -1,0 +1,114 @@
+<div ng-controller="borrowCtrl" id="raiseLoan">
+	<div class="borrowBanner"></div>
+	<div class="borrowMain">
+		<div class="borrowContent">
+			<div class="borrowTip">
+				<span class="borrowIcon1"></span>
+				<h2>在线申请借款</h2>
+			</div>
+			<form name="form" novalidate ng-submit="submit(form)">
+				<div class="borrow-layout">
+					<div tabs >
+						<div class="borrow-tab">
+							<a tab-index="0" class="borrowBtn3" href="javascript:void(0)" ng-click="company = false;formData.borrowType=0;">个人借贷</a>
+							<a tab-index="1" class="borrowBtn4" href="javascript:void(0)" ng-click="formData.borrowType=1;company = true;">企业借贷</a>
+						</div>
+						<div></div>
+					</div>
+
+					<!-- <div class="borrow-tab">
+						<a class="borrowBtn3 active" href="javascript:void(0)" ng-click="tab1()">个人借贷</a>
+						<a class="borrowBtn4" href="javascript:void(0)" ng-click="tab2()">企业借贷</a>
+					</div> -->
+					<div class="borrow-left">
+						<div class="borrowPart" ng-if="company">
+							<div class="borrowItem1">公司名称</div>
+							<div class="borrowItem2 form-group">
+								<input type="text" class="borrowText" ng-model="formData.companyName" required ng-maxlength="100"/>
+							</div>
+						</div>
+						<div class="borrowPart">
+							<div class="borrowItem1">联系人姓名</div>
+							<div class="borrowItem2 form-group">
+								<input type="text"class="borrowText" ng-model="formData.linkman" ng-pattern="/^[\u2E80-\u9FFF]{2,4}$/" pattern-err-type="realName" required/>
+							</div>
+						</div>
+						<div class="borrowPart">
+							<div class="borrowItem1">借款金额</div>
+							<div class="borrowItem2 form-group">
+								<div class="borrowUnit">元</div>
+								<input type="text" class="borrowText" ng-model="formData.amountBorrow" maxlength="10" ng-pattern="/^[1-9]\d*$/" pattern-err-type="RechargeError" required/>
+							</div>
+						</div>
+						<div class="borrowPart">
+							<div class="borrowItem1">所在城市</div>
+							<div class="borrowItem2">
+								<div class="input-group" >
+							        <div p2p-area class="value double-select" json-url="resources/interface/city.json" p2p-province="formData.province" p2p-city="formData.city"></div>
+							        <i class="borrow-arrow1"></i>
+							        <i class="borrow-arrow2"></i>
+							        <i class="borrow-bg"></i>
+							        <i class="borrow-bg1"></i>
+							        <i class="borrow-mask"></i>
+						        </div>
+							</div>
+						</div>
+					</div>
+					<div class="borrow-right">
+						<div class="borrowPart">	
+							<div class="borrowItem1">手机号码</div>
+							<div class="borrowItem2 form-group">
+								<input type="text" name="phone" maxlength="11" class="borrowText" pattern-err-type="PhoneError" ng-pattern="/^1[3|5|7|8|4]\d{9}$/"  ng-model="formData.linkmanPhone" required/>
+							</div>
+						</div>
+						<div class="borrowPart">
+							<div class="borrowItem1">借款期限</div>
+							<div class="borrowItem2 form-group">
+								<input class="borrowText2" type="text" ng-model="formData.timeLimit" ng-maxlength="3" pattern-err-type="Integer" ng-pattern="/^[1-9]\d*$/"  required/>
+								<div class="borrow-wrap">
+									<select class="borrowSelect1" ng-model="formData.timeType">
+										<option value="0">月</option>
+										<option value="1">天</option>
+									</select>
+									<span class="borrow-arrow"></span>
+								</div>
+							</div>
+						</div>						
+						<div id="identifyCode" class="reigster-block form-group borrowPart">
+							<div class="borrowItem1">图片验证码</div>
+							<input  ng-change="validImg()" class="borrowText2"   ng-focus="hideError()" required ng-required-err-type="validateError" ng-model="formData.imageCode" type="text" name="validCode"  > <!---->
+							<div class="reg-validatebox">
+					    	<img class="validatebox" ng-click="validCode()" id="reg-validatecode" ng-src="{{valid}}" style="display:inline">
+					    	</div>
+					    	<span id="" class="has-error" ng-show="serverError" ng-bind="callError"></span>
+					    </div>
+						<div class="borrowPart">
+							<div class="borrowItem1">手机验证码</div>
+							<div class="borrowItem2 form-group"> 
+								<div class="input-group">
+									<input type="text" ng-model="formData.validCode" class="borrowText2" maxlength="6" required/>
+									<input id="getCode" type="button" class="register-getcode disabled" style="margin-left:-5px; width: 92px;" ng-value="countdown <= 0 ? '获取校验码' : countdown + '秒后获取'" ng-disabled="countdown>0" ng-click="getCode()" />
+								</div>
+							</div>
+						</div>
+					</div>
+					
+				</div>
+				<input type="submit" class="borrowBtn2" value="提交申请" cp-common-singleton-button />
+			</form>
+		</div>
+	</div>
+	<div class="borrowfooter">
+		<div class="borrowContent">
+			<div class="borrowTip">
+				<span class="borrowIcon2"></span>
+				<h2>温馨提示</h2>
+			</div>
+			<div class="borromPrompt">
+				<p>1、您也可以直接拨打客服热线{{corpInfo.webPhone}}与我们业务员联系；</p>
+				<p>2、请务必确保您所提交的手机号码正确性，以便我们能及时联系您；</p>
+				<p>3、如申请遇到任何问题，您均可咨询网站客服热线{{corpInfo.webPhone}}。</p>
+			</div>
+		</div>
+	</div>
+</div>

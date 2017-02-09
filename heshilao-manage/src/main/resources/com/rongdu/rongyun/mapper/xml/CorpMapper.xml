@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rongdu.rongyun.mapper.CorpMapper">
+	<resultMap id="BaseResultMap" type="corpRes">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="corpLoginAccountId" property="corpLoginAccountId"
+			jdbcType="INTEGER" />
+		<result column="corpNumber" property="corpNumber" jdbcType="VARCHAR" />
+		<result column="corpName" property="corpName" jdbcType="VARCHAR" />
+		<result column="corpAddress" property="corpAddress" jdbcType="VARCHAR" />
+		<result column="corpContactPerson" property="corpContactPerson"
+			jdbcType="VARCHAR" />
+		<result column="corpPhone" property="corpPhone" jdbcType="VARCHAR" />
+		<result column="corpEmail" property="corpEmail" jdbcType="VARCHAR" />
+		<result column="corporationName" property="corporationName"
+			jdbcType="VARCHAR" />
+		<result column="corporationSex" property="corporationSex"
+			jdbcType="VARCHAR" />
+		<result column="corporationAge" property="corporationAge"
+			jdbcType="INTEGER" />
+		<result column="corporationPhone" property="corporationPhone"
+			jdbcType="VARCHAR" />
+		<result column="corporationEmail" property="corporationEmail"
+			jdbcType="VARCHAR" />
+		<result column="state" property="state" jdbcType="INTEGER" />
+		<result column="submitTime" property="submitTime" jdbcType="TIMESTAMP" />
+		<result column="businessLicenceCode" property="businessLicenceCode"
+			jdbcType="VARCHAR" />
+		<result column="organizationCode" property="organizationCode"
+			jdbcType="VARCHAR" />
+		<result column="taxCertCode" property="taxCertCode" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, corpLoginAccountId, corpNumber, corpName, corpAddress,
+		corpContactPerson, corpPhone,
+		corpEmail, corporationName,
+		corporationSex, corporationAge, corporationPhone,
+		corporationEmail,state,submitTime,businessLicenceCode,organizationCode,taxCertCode
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from corp
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from corp
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="corpReq">
+		insert into corp (id,
+		corpLoginAccountId, corpNumber,
+		corpName, corpAddress,
+		corpContactPerson,
+		corpPhone, corpEmail, corporationName,
+		corporationSex, corporationAge, corporationPhone,
+		corporationEmail,
+		state,submitTime)
+		values (#{id,jdbcType=INTEGER},
+		#{corpLoginAccountId,jdbcType=INTEGER},
+		#{corpNumber,jdbcType=VARCHAR},
+		#{corpName,jdbcType=VARCHAR},
+		#{corpAddress,jdbcType=VARCHAR},
+		#{corpContactPerson,jdbcType=VARCHAR},
+		#{corpPhone,jdbcType=VARCHAR},
+		#{corpEmail,jdbcType=VARCHAR}, #{corporationName,jdbcType=VARCHAR},
+		#{corporationSex,jdbcType=VARCHAR},
+		#{corporationAge,jdbcType=INTEGER},
+		#{corporationPhone,jdbcType=VARCHAR},
+		#{corporationEmail,jdbcType=VARCHAR},
+		#{state,jdbcType=INTEGER},#{submitTime,jdbcType=TIMESTAMP})
+	</insert>
+	<insert id="insertSelective" parameterType="corpReq">
+		insert into corp
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="corpLoginAccountId != null">
+				corpLoginAccountId,
+			</if>
+			<if test="corpNumber != null">
+				corpNumber,
+			</if>
+			<if test="corpName != null">
+				corpName,
+			</if>
+			<if test="corpAddress != null">
+				corpAddress,
+			</if>
+			<if test="corpContactPerson != null">
+				corpContactPerson,
+			</if>
+			<if test="corpPhone != null">
+				corpPhone,
+			</if>
+			<if test="corpEmail != null">
+				corpEmail,
+			</if>
+			<if test="corporationName != null">
+				corporationName,
+			</if>
+			<if test="corporationSex != null">
+				corporationSex,
+			</if>
+			<if test="corporationAge != null">
+				corporationAge,
+			</if>
+			<if test="corporationPhone != null">
+				corporationPhone,
+			</if>
+			<if test="corporationEmail != null">
+				corporationEmail,
+			</if>
+			<if test="state != null">
+				state,
+			</if>
+			<if test="submitTime != null">
+				submitTime,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="corpLoginAccountId != null">
+				#{corpLoginAccountId,jdbcType=INTEGER},
+			</if>
+			<if test="corpNumber != null">
+				#{corpNumber,jdbcType=VARCHAR},
+			</if>
+			<if test="corpName != null">
+				#{corpName,jdbcType=VARCHAR},
+			</if>
+			<if test="corpAddress != null">
+				#{corpAddress,jdbcType=VARCHAR},
+			</if>
+			<if test="corpContactPerson != null">
+				#{corpContactPerson,jdbcType=VARCHAR},
+			</if>
+			<if test="corpPhone != null">
+				#{corpPhone,jdbcType=VARCHAR},
+			</if>
+			<if test="corpEmail != null">
+				#{corpEmail,jdbcType=VARCHAR},
+			</if>
+			<if test="corporationName != null">
+				#{corporationName,jdbcType=VARCHAR},
+			</if>
+			<if test="corporationSex != null">
+				#{corporationSex,jdbcType=VARCHAR},
+			</if>
+			<if test="corporationAge != null">
+				#{corporationAge,jdbcType=INTEGER},
+			</if>
+			<if test="corporationPhone != null">
+				#{corporationPhone,jdbcType=VARCHAR},
+			</if>
+			<if test="corporationEmail != null">
+				#{corporationEmail,jdbcType=VARCHAR},
+			</if>
+			<if test="state != null">
+				#{state,jdbcType=INTEGER},
+			</if>
+			<if test="submitTime != null">
+				#{submitTime,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="corpReq">
+		update corp
+		<set>
+			<if test="corpLoginAccountId != null">
+				corpLoginAccountId =
+				#{corpLoginAccountId,jdbcType=INTEGER},
+			</if>
+			<if test="corpNumber != null">
+				corpNumber = #{corpNumber,jdbcType=VARCHAR},
+			</if>
+			<if test="corpName != null">
+				corpName = #{corpName,jdbcType=VARCHAR},
+			</if>
+			<if test="corpAddress != null">
+				corpAddress = #{corpAddress,jdbcType=VARCHAR},
+			</if>
+			<if test="corpContactPerson != null">
+				corpContactPerson =
+				#{corpContactPerson,jdbcType=VARCHAR},
+			</if>
+			<if test="corpPhone != null">
+				corpPhone = #{corpPhone,jdbcType=VARCHAR},
+			</if>
+			<if test="corpEmail != null">
+				corpEmail = #{corpEmail,jdbcType=VARCHAR},
+			</if>
+			<if test="corporationName != null">
+				corporationName = #{corporationName,jdbcType=VARCHAR},
+			</if>
+			<if test="corporationSex != null">
+				corporationSex = #{corporationSex,jdbcType=VARCHAR},
+			</if>
+			<if test="corporationAge != null">
+				corporationAge = #{corporationAge,jdbcType=INTEGER},
+			</if>
+			<if test="corporationPhone != null">
+				corporationPhone = #{corporationPhone,jdbcType=VARCHAR},
+			</if>
+			<if test="corporationEmail != null">
+				corporationEmail = #{corporationEmail,jdbcType=VARCHAR},
+			</if>
+			<if test="state != null">
+				state = #{state,jdbcType=INTEGER},
+			</if>
+			<if test="submitTime != null">
+				submitTime = #{submitTime,jdbcType=TIMESTAMP},
+			</if>
+
+			<if test="businessLicenceCode != null">
+				businessLicenceCode =
+				#{businessLicenceCode,jdbcType=VARCHAR},
+			</if>
+			<if test="organizationCode != null">
+				organizationCode = #{organizationCode,jdbcType=VARCHAR},
+			</if>
+			<if test="taxCertCode != null">
+				taxCertCode = #{taxCertCode,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="corpReq">
+		update corp
+		set
+		corpNumber = #{corpNumber,jdbcType=VARCHAR},
+		corpName =
+		#{corpName,jdbcType=VARCHAR},
+		corpAddress =
+		#{corpAddress,jdbcType=VARCHAR},
+		corpContactPerson =
+		#{corpContactPerson,jdbcType=VARCHAR},
+		corpPhone =
+		#{corpPhone,jdbcType=VARCHAR},
+		corpEmail =
+		#{corpEmail,jdbcType=VARCHAR},
+		corporationName =
+		#{corporationName,jdbcType=VARCHAR},
+		corporationSex =
+		#{corporationSex,jdbcType=VARCHAR},
+		corporationAge =
+		#{corporationAge,jdbcType=INTEGER},
+		corporationPhone =
+		#{corporationPhone,jdbcType=VARCHAR},
+		corporationEmail =
+		#{corporationEmail,jdbcType=VARCHAR},
+		state =
+		#{state,jdbcType=INTEGER},
+		submitTime =
+		#{submitTime,jdbcType=TIMESTAMP},
+		businessLicenceCode =
+		#{businessLicenceCode,jdbcType=VARCHAR},
+		organizationCode =
+		#{organizationCode,jdbcType=VARCHAR},
+		taxCertCode =
+		#{taxCertCode,jdbcType=VARCHAR}
+		where id = #{id,jdbcType=INTEGER} and
+		corpLoginAccountId=#{corpLoginAccountId,jdbcType=INTEGER}
+	</update>
+
+	<!-- 根据用户Id查找企业Id -->
+	<select id="seletCorpByLoginId" resultMap="BaseResultMap"
+		parameterType="int">
+		select
+		<include refid="Base_Column_List" />
+		from corp
+		where corpLoginAccountId =
+		#{corpLoginAccountId,jdbcType=INTEGER}
+	</select>
+
+	<select id="getCorpStatus" resultType="int" parameterType="int">
+		select
+		state
+		from corp
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+
+	<select id="getPhone" resultMap="BaseResultMap" parameterType="int">
+		select
+		<include refid="Base_Column_List" />
+		from corp
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+
+
+	<insert id="initCorp" parameterType="corpReq">
+		<selectKey resultType="int" keyProperty="id" order="AFTER">
+			SELECT
+			LAST_INSERT_ID()
+		</selectKey>
+		insert into corp (id,corpLoginAccountId,state)values
+		(#{id,jdbcType=INTEGER},#{corpLoginAccountId,jdbcType=INTEGER},#{state,jdbcType=INTEGER})
+	</insert>
+
+
+
+</mapper>

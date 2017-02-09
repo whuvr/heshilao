@@ -1,0 +1,1 @@
+define(["modules/register/registerCtrl","modules/register/registerService","text!htmlModule/register/register.html"],function(e,r,t){return function(i,s,n,g){e(i,s,n,g),r(i,s,n,g),s.append(t)}});

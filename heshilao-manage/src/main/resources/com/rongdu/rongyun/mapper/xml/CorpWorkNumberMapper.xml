@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rongdu.rongyun.mapper.CorpWorkNumberMapper">
+	<resultMap id="BaseResultMap" type="corpWorkNumberRes">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="corpId" property="corpId" jdbcType="INTEGER" />
+		<result column="workNumber" property="workNumber" jdbcType="INTEGER" />
+		<result column="workNumberUsed" property="workNumberUsed"
+			jdbcType="INTEGER" />
+		<result column="validityStart" property="validityStart"
+			jdbcType="TIMESTAMP" />
+		<result column="validityEnd" property="validityEnd" jdbcType="TIMESTAMP" />
+		<result column="typeId" property="typeId" jdbcType="INTEGER" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, corpId,
+		workNumber,workNumberUsed,validityStart,validityEnd,typeId
+	</sql>
+
+	<!-- 根据CorpId查找可用数量 -->
+	<select id="selectCorpWorkNumber" resultType="corpWorkNumberRes"
+		parameterType="corpWorkNumberReq">
+		<![CDATA[ 
+		select * from corpWorkNumber where corpId=#{corpId} and
+		typeId=#{typeId,jdbcType=INTEGER}
+		AND (
+	      validityStart  <= NOW()
+	      OR validityStart IS NULL
+	    ) 
+	    AND (
+	      validityEnd >= NOW()
+	      OR validityEnd IS NULL
+	    )  
+		 ]]>
+	</select>
+
+	<!-- 减少工单可用数量 -->
+	<update id="updateWorkNumber" parameterType="workOrderReq">
+		update
+		corpWorkNumber set workNumber=workNumber-1,workNumberUsed=workNumberUsed+1 where
+		corpId=#{corpId,jdbcType=INTEGER} and
+		typeId=#{typeId,jdbcType=INTEGER} and workNumber>0
+	</update>
+	<!-- 增加工单可用数量 -->
+	<update id="addWorkNumber" parameterType="workOrderReq">
+		update
+		corpWorkNumber
+		set workNumber=workNumber+1 ,workNumberUsed=workNumberUsed-1 where
+		corpId=#{corpId,jdbcType=INTEGER} and
+		typeId=#{typeId,jdbcType=INTEGER}
+	</update>
+
+</mapper>

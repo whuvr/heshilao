@@ -1,0 +1,21 @@
+// 支付跳转页面
+$image-path: "../images/";
+$gray-dark: #333;
+.page_payform{
+
+  .container{
+    margin-top: 333px;
+
+    .loading{
+      height: 50px;
+      background: url($image-path + "loading2.gif") no-repeat top center;
+      margin: 0 0 20px;
+    }
+
+    .load_text{
+      text-align: center;
+      font-size: 16px;
+      color: $gray-dark;
+    }
+  }
+}

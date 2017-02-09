@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rongdu.rongyun.mapper.StationMessageMapper">
+	<resultMap id="BaseResultMap" type="stationMessageRes">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="messageContent" property="messageContent"
+			jdbcType="LONGVARCHAR" />
+		<result column="messageTitle" property="messageTitle" jdbcType="VARCHAR" />
+		<result column="messageType" property="messageType" jdbcType="INTEGER" />
+		<result column="modifyTime" property="modifyTime" jdbcType="TIMESTAMP" />
+		<result column="modifyFullName" property="modifyFullName"
+			jdbcType="VARCHAR" />
+		<result column="publishTime" property="publishTime" jdbcType="TIMESTAMP" />
+		<result column="publishFullName" property="publishFullName"
+			jdbcType="VARCHAR" />
+		<result column="messageState" property="messageState" jdbcType="INTEGER" />
+		<result column="validityDateEnd" property="validityDateEnd" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<resultMap id="ResultMapWithBLOBs" type="stationMessageRes"
+		extends="BaseResultMap">
+		<result column="messageContent" property="messageContent"
+			jdbcType="LONGVARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, messageTitle, messageType, modifyTime, modifyFullName,
+		publishTime,
+		publishFullName,
+		messageState,
+		validityDateEnd
+	</sql>
+	<sql id="Blob_Column_List">
+		messageContent
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from stationMessage
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		stationMessage
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="stationMessageReq">
+		insert into stationMessage
+		(id, messageTitle, messageType,
+		modifyTime, modifyFullName,
+		publishTime,
+		publishFullName, messageState, messageContent,validityDateEnd
+		)
+		values
+		(#{id,jdbcType=INTEGER}, #{messageTitle,jdbcType=VARCHAR},
+		#{messageType,jdbcType=INTEGER},
+		#{modifyTime,jdbcType=TIMESTAMP},
+		#{modifyFullName,jdbcType=VARCHAR},
+		#{publishTime,jdbcType=TIMESTAMP},
+		#{publishFullName,jdbcType=VARCHAR}, #{messageState,jdbcType=INTEGER},
+		#{messageContent,jdbcType=LONGVARCHAR},
+		#{validityDateEnd,jdbcType=TIMESTAMP}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="stationMessageReq">
+		insert into stationMessage
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="messageTitle != null">
+				messageTitle,
+			</if>
+			<if test="messageType != null">
+				messageType,
+			</if>
+			<if test="modifyTime != null">
+				modifyTime,
+			</if>
+			<if test="modifyFullName != null">
+				modifyFullName,
+			</if>
+			<if test="publishTime != null">
+				publishTime,
+			</if>
+			<if test="publishFullName != null">
+				publishFullName,
+			</if>
+			<if test="messageState != null">
+				messageState,
+			</if>
+			<if test="messageContent != null">
+				messageContent,
+			</if>
+			<if test="validityDateEnd != null">
+				validityDateEnd,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="messageTitle != null">
+				#{messageTitle,jdbcType=VARCHAR},
+			</if>
+			<if test="messageType != null">
+				#{messageType,jdbcType=INTEGER},
+			</if>
+			<if test="modifyTime != null">
+				#{modifyTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="modifyFullName != null">
+				#{modifyFullName,jdbcType=VARCHAR},
+			</if>
+			<if test="publishTime != null">
+				#{publishTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="publishFullName != null">
+				#{publishFullName,jdbcType=VARCHAR},
+			</if>
+			<if test="messageState != null">
+				#{messageState,jdbcType=INTEGER},
+			</if>
+			<if test="messageContent != null">
+				#{messageContent,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="validityDateEnd != null">
+				#{validityDateEnd,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="stationMessageReq">
+		update stationMessage
+		<set>
+			<if test="messageTitle != null">
+				messageTitle = #{messageTitle,jdbcType=VARCHAR},
+			</if>
+			<if test="messageType != null">
+				messageType = #{messageType,jdbcType=INTEGER},
+			</if>
+			<if test="modifyTime != null">
+				modifyTime = #{modifyTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="modifyFullName != null">
+				modifyFullName = #{modifyFullName,jdbcType=VARCHAR},
+			</if>
+			<if test="publishTime != null">
+				publishTime = #{publishTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="publishFullName != null">
+				publishFullName = #{publishFullName,jdbcType=VARCHAR},
+			</if>
+			<if test="messageState != null">
+				messageState = #{messageState,jdbcType=INTEGER},
+			</if>
+			<if test="messageContent != null">
+				messageContent = #{messageContent,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="validityDateEnd != null">
+				validityDateEnd = #{validityDateEnd,jdbcType=TIMESTAMP},
+			</if>
+			
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+
+	<update id="updateByPrimaryKey" parameterType="stationMessageReq">
+		update
+		stationMessage
+		set messageTitle = #{messageTitle,jdbcType=VARCHAR},
+		messageType = #{messageType,jdbcType=INTEGER},
+		modifyTime =
+		#{modifyTime,jdbcType=TIMESTAMP},
+		modifyFullName =
+		#{modifyFullName,jdbcType=VARCHAR},
+		publishTime =
+		#{publishTime,jdbcType=TIMESTAMP},
+		publishFullName =
+		#{publishFullName,jdbcType=VARCHAR},
+		messageState =
+		#{messageState,jdbcType=INTEGER},
+		validityDateEnd = #{validityDateEnd,jdbcType=TIMESTAMP},
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+
+	<!-- selectSelective -->
+	<select id="selectSelective" resultType="com.rongdu.rongyun.model.StationMessageRes"
+		parameterType="com.rongdu.rongyun.model.StationMessageReq">
+		SELECT b.*,a.isReaded,a.stationMessageId FROM corpStationMessage a left join  stationMessage b
+		on a.stationMessageId = b.id
+		WHERE a.corpId = #{corpId,jdbcType=INTEGER}
+		<if test="messageType != null">
+			and	b.messageType = #{messageType,jdbcType=INTEGER}
+		</if>
+		order by b.publishTime desc
+	</select>
+
+	<!-- getNotReadedCount -->
+	<select id="getNotReadedCount" resultType="java.lang.Integer" parameterType="java.lang.Integer">
+		SELECT count(1) FROM
+		corpStationMessage WHERE
+		corpId =#{corpId,jdbcType=INTEGER}
+		and isReaded = 0
+	</select>
+</mapper>

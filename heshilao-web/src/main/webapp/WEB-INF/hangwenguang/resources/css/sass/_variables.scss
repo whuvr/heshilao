@@ -1,0 +1,22 @@
+﻿//网站的字体
+$font-stack:    Helvetica, sans-serif;
+$font-yh:'微软雅黑';
+
+//常用的字号（可以根据具体的项目字号调整）
+$f12:12px;
+$f14:14px;
+$f16:16px;
+$f18:18px;
+$f20:20px;
+$f24:24px;
+
+//常用的颜色（可以根据具体的项目调整色值和添加变量）
+$main-color:#333;
+$dark-color:#666;
+$light-color:#999;
+$white-color:#fff;
+$error-color:#f00;//错误提示的颜色
+$title-color:#5bb433;//标题的颜色（可以自己定义）
+
+//布局宽度
+$container: 1192px; //页面总宽度

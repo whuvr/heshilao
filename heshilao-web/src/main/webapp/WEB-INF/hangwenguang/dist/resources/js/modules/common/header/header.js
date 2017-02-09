@@ -1,0 +1,1 @@
+define(["modules/common/header/headerCtrl","text!htmlModule/common/header/header.html"],function(e,n){return function(d,o,t,m){e(d,o,t,m),o.append(n)}});

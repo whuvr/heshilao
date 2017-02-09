@@ -1,0 +1,109 @@
+<div ng-controller="withdrawlsCtrl"  class="withdrawls">
+	<iframe style="display:none" id="iframeURL"></iframe>
+	<h1 class="accountTitle">账户提现</h1>
+	<div class="accountLine"></div>
+	<div class="part-cont2">
+		<form name="form1" novalidate action="account/cash/cashform" method="post" target="_blank">
+			<ul>
+				<li  ng-class="{'active':tab['on'+$index]}" class="m-bankCard" ng-repeat="item in bankList" ng-click="checkBank($index)">
+    				<div class="bank-content" >
+    					<span class="bank_card_title title1" style="">银行卡</span>
+	    				<span class="bank_card_title title2" style="">Bank</span>
+	    				<span class="bank_card_title bankKind account-font2">{{item.bankKind}}</span>
+	    				<span class="bank_card_title bankName">{{item.bank}}</span>
+	    				<span class="bank_card_title cardNo">{{item.bankNo}}</span>
+    				</div>
+    			</li>
+    			<input type="hidden" name="bankId" ng-value="formData.bankId">
+			</ul>
+			<table class="account-table-line">
+				<tr>
+					<td class="td-fixed">可用余额：</td>
+					<td class="td-left">{{balanceAvailable | number:2}}元</td>
+				</tr>
+				<!-- <tr ng-if="isCheckCashAmount">
+					<td class="td-fixed">剩余可提现额度：</td>
+					<td class="td-left">{{canCashAmount | number:2}}元</td>
+				</tr> -->
+				<tr>
+					<td class="td-fixed">提现金额：</td>
+					<td class="td-left form-group">
+						<input
+							id="withdraw-input" type="text" class="account-Input1"
+							maxlength="13"
+							ng-model="formData.cash"
+							ng-pattern="/^\d+(.\d{1,2})?$/"
+							required
+							pattern-err-type="Float"
+							dymin="{{minCashAoumnt}}"
+							dy-min="minCashAoumnt"
+							dymax="{{balanceAvailable}}"
+							dy-max="balanceAvailable"
+							ng-change="cashAmount()"
+							/>
+						<input type="hidden" name="cashStr" ng-value="formData.cashStr">
+					</td>
+				</tr>
+			</table>
+			<input type="hidden" name="token" ng-value="token">
+			<input type="button" class="accountBtn accountBtnPosi2" ng-disabled="form1.$invalid"  value="提交" cp-form-withdrawals-pay />
+		</form>
+	</div>
+	<div class="part-cont">
+		<div class="holder">
+			<div class="content1">
+				<span class="tip-lamp"></span>
+			</div>
+			<div class="content2">
+				<span class="account-font3">温馨提示：</span><br>
+				<span>预计到账时间：</span><br>
+				<span>T日10：00AM之前申请提现，预计当日到账；T日10：10AM以后申请提现，预计最晚T+1个工作日到账；</span><br>
+				<span>遇双休日或法定节假日顺延，实际到账时间根据账户托管方（第三方支付平台）及提现银行而有所差异</span>
+			</div>
+		</div>
+	</div>
+	<table class="account-table">
+		<thead class="thead-holder">
+    		<tr >
+    			<td>提现时间</td>
+    			<td>提现流水号</td>
+    		    <td ng-if="corp">提现银行|账户</td>
+    		    <td>提现金额</td>
+    		    <td>手续费</td>
+    		    <td>状态</td>
+    		</tr>
+	    </thead>
+	    <tbody>
+	    	<tr ng-repeat="item in data">
+			    <td ng-bind="item.addTime|date:'yyyy-MM-dd HH:mm:ss'"></td>
+			    <td ng-bind="item.tradeNo"></td>
+			    <td ng-bind="item.bankNo" ng-if="corp"></td>
+			    <td><span  ng-bind="item.cash | number:2"></span>元</td>
+			    <td><span ng-if="item.feeOwner==0||item.feeOwner==2" ng-bind="(item.fee | number:2)+'元'"></span><span ng-if="item.feeOwner==1" ng-bind="(item.fee | number:2)+'元'"></span></td>
+			    <td >
+			    	<span ng-if="item.status==0 ||item.status==6">提现处理中</span>
+			    	<span ng-if="item.status==1">提现成功</span>
+			    	<span ng-if="item.status==2">提现失败</span>
+			    	<span ng-if="item.status==-1">提现初始中</span>
+			    </td>
+		    </tr>
+	    </tbody>
+	</table>
+    <div id="page">
+    	<div  paging
+						class="small"
+						page="page"
+						page-size="pageSize"
+						total="total"
+						adjacent="2"
+						dots="..."
+						scroll-top="false"
+						hide-if-empty="true"
+						ul-class="pagination"
+						active-class="active"
+						disabled-class="disabled"
+						show-prev-next="true"
+						paging-action="pageSerch(page)">
+    	</div>
+    </div>
+</div>

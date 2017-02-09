@@ -1,0 +1,1 @@
+define(["modules/payResult/payThirdCtrl","text!htmlModule/payResult/payThird.html"],function(t,e){return function(l,n,u,d){t(l,n,u,d),n.append(e)}});

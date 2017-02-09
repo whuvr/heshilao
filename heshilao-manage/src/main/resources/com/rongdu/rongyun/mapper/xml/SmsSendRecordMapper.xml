@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rongdu.rongyun.mapper.SmsSendRecordMapper">
+	<resultMap id="BaseResultMap" type="com.rongdu.rongyun.model.SmsSendRecordRes">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="corpId" property="corpId" jdbcType="INTEGER" />
+		<result column="receivePhoneNumber" property="receivePhoneNumber"
+			jdbcType="VARCHAR" />
+		<result column="smsType" property="smsType" jdbcType="INTEGER" />
+		<result column="smsContent" property="smsContent" jdbcType="VARCHAR" />
+		<result column="sendTime" property="sendTime" jdbcType="TIMESTAMP" />
+		<result column="status" property="status" jdbcType="INTEGER" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, corpId, receivePhoneNumber, smsType,
+		smsContent,sendTime,status
+	</sql>
+	<insert id="insertSelective" parameterType="com.rongdu.rongyun.model.SmsSendRecordReq">
+		insert into smsSendRecord
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="corpId != null">
+				corpId,
+			</if>
+			<if test="receivePhoneNumber != null">
+				receivePhoneNumber,
+			</if>
+			<if test="smsType != null">
+				smsType,
+			</if>
+			<if test="smsContent != null">
+				smsContent,
+			</if>
+			<if test="sendTime != null">
+				sendTime,
+			</if>
+			<if test="status != null">
+				status,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="corpId != null">
+				#{corpId,jdbcType=INTEGER},
+			</if>
+			<if test="receivePhoneNumber != null">
+				#{receivePhoneNumber,jdbcType=VARCHAR},
+			</if>
+			<if test="smsType != null">
+				#{smsType,jdbcType=INTEGER},
+			</if>
+			<if test="smsContent != null">
+				#{smsContent,jdbcType=VARCHAR},
+			</if>
+			<if test="sendTime != null">
+				#{sendTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+</mapper>

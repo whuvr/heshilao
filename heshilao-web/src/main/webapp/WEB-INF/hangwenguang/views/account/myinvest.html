@@ -1,0 +1,38 @@
+<div  class="invest " id="myinvest">
+
+	<div class="apply_record">
+		<div class="tabs2" cp-ui-tab var-name="status" >
+			<div class="tab2-nav">
+				<a href="" value="0"  class="first"><span>投资中</span></a>
+				<a href="" value="1" ><span>待回款</span></a>
+				<a href="" value="2" ><span>已结算</span></a>
+				<a href="" value="-2"  class="last"><span>失败</span></a>
+			</div>
+			<div class="mt20">
+				<!-- 投资中 -->
+				<div ng-if="status == 0" cp-common-include="'template_investments1'">
+
+				</div>
+
+				<!-- 待回款 -->
+				<div ng-if="status == 1" cp-common-include="'template_investments2'">
+
+				</div>
+
+				<!-- 已结算 -->
+				<div ng-if="status == 2" cp-common-include="'template_investments3'">
+
+				</div>
+
+				<!-- 失败 -->
+				<div ng-if="status == -2" cp-common-include="'template_investments4'">
+
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+
+</div>
+

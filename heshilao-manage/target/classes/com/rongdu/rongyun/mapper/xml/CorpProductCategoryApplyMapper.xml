@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rongdu.rongyun.mapper.CorpProductCategoryApplyMapper">
+	<resultMap id="BaseResultMap" type="corpProductCategoryApplyRes">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="corpId" property="corpId" jdbcType="INTEGER" />
+		<result column="businessType" property="businessType" jdbcType="INTEGER" />
+		<result column="applyTime" property="applyTime" jdbcType="TIMESTAMP" />
+		<result column="managerUrl" property="managerUrl" jdbcType="VARCHAR" />
+		<result column="corpServiceCode" property="corpServiceCode"
+			jdbcType="VARCHAR" />
+		<result column="approveFullName" property="approveFullName"
+			jdbcType="VARCHAR" />
+		<result column="approveTime" property="approveTime" jdbcType="TIMESTAMP" />
+		<result column="approveResult" property="approveResult"
+			jdbcType="INTEGER" />
+		<result column="approveMemo" property="approveMemo" jdbcType="VARCHAR" />
+		<result column="categoryCode" property="categoryCode" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, corpId, businessType, applyTime, managerUrl,
+		corpServiceCode,
+		approveFullName, approveTime, approveResult,
+		approveMemo,categoryCode
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from corpProductCategoryApply
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		corpProductCategoryApply
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="corpProductCategoryApplyReq">
+		insert into
+		corpProductCategoryApply (id, corpId, businessType,
+		applyTime,
+		managerUrl,
+		corpServiceCode, approveFullName,
+		approveTime,
+		approveResult, approveMemo,categoryCode
+		)
+		values (#{id,jdbcType=INTEGER},
+		#{corpId,jdbcType=INTEGER},
+		#{businessType,jdbcType=INTEGER},
+		#{applyTime,jdbcType=TIMESTAMP}, #{webUrl,jdbcType=VARCHAR},
+		#{managerUrl,jdbcType=VARCHAR},
+		#{corpServiceCode,jdbcType=VARCHAR},
+		#{approveFullName,jdbcType=VARCHAR},
+		#{approveTime,jdbcType=TIMESTAMP}, #{approveResult,jdbcType=INTEGER},
+		#{approveMemo,jdbcType=VARCHAR},#{categoryCode,jdbcType=VARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="corpProductCategoryApplyReq">
+		insert into corpProductCategoryApply
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="corpId != null">
+				corpId,
+			</if>
+			<if test="businessType != null">
+				businessType,
+			</if>
+			<if test="applyTime != null">
+				applyTime,
+			</if>
+
+			<if test="managerUrl != null">
+				managerUrl,
+			</if>
+			<if test="corpServiceCode != null">
+				corpServiceCode,
+			</if>
+			<if test="approveFullName != null">
+				approveFullName,
+			</if>
+			<if test="approveTime != null">
+				approveTime,
+			</if>
+			<if test="approveResult != null">
+				approveResult,
+			</if>
+			<if test="approveMemo != null">
+				approveMemo,
+			</if>
+			<if test="approveMemo != null">
+				categoryCode,
+			</if>
+			
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="corpId != null">
+				#{corpId,jdbcType=INTEGER},
+			</if>
+			<if test="businessType != null">
+				#{businessType,jdbcType=INTEGER},
+			</if>
+			<if test="applyTime != null">
+				#{applyTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="managerUrl != null">
+				#{managerUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="corpServiceCode != null">
+				#{corpServiceCode,jdbcType=VARCHAR},
+			</if>
+			<if test="approveFullName != null">
+				#{approveFullName,jdbcType=VARCHAR},
+			</if>
+			<if test="approveTime != null">
+				#{approveTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="approveResult != null">
+				#{approveResult,jdbcType=INTEGER},
+			</if>
+			<if test="approveMemo != null">
+				#{approveMemo,jdbcType=VARCHAR},
+			</if>
+			<if test="categoryCode != null">
+				#{categoryCode,jdbcType=VARCHAR},
+			</if>
+			
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="corpProductCategoryApplyReq">
+		update corpProductCategoryApply
+		<set>
+			<if test="corpId != null">
+				corpId = #{corpId,jdbcType=INTEGER},
+			</if>
+			<if test="businessType != null">
+				businessType = #{businessType,jdbcType=INTEGER},
+			</if>
+			<if test="applyTime != null">
+				applyTime = #{applyTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="managerUrl != null">
+				managerUrl = #{managerUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="corpServiceCode != null">
+				corpServiceCode = #{corpServiceCode,jdbcType=VARCHAR},
+			</if>
+			<if test="approveFullName != null">
+				approveFullName = #{approveFullName,jdbcType=VARCHAR},
+			</if>
+			<if test="approveTime != null">
+				approveTime = #{approveTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="approveResult != null">
+				approveResult = #{approveResult,jdbcType=INTEGER},
+			</if>
+			<if test="approveMemo != null">
+				approveMemo = #{approveMemo,jdbcType=VARCHAR},
+			</if>
+			<if test="categoryCode != null">
+				categoryCode = #{categoryCode,jdbcType=VARCHAR},
+			</if>
+			
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="corpProductCategoryApplyReq">
+		update
+		corpProductCategoryApply
+		set corpId = #{corpId,jdbcType=INTEGER},
+		businessType = #{businessType,jdbcType=INTEGER},
+		applyTime =
+		#{applyTime,jdbcType=TIMESTAMP},
+		corpServiceCode =
+		#{corpServiceCode,jdbcType=VARCHAR},
+		approveFullName =
+		#{approveFullName,jdbcType=VARCHAR},
+		approveTime =
+		#{approveTime,jdbcType=TIMESTAMP},
+		approveResult =
+		#{approveResult,jdbcType=INTEGER},
+		approveMemo =
+		#{approveMemo,jdbcType=VARCHAR},
+		categoryCode = #{approveMemo,jdbcType=VARCHAR}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+
+	<!-- 0元免费开通 -->
+	<insert id="addCategoryApply" parameterType="corpProductCategoryApplyReq">
+		insert into
+		corpProductCategoryApply (corpId, businessType,
+		applyTime,categoryCode)
+		values
+		(#{corpId,jdbcType=INTEGER},
+		#{businessType,jdbcType=INTEGER},
+		#{applyTime,jdbcType=TIMESTAMP},#{categoryCode,jdbcType=VARCHAR})
+	</insert>
+
+	<select id="selectCorpApply" resultMap="BaseResultMap"
+		parameterType="corpProductCategoryApplyReq">
+		select
+		<include refid="Base_Column_List" />
+		from corpProductCategoryApply
+		where corpId = #{corpId,jdbcType=INTEGER}
+		and businessType=#{businessType,jdbcType=INTEGER} and
+		categoryCode=#{categoryCode,jdbcType=VARCHAR}
+	</select>
+
+
+	<select id="selectCorpApplyList" resultMap="BaseResultMap"
+		parameterType="corpProductCategoryApplyReq">
+		select
+		<include refid="Base_Column_List" />
+		from corpProductCategoryApply
+		where corpId = #{corpId,jdbcType=INTEGER}
+		and businessType=#{businessType,jdbcType=INTEGER}
+	</select>
+
+	<!-- 查找后台地址 -->
+	<select id="selectCorpProductCategoryApply" resultMap="BaseResultMap"
+		parameterType="int">
+		select
+		<include refid="Base_Column_List" />
+		from corpProductCategoryApply where
+		corpId=#{corpId,jdbcType=INTEGER}
+		and categoryCode='2001'
+	</select>
+
+</mapper>

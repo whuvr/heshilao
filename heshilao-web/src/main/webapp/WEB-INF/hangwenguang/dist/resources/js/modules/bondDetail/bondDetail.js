@@ -1,0 +1,1 @@
+define(["modules/bondDetail/bondDetailCtrl","modules/bondDetail/bondDetailService","directives/opPagingDirective","directives/knobDirective","text!htmlModule/bondDetail/bondDetail.html"],function(e,i,t,n,d){return function(o,l,a,r){e(o,l,a,r),i(o,l,a,r),t(o,l,a,r),n(o,l,a,r),l.append(d)}});

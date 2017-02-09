@@ -1,0 +1,356 @@
+<div ui-view ng-controller="investCtrl">
+	<div class="bgf">
+		<img src="resources/images/invest.png" width="100%">
+		<div class=""  tabs initialize-index="{{investType == 'bond' ? 1 : 0}}">
+			<!-- 列表页切换tab title-->
+			<div class="index-invest index-newinvest bgf">
+				<div class="container">
+					<a ng-click="investPageSearch(investPage)">定期理财专区</a>
+					<!--<a ng-click="bondPageSearch(bondPage)">债权专区</a>-->
+					<!--<a ng-click="expBorrowsPageSearch(investPage)">体验标专区</a>-->
+				</div>
+			</div>
+			<!-- 列表页切换tab title end-->
+			<div style="padding-bottom:20px;">
+				<!-- 定期理财专区 -->
+				<div>
+					<!-- 定期理财筛选条件 -->
+					<div class="index-invest" style="position: relative;z-index: 2;">
+						<div class="container">
+							<div class="bottom">
+								<div class="condition">
+									<span class="l">分类</span>
+									<ul rd-switch switch-type="switchType" categories="borrowCategories" active-type="{{-1}}" switch-action="switchAction9(switchType)">
+										<li class="active" switchType="-1">全部</li>
+										<li ng-repeat="item in borrowCategories" switchType="{{item.id}}" ng-bind="item.categoryName"></li>
+										<!-- <li switchType="5">有道有礼 switch-init="{{-1}}"  </li>
+										<li switchType="6">都市计划</li>
+										<li switchType="7">雏鹰计划</li>
+										<li switchType="8">知州通宝</li> -->
+										<div class="clearfix"></div>
+									</ul>
+								</div>
+								<div class="condition">
+									<span class="l">状态</span>
+									<ul rd-switch switch-type="switchType" active-type="{{value1}}" switch-action="switchAction1(switchType)">
+										<li class="active" switchType="-1">全部</li>
+										<li switchType="1">招标中</li>
+										<li switchType="4">还款中</li>
+										<li switchType="8">已还款</li>
+									</ul>
+									<div class="clearfix"></div>
+								</div>
+								<div class="condition">
+									<span class="l">标种</span>
+									<ul rd-switch switch-type="switchType" switch-action="switchAction2(switchType)">
+										<li class="active" switchType="-1">全部</li>
+										<li switchType="0">新手标</li>
+										<li switchType="101">担保标</li>
+										<li switchType="102">抵押标</li>
+										<li switchType="103">信用标</li>
+									</ul>
+									<div class="clearfix"></div>
+								</div>
+								<div class="condition">
+									<span class="l">利率</span>
+									<ul rd-switch switch-type="switchType" switch-action="switchAction3(switchType)">
+										<li class="active" switchType="-1">全部</li>
+										<li switchType="1">0%-6%</li>
+										<li switchType="2">6%-12%</li>
+										<li switchType="3">12%-18%</li>
+										<li switchType="4">18%-20%</li>
+										<li switchType="5">20%以上</li>
+										<div class="clearfix"></div>
+									</ul>
+								</div>
+								<div class="condition">
+									<span class="l">期限</span>
+									<ul rd-switch switch-type="switchType" switch-action="switchAction6(switchType)">
+										<li class="active" switchType="-1">全部</li>
+										<li switchType="1">小于1个月</li>
+										<li switchType="2">1-3个月</li>
+										<li switchType="3">4-6个月</li>
+										<li switchType="4">7-12个月</li>
+										<li switchType="5">12个月以上</li>
+										<div class="clearfix"></div>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- 定期理财筛选条件 end-->
+
+					<!-- 定期理财列表 -->
+					<div class="investbox invest-list">
+						<div class="container" >
+							<!-- 分隔线 -->
+							<div class="line"></div>
+							<!-- 分隔线 end-->
+							<div class="list item recommend" >
+								<div ng-repeat="item in investData" class="itemright">
+									<div class="pl50" ng-class="{head:true,danbg:item.type==101,dibg:item.type==102,xinbg:item.type==103,miaobg:recommendData.type==104}" >
+										<a ui-sref="borrowDetail({id:item.id})" class="title" titlt="{{item.name}}" ng-bind="item.name"></a>
+										<i class="invest-type"></i>
+										<span class="dark-color pl10" ng-if="item.repayWay == 1">按月分期还款</span>
+										<span class="dark-color pl10" ng-if="item.repayWay == 2">一次性还款</span>
+										<span class="dark-color pl10" ng-if="item.repayWay == 3">每月还息到期还本</span>
+									</div>
+									<table>
+										<tr>
+											<td width="46%" class=" pl50"><p class="f16">预期年化利率</p><strong>
+											<!-- <span class="f18"  ng-bind="item.rateYearMin+'~'+item.rateYear+'%'"></span>
+											 -->
+											<span class="f30 light-lightest-on" ng-if="item.classify!=1||item.isRegionConfirm==1" ng-bind="item.rateYear+'%'"></span>
+											<em ng-if="item.classify==1&&item.isRegionConfirm==0"><span class="f30 light-lightest-on" ng-bind="item.rateYearMin+'%'+'~'+item.rateYearMax+'%'"></span></em></strong><em ng-if="item.platformRateYear">+<span ng-bind="item.platformRateYear | number: 2"></span>%</em>
+											</td>
+											<td width="12%"><span class="f30 gray"><p class="f16">项目期限</p>{{item.timeLimit}}</span><span ng-if="item.timeType==1">天</span><span ng-if="item.timeType==0">个月</span></td>
+											<td width="18%"><span class="f30 gray"><p class="f16">借款金额</p>{{item.amountBorrow}}</span>元</td>
+											<td width="13%" class="ta-center" >
+												<i class="knob" knob="item.progressPercentage">
+													<span class="per-val f12 gray-light"><span>{{item.progressPercentage}}</span>%</span>
+												</i>
+											</td>
+											<!-- <td width="27%"><span class="f18 gray"><p class="f16">剩余可投</p>{{item.amountInvestable | number: 2}}</span>元</td> -->
+											<td class="ta-right ft16 pr40" width="11%">
+												<a ng-if="item.countDown <= 0"  ui-sref="borrowDetail({id:item.id})">
+													<span class="btn-light button" ng-if="item.status==1">立即投标</span>
+													<span class="btn-gray1" ng-if="item.status==3">招标结束</span>
+													<span class="btn-gray1" ng-if="item.status==4">还款中</span>
+													<span class="btn-gray1" ng-if="item.status==8">已还款</span>
+												</a>
+												<p class="tc" ng-if="item.countDown > 0">开标倒计时</p><a ui-sref="borrowDetail({id:item.id})"  ng-if="item.countDown > 0"  class="btn-gray"><span countdown="item.countDown"></span></a>
+											</td>
+										</tr>
+									</table>
+								</div>
+
+								<!-- 分页 -->
+								<div id="page">
+									<div paging
+									class="small"
+									page="investPage"
+									page-size="investPageSize"
+									total="investTotal"
+									adjacent="2"
+									dots="..."
+									scroll-top="false"
+									hide-if-empty="true"
+									ul-class="pagination"
+									active-class="active"
+									disabled-class="disabled"
+									show-prev-next="true"
+									paging-action="investPageSearch(page)">
+									</div>
+								</div>
+								<!-- 分页 end-->
+							</div>
+						</div>
+
+					</div>
+					<!-- 定期理财列表 end-->
+				</div>
+				<!-- 定期理财专区 end-->
+				<!-- 债权专区 -->
+				<!--
+				<div>
+				-->
+					<!-- 债权专区筛选条件 -->
+					<!--
+					<div class="index-invest" style="position: relative;z-index: 2;">
+						<div class="container">
+							<div class="bottom">
+								<div class="condition">
+									<span class="l">状态</span>
+									<ul rd-switch switch-type="switchType" switch-action="switchAction4(switchType)">
+										<li class="active" switchType="-3">不限</li>
+										<li switchType="1">转让中</li>
+										<li switchType="-2">转让完成</li>
+									</ul>
+									<div class="clearfix"></div>
+								</div>
+								<div class="condition">
+									<span class="l">利率</span>
+									<ul rd-switch switch-type="switchType" switch-action="switchAction5(switchType)">
+										<li class="active" switchType="-1">不限</li>
+										<li switchType="1">0%-6%</li>
+										<li switchType="2">6%-12%</li>
+										<li switchType="3">12%-18%</li>
+										<li switchType="4">18%-20%</li>
+										<li switchType="5">20%以上</li>
+										<div class="clearfix"></div>
+									</ul>
+								</div>
+
+							</div>
+						</div>
+					</div>
+					-->
+					<!-- 债权专区筛选条件 end-->
+
+					<!-- 债权专区 -->
+					<!--
+					<div class="investbox invest-list">
+						<div class="container" >
+					-->
+							<!-- 分隔线 -->
+							<!--
+							<div class="line"></div>
+							-->
+							<!-- 分隔线 end-->
+							<!--
+							<div class="list" >
+								<table class="clearfix item item2">
+									<tr class="thead">
+										<td width="22%" class="pl30">项目名称</td>
+										<td width="15%">预期年化利率</td>
+										<td width="10%">剩余期限</td>
+										<td width="15%">转让价格</td>
+										<td width="18%">还款方式</td>
+										<td class="tc" width="10%">进度</td>
+										<td class="tc pr30" width="10%">状态</td>
+									</tr>
+									<tr ng-repeat="item in bondData" class="bond">
+										<td width="22%" class="pl30"><h3><i class="invest-type"></i><a class="w10 ml5"   ui-sref="bondDetail({id:{{item.id}},userId:{{item.userId}}})" title="{{item.borrowName}}" ng-bind="item.borrowName|limitTo : 5"></a></h3></td>
+										<td width="15%" class="light-lightest-on"><strong><span class="f18" ng-bind="item.rateYear | number: 2"></span></strong>%</td>
+										<td width="15%"><span class="f18 gray">{{item.remainDays}}</span>天</td>
+										<td width="15%"><span class="f18 gray">{{item.sellingPrice | number: 0}}</span>元</td>
+										<td width="13%">
+											<span class="dark-color" ng-if="item.repayWay == 1">按月分期还款</span>
+											<span class="dark-color" ng-if="item.repayWay == 2">一次性还款</span>
+											<span class="dark-color" ng-if="item.repayWay == 3">每月还息到期还本</span>
+										</td>
+										<td width="10%" class="tc" >
+											<i class="knob" knob="item.sellingProgress">
+												<span class="per-val f12 gray-light"><span>{{item.sellingProgress}}</span>%</span>
+											</i>
+										</td>
+										<td class="ta-right ft16 pr30" width="10%">
+											<a ng-if="item.status==1" class="btn-light button" ui-sref="bondDetail({id:{{item.id}},userId:{{item.userId}}})">立即受让</a>
+											<a ng-if="item.status==3||item.status==4||item.status==5||item.status==6" class="btn-gray" ui-sref="bondDetail({id:{{item.id}},userId:{{item.userId}}})">转让完成</a>
+										</td>
+
+									</tr>
+								</table>
+								<div id="page">
+									<div paging
+									class="small"
+									page="bondPage"
+									page-size="bondPageSize"
+									total="bondTotal"
+									adjacent="2"
+									dots="..."
+									scroll-top="false"
+									hide-if-empty="true"
+									ul-class="pagination"
+									active-class="active"
+									disabled-class="disabled"
+									show-prev-next="true"
+									paging-action="bondPageSearch(page)">
+									</div>
+								</div>
+							</div>
+
+						</div>
+
+					</div>
+					-->
+					<!-- 债权专区 end-->
+					<!--
+				</div>
+				-->
+				<!-- 债权专区 end-->
+				<!-- 体验标专区 -->
+<!--				<div>
+					<div class="index-invest" style="position: relative;z-index: 2;">
+						<div class="container">
+							<div class="bottom">
+								<div class="condition">
+									<span class="l">状态</span>
+									<ul rd-switch switch-type="switchType" active-type="{{value1}}" switch-action="switchAction1(switchType)">
+										<li class="active" switchType="-1">全部</li>
+										<li switchType="1">招标中</li>
+										<li switchType="4">还款中</li>
+										<li switchType="8">已还款</li>
+									</ul>
+									<div class="clearfix"></div>
+								</div>
+								<div class="condition">
+									<span class="l">利率</span>
+									<ul rd-switch switch-type="switchType" switch-action="switchAction3(switchType)">
+										<li class="active" switchType="-1">全部</li>
+										<li switchType="1">0%-6%</li>
+										<li switchType="2">6%-12%</li>
+										<li switchType="3">12%-18%</li>
+										<li switchType="4">18%-20%</li>
+										<li switchType="5">20%以上</li>
+										<div class="clearfix"></div>
+									</ul>
+								</div>
+								<div class="condition">
+									<span class="l">期限</span>
+									<ul rd-switch switch-type="switchType" switch-action="switchAction6(switchType)">
+										<li class="active" switchType="-1">全部</li>
+										<li switchType="1">小于1个月</li>
+										<div class="clearfix"></div>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="investbox invest-list">
+						<div class="container" >
+							<div class="line"></div>
+							<div class="list item recommend" >
+								<div ng-repeat="item in expBorrowsData" class="itemright">
+									<div class="pl50">
+										<a ui-sref="expBorrowsDetail({id:item.id})" class="title" titlt="{{item.name}}" ng-bind="item.name"></a>
+										<i class="invest-type exp-type"></i>
+									</div>
+									<table>
+										<tr>
+											<td width="36%" class="pl50"><p class="f16">预期年化利率</p><strong><span class="f18" ng-bind="item.rateYear+'%'"></span></strong>
+											</td>
+											<td width="17%"><span class="f30 gray"><p class="f16">项目期限</p>{{item.timeLimit}}</span><span ng-if="item.timeType==1">天</span><span ng-if="item.timeType==0">个月</span></td>
+											<td width="25%"><span class="f30 gray"><p class="f16">借款金额</p>{{item.amountBorrow}}</span>元</td>
+											<td width="13%" class="ta-center" >
+												<i class="knob" knob="item.progressPercentage">
+													<span class="per-val f12 gray-light"><span>{{item.progressPercentage}}</span>%</span>
+												</i>
+											</td>
+											<td class="ta-right ft16 pr40" width="11%">
+												<a ui-sref="expBorrowsDetail({id:item.id})">
+													<span class="btn-light button" ng-if="item.status==1">立即投标</span>
+													<span class="btn-gray1" ng-if="item.status==2">招标结束</span>
+													<span class="btn-gray1" ng-if="item.status==3">已还款</span>
+												</a>
+											</td>
+										</tr>
+									</table>
+								</div>
+								<div id="page">
+									<div paging
+									class="small"
+									page="expBorrowsPage"
+									page-size="expBorrowsPageSize"
+									total="expBorrowsTotal"
+									adjacent="2"
+									dots="..."
+									scroll-top="false"
+									hide-if-empty="true"
+									ul-class="pagination"
+									active-class="active"
+									disabled-class="disabled"
+									show-prev-next="true"
+									paging-action="expBorrowsPageSearch(page)">
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>-->
+				<!-- 体验标专区 end-->
+			</div>
+		</div>
+	</div>
+
+</div>

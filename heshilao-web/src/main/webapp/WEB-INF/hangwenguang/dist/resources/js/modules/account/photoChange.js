@@ -1,0 +1,1 @@
+define(["modules/account/photoChangeCtrl","text!htmlModule/account/photoChange.html"],function(t,n){return function(o,e,u,c){t(o,e,u,c),e.append(n)}});

@@ -1,0 +1,364 @@
+<div ng-controller="myaccountCtrl" class="myaccount" id="account">
+  <div class="accounttop" cp-info-account-cash var-name="accountCash">
+    <!--userType== 0 普通用户  1 企业用户  -->
+    <!--canBorrow==  false 投资人 true 借款人 -->
+    <div class="left fl">
+      <div class="leftt">
+        <div class="l" ng-if="user.userType==0 || user.userType==1">
+          <p class="mt5"><span class="f22 blue" ng-bind="accountCash.accountAmountTotal |number:2 "></span> 元</p>
+          <div style="margin-left:100px;">账户总额
+            <span ng-if="user.userType==0" class="rechargeCash-icon" pop-tipbox="提现及投资中冻结金额+账户可用余额+待到账本金收益"></span>
+            <span ng-if="user.userType==1" class="rechargeCash-icon" pop-tipbox="提现及还款冻结金额+账户可用余额"></span>
+          </div>
+        </div>
+        <div class="l" ng-if="user.userType==2">
+          <p class="mt5"><span class="f22 blue" ng-bind="getGuarantor.totalRepaidAmount |number:2"></span> 元</p>
+          <div style="margin-left:100px;">已担保还款金额</div>
+        </div>
+        <div class="l bg" ng-if="user.userType==0 || user.userType==1">
+          <p ng-if="user.userType==0" class="mt5"><span class="f22 blue" ng-bind="accountCash.incomeCollecting | number:2 "></span> 元</p>
+          <div style="margin-left:100px;" ng-if="user.userType==0">待到账收益
+            <span class="rechargeCash-icon" pop-tipbox="在平台投资所获得的未回款收益（未扣除利息管理费）"></span>
+          </div>
+          <p ng-if="user.userType==1" class="mt5"><span class="f22 blue" ng-bind="accountCash.amountToBeBack | number:2 "></span> 元</p>
+          <div style="margin-left:100px;" ng-if="user.userType==1">待还金额
+            <span class="rechargeCash-icon" pop-tipbox="借款项目当前未还金额"></span>
+          </div>
+        </div>
+      </div>
+      <div class="leftb" ng-if="user.userType==0 || user.userType==1">
+        <div>
+          <span ng-if="user.userType==0" class="rechargeCash-icon" pop-tipbox="正在投资中的金额"></span>
+          <span ng-if="user.userType==0" class="dark"> 在投金额  </span>
+          <span ng-if="user.userType==0" class="darks" ng-bind="accountCash.amountInvesting | number: 2 "></span>
+          <span ng-if="user.userType==1" class="rechargeCash-icon" pop-tipbox="历史总的借款金额"></span>
+          <span ng-if="user.userType==1" class="dark">借款总额 </span>
+          <span ng-if="user.userType==1" class="darks" ng-bind="accountCash.borrowTotal | number: 2 "></span><span class="darks">元</span>
+        </div>
+        <div ng-if="user.userType==0">
+          <span class="rechargeCash-icon" pop-tipbox="在平台投资所获得的已回款收益（未扣除利息管理费）"></span> 已收收益 <span class="darks" ng-bind="accountCash.incomeCollected | number: 2 "></span> <span class="darks">元</span>
+        </div>
+        <div ng-if="user.userType==1">
+          <span class="rechargeCash-icon" pop-tipbox="历史借款项目已还金额"></span> 已还金额 <span class="darks" ng-bind="accountCash.repaidTotal | number: 2 "></span> <span class="darks">元</span>
+        </div>
+      </div>
+      <div class="leftb" ng-if="user.userType==2">
+        <div class="gray"> 已担保还款项目&nbsp;&nbsp;<span class="darks" ng-bind="getGuarantor.repaidCount"></span><span class="darks">个</span></div>
+        <div class="gray"> 正在担保项目&nbsp;&nbsp;<span class="darks" ng-bind="getGuarantor.guaranteeCount"></span><span class="darks">个</span></div>
+      </div>
+    </div>
+    <div class="right fr">
+      <div class="rightt">
+        <button class="pay mt10" ng-click="jump(1)">充值</button>
+        <button class="back mt10" ng-click="jump(2)">提现</button>
+      </div>
+      <div class="rightb mt5">
+        <div class="border-b">
+          <span class="rechargeCash-icon" pop-tipbox="账户内可自由支配的资金"></span>
+          <span class="">可用余额&nbsp;&nbsp;</span>
+          <span class="f22 blue" ng-bind="accountCash.balanceAvailable | number:2 "></span>
+          <span class="dark">元</span>
+        </div>
+        <div class="border-n" ng-if="user.userType==0 || user.userType==1">
+          <!-- 开通借款显示 -->
+          <p ng-if="user.canBorrow==false" class="f12"><span class="dark">正在投资</span>&nbsp;&nbsp;&nbsp;<span class="darks" ng-bind="accountCash.projectInvesting"></span> 个 <a class="fred ml20" id="fred" ui-sref="account.creditorRight({type:3})" style="display:none">查看转入债权</a> <a class="fred fr" id="fred" ui-sref="account.myinvest">查看投资记录</a></p>
+          <!-- 未开通借款显示 -->
+          <p ng-if="user.canBorrow==true" class="f12"><span class="dark">正在借款项目</span>&nbsp;&nbsp;&nbsp;<span class="darks" ng-bind="accountCash.projectBorrowing"></span> 个 <a class="fred fr" ui-sref="account.borrowdetail">查看借款详情</a></p>
+        </div>
+        <div class="border-n" ng-if="user.userType==2">
+          正在担保金额&nbsp;<span class="darks" ng-bind="getGuarantor.totalGuaranteeAmount | number:2 "></span> 元
+        </div>
+      </div>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+  <div class="accountmain">
+    <div tabs initialize-index="{{user.userType == 0 ? 0 : 3}}">
+      <div class="tabstitle">
+        <a ng-hide="user.userType==1 || user.userType==2" tab-index="0" class="first">推荐项目<span class="arrow-top"></span></a>
+        <a ng-hide="user.userType==1 || user.userType==2" tab-index="1">待收信息<span class="arrow-top"></span></a>
+        <a ng-class="{none:user.canBorrow==false}" tab-index="2" ng-class="{first:user.userType==1 || user.userType==2}">借款信息<span class="arrow-top"></span></a>
+        <a tab-index="3">资金记录<span class="arrow-top"></span></a>
+      </div>
+      <div class="tabscontent">
+        <!-- 推荐项目 -->
+        <div>
+          <div>
+            <table class="table-noline">
+              <thead>
+                <tr>
+                  <td>标的名称</td>
+                  <td>金额</td>
+                  <td>年化利率</td>
+                  <td>期限</td>
+                  <td>发布时间</td>
+                  <td>进度</td>
+                  <td class="tc">操作</td>
+                </tr>
+              </thead>
+              <tbody cp-list-account-recommend var-name="recommendData">
+                <tr class="null" ng-show="!recommendData.length">
+                  <td colspan="7">
+                    <div id="page">
+                      <div class="no-data">暂时没有数据</div>
+                    </div>
+                  </td>
+                </tr>
+                <tr ng-repeat="item in recommendData" ng-show="recommendData">
+                  <td class="nameTitle">
+                    <a ng-bind="item.name" title="{{item.name}}" ui-sref="borrowDetail({id:item.id})"></a>
+                  </td>
+                  <td><span ng-bind="item.amountBorrow | number:2"></span>元</td>
+                  <td>
+                    <span ng-if="item.classify==1" ng-bind="item.rateYearMin+'~'+item.rateYear+'%'"></span>
+                    <span ng-if="item.classify==0" ng-bind="item.rateYear+'%'"></span>
+                  </td>
+                  <td>
+                    <span ng-bind="item.timeLimit"></span>
+                    <span ng-if="item.timeType==0">个月</span>
+                    <span ng-if="item.timeType==1">天</span>
+                  </td>
+                  <td>
+                    <span ng-bind="item.openTime | date:'yyyy-MM-dd'"></span>
+                  </td>
+                  <td>
+                    <div class="process-bar process-bar-table relative">
+                      <i ng-style="{width:item.progressPercentage+'%'}"></i>
+                      <span ng-bind="item.progressPercentage+'%'"></span>
+                    </div>
+                  </td>
+                  <td class="tc w80">
+                    <a style="width:80px;height:30px;line-height:30px;" class="button" ui-sref="borrowDetail({id:item.id})">
+                      <span ng-if="item.status==1" class="f12">立即投标</span>
+                      <span ng-if="item.status==4" class="f12">还款中</span>
+                      <span ng-if="item.status==8" class="f12">已还款</span>
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <p ng-show="recommendData" class="light tc mt15"><a ui-sref="invest">查看更多投资项目</a></p>
+          </div>
+        </div>
+        <!-- 待收款信息 -->
+        <div>
+          <table class="table-noline">
+            <thead>
+              <tr>
+                <td>标的名称</td>
+                <td>年化利率</td>
+                <td>投资金额</td>
+                <td>计息起始日</td>
+                <td>预计本期回款日</td>
+                <td>预计回收本息</td>
+                <td>预计赚取收益</td>
+                <td>期数</td>
+              </tr>
+            </thead>
+            <tbody cp-list-borrow-collections page-size="5" var-name="collections1Data" params="{status:0}">
+              <tr ng-repeat="item in collections1Data">
+                <td class="nameTitle">
+                  <a ng-bind="item.borrowName" title="{{item.borrowName}}" ui-sref="borrowDetail({id:item.borrowId})"></a>
+                </td>
+                <td>
+                  <span ng-if="item.classify==1" ng-bind="item.rateYearMin+'~'+item.rateYear+'%'"></span>
+                  <span ng-if="item.classify==0" ng-bind="item.rateYear+'%'"></span>
+                </td>
+                <td><span ng-bind="item.investAmount | number:2"></span>元</td>
+                <td ng-bind="item.interestStartTime | date:'yyyy-MM-dd'"></td>
+                <td ng-bind="item.repaymentTime  | date:'yyyy-MM-dd'"></td>
+                <td><span ng-bind="item.repaymentAmount | number:2"></span>元</td>
+                <td>
+                  <div ng-if="item.classify==1">
+                    <span ng-bind="item.interestMin | number:2"></span>~<span ng-bind="item.interest | number:2"></span>元
+                  </div>
+                  <div ng-if="item.classify==0">
+                    <span ng-bind="item.interest | number:2"></span>元
+                  </div>
+                </td>
+                <td>{{item.period}}/{{item.totalPeriod}}</td>
+              </tr>
+            </tbody>
+          </table>
+          <div id="page" class="tc">
+            <div paging class="small" page="collections1DataPage" page-size="collections1DataPageSize" total="collections1DataTotal" adjacent="2" dots="..." scroll-top="false" hide-if-empty="true" ul-class="pagination" active-class="active" disabled-class="disabled" show-prev-next="true" paging-action="collections1DataPageSearch(page)">
+            </div>
+          </div>
+        </div>
+        <!-- 借款信息 -->
+        <div ng-class="{none:user.canBorrow==false}">
+          <div style="padding:0;" class="tabs2" cp-ui-tab var-name="status">
+            <div class="tab2-nav">
+              <a class="first" value="0" href="">
+                <span ng-if='user.userType!=2'>借款详情</span>
+                <span ng-if='user.userType==2'>担保详情</span>
+              </a>
+              <a class="last" value="1" href="">
+                <span ng-if='user.userType!=2'>还款详情</span>
+                <span ng-if='user.userType==2'>担保垫付</span>
+              </a>
+            </div>
+            <div>
+              <!-- 借款详情 -->
+              <div>
+                <table class="table-noline">
+                  <thead>
+                    <tr>
+                      <td>标的名称</td>
+                      <td>借款类型</td>
+                      <td>借款金额</td>
+                      <td>年化利率</td>
+                      <td>借款期限</td>
+                      <td>借款进度</td>
+                      <td>状态</td>
+                      <td>协议</td>
+                    </tr>
+                  </thead>
+                  <tbody ng-if="user.canBorrow==true" cp-list-my-borrow var-name="myBorrow1Data" page-size="5" params="{userId:user.id}">
+                    <tr class="null" ng-show="!myBorrow1Data">
+                      <td colspan="7">
+                        <div id="page">
+                          <div class="no-data">暂时没有数据</div>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr ng-repeat="item in myBorrow1Data">
+                      <td class="nameTitle">
+                        <a ng-bind="item.name" title="{{item.name}}" ui-sref="borrowDetail({id:item.id})"></a>
+                      </td>
+                      <td>
+                        <span ng-if="item.type==101"><img src="resources/images/dan.png"></span>
+                        <span ng-if="item.type==102"><img src="resources/images/di.png"></span>
+                        <span ng-if="item.type==103"><img src="resources/images/xin.png"></span>
+                        <span ng-if="item.type==104"><img src="resources/images/miao.png"></span>
+                      </td>
+                      <td><span ng-bind="item.amountBorrow | number:2"></span>元</td>
+                      <td><span ng-bind="item.rateYear"></span>%</td>
+                      <td><span ng-bind="item.timeLimit"></span><span ng-if="item.timeType==1">天</span><span ng-if="item.timeType==0">个月</span></td>
+                      <td>
+                        <div class="progressbar_1 relative">
+                          <div class="bar" ng-style="{width:item.progressPercentage+'%'}"></div>
+                          <span class="r absolute Percentage" ng-bind="item.progressPercentage+'%'"></span>
+                        </div>
+                      </td>
+                      <td>
+                        <span ng-if="item.status==0||item.status==9||item.status==10||item.status==11||item.status==12">待初审</span>
+                        <span ng-if="item.status==1">招标中</span>
+                        <span ng-if="item.status==2">初审未通过</span>
+                        <span ng-if="item.status==3">满标待审</span>
+                        <span ng-if="item.status==4">还款中</span>
+                        <span ng-if="item.status==5">复审未通过</span>
+                        <span ng-if="item.status==6">已撤回</span>
+                        <span ng-if="item.status==7">已流标</span>
+                        <span ng-if="item.status==8">已还款</span>
+                      </td>
+                      <td>
+                        <!-- <a ng-if="item.status==4 || item.status==8" ng-href="borrows/borrowerProtocolDownload?borrowId={{item.id}}" target="_blank">下载</a> -->
+                        <a ng-if="item.status==4 || item.status==8" cp-do-borrows-protocol-preview="item">查看</a>
+                        <span ng-if="item.status==0||item.status==1||item.status==2||item.status==3||item.status==5||item.status==6||item.status==7">--</span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div id="page" class="tc">
+                  <div paging class="small" page="myBorrow1DataPage" page-size="myBorrow1DataPageSize" total="myBorrow1DataTotal" adjacent="2" dots="..." scroll-top="false" hide-if-empty="true" ul-class="pagination" active-class="active" disabled-class="disabled" show-prev-next="true" paging-action="myBorrow1DataPageSearch(page)">
+                  </div>
+                </div>
+              </div>
+              <!-- 还款详情 -->
+              <div>
+                <table class="table-noline">
+                  <thead>
+                    <tr>
+                      <td>标的名称</td>
+                      <td>期数</td>
+                      <td>本期还款日</td>
+                      <td>本期应还本息</td>
+                      <td>利息</td>
+                      <td>还款状态</td>
+                      <td>操作</td>
+                    </tr>
+                  </thead>
+                  <tbody ng-if="status == 1" cp-list-repayment var-name="repayment1Data" page-size="5">
+                    <tr class="null" ng-show="!repayment1Data">
+                      <td colspan="7">
+                        <div id="page">
+                          <div class="no-data">暂时没有数据</div>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr ng-repeat="item in repayment1Data">
+                      <td class="nameTitle">
+                        <a ng-bind="item.borrowName" title="{{item.borrowName}}" ui-sref="borrowDetail({id:item.borrowId})"></a>
+                      </td>
+                      <td>{{item.period}}/{{item.totalPeriod}}</td>
+                      <td ng-bind="item.expectedRepaymentTime|date:'yyyy-MM-dd'"></td>
+                      <td><span ng-bind="item.repaymentAmount | number:2"></span>元</td>
+                      <td><span ng-bind="item.interest | number:2"></span>元</td>
+                      <td ng-bind="item.statusString"></td>
+                      <td><a ng-if="item.status==0" cp-do-borrows-repayment="item" item-id="{{item.id}}" herf="javascript:;">还款</a></td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div id="page" class="tc">
+                  <div paging class="small" page="repayment1DataPage" page-size="repayment1DataPageSize" total="repayment1DataTotal" adjacent="2" dots="..." scroll-top="false" hide-if-empty="true" ul-class="pagination" active-class="active" disabled-class="disabled" show-prev-next="true" paging-action="repayment1DataPageSearch(page)">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- 资金记录 -->
+        <div>
+          <div class="screenColumn ml20">
+            <form>
+              <span>日期范围</span>
+              <select class="rechargeCash-select" ng-model="time" ng-change="changeTime()">
+                <option value="-1">全部</option>
+                <option value="7d">近7天</option>
+                <option value="15d">近15天</option>
+                <option value="1m">近1个月</option>
+                <option value="2m">近2个月</option>
+                <option value="">具体日期</option>
+              </select>
+              <div ng-show="searchDate" style="display:inline-block">
+                <span>日期：</span>
+                <input type="text" id="startTime" class="inputTime Wdate" onFocus="WdatePicker({dateFmt:'yyyy-MM-dd',maxDate:'#F{$dp.$D(\'endTime\')}',readOnly:true})" /> &nbsp;-&nbsp;
+                <input type="text" id="endTime" class="inputTime Wdate" onFocus="WdatePicker({minDate:'#F{$dp.$D(\'startTime\')}',readOnly:true})" />
+              </div>
+              <a class="screenSearch" href="javascript:void(0)" ng-click="change(1)">搜索</a>
+            </form>
+          </div>
+          <table class="table-noline">
+            <thead>
+              <tr>
+                <td>时间</td>
+                <td>类型</td>
+                <td>交易对方</td>
+                <td>操作金额</td>
+                <td>备注</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="item in data">
+                <td ng-bind="item.addTime|date:'yyyy-MM-dd HH:mm:ss'"></td>
+                <td ng-bind="item.type"></td>
+                <td ng-bind="item.toUser"></td>
+                <td><span ng-bind="item.amount | number:2"></span>元</td>
+                <td class="nameTitle1">
+                  <div ng-if="item.borrowId" title="{{item.remark}}"><span ng-bind="item.remark1"></span>
+                    <a ng-if="item.url==false" ui-sref="borrowDetail({id:item.borrowId})" ng-bind="item.remark2"></a><a ng-if="item.url==true" ui-sref="expBorrowsDetail({id:item.borrowId})" ng-bind="item.remark2"></a><span ng-bind="item.remark3"></span></div>
+                  <div ng-if="!item.borrowId" title="{{item.remark}}"><span ng-bind="item.remark"></span></div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div id="page">
+            <div paging class="small" page="page" page-size="pageSize" total="total" adjacent="2" dots="..." scroll-top="false" hide-if-empty="true" ul-class="pagination" active-class="active" disabled-class="disabled" show-prev-next="true" paging-action="change(page,1)">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

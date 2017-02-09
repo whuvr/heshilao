@@ -1,0 +1,15 @@
+@mixin error($top:null,$left:null,$width:null,$position:absolute,$color:#ff6600,$font-size:12px,$display: block){
+	color:$color;
+	font-size: $font-size;
+	position: $position;
+	top: $top;
+	left: $left;
+	width: $width;
+	display: $display;
+}
+@mixin errorTip($left:-6px,$top:2px,$content: url(../images/error-tip.png),$position: relative){
+	content: $content;
+	top: $top;
+	left: $left;
+	position: $position;
+}

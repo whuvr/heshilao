@@ -1,0 +1,26 @@
+@mixin process-bar($width:165px,$height:5px){
+	position: relative;
+	width: $width;
+	height: $height;
+	display: inline-block;
+	border-radius: 10px;
+	background: $gray-bg;
+}
+@mixin process-in($height:100%){
+	display: block;
+	height: $height;
+	border-radius: 10px;
+	background: #58bf8b;
+}
+.process-bar{
+	@include process-bar;
+}
+.process-bar i{
+	@include process-in;
+}
+.process-bar span{
+	position: absolute;
+	top: -4px;
+	right: -40px;
+	color: $gray;
+}

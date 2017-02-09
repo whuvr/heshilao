@@ -1,0 +1,1 @@
+define(["angular"],function(n){return function(n,t,u,a){n.factory("payAccount",[function(){return{name:"qian"}}])}});

@@ -1,0 +1,108 @@
+<script type="text/ng-template" id="template_pay_recharge">
+  <iframe src="{{payUrl}}" width="600" height="400" frameborder="no"></iframe>
+</script>
+<div ng-controller="rechargeCtrl" id="recharge">
+  <div tabs>
+    <!--ng-show="isBank"  initialize-index="tabIndex"-->
+    <div class="recharge-nav">
+      <a class="recharge-label">充值</a>
+      <!--<a class="recharge-label" ><span>快捷充值</span></a>  ng-show="fastPay"-->
+    </div>
+    <div>
+      <div class="recharge-tab" id="onlinebank">
+        <form name="form2" novalidate action="account/recharge/recharge" method="post" target="_blank">
+          <div class="tab-amount2">
+            <span>可用余额：</span><span name="balance" class="account-font1">￥{{balance | number:2}}</span>
+          </div>
+          <div class="tab-amount1">
+            <span>充值方式：</span>
+            <select ng-if="user.userType == 0" name="rechargeType" class="recharge-select" id="recharge_corp" ng-model="formData1.rechargeType" ng-change="rechargeType()">
+              <option value="0">个人网银充值</option>
+              <option value="2">快捷支付</option>
+              <!--3 汇款充值 -->
+              <option value="3" ng-if="corpInfo.tppType == 3">汇款充值</option>
+              <option value="4" ng-if="corpInfo.tppType == 1">企业网银充值</option>
+            </select>
+            <select ng-if="user.userType == 1 || user.userType == 2" name="rechargeType" class="recharge-select" id="recharge_corp" ng-model="formData1.rechargeType">
+              <option value="0">个人网银充值</option>
+              <option value="4">企业网银充值</option>
+            </select>
+          </div>
+          <!-- 联动优势选卡 -->
+          <div class="tab-amount1" id="bank-card-list" style="display:none;">
+            <span>充值银行：</span>
+            <select name="rechargeBank" class="recharge-select" id="recharge_sel">
+            </select>
+            <input type="hidden" name="bankCode" ng-value="formData1.bankCode">
+            <input type="hidden" name="bankName" ng-value="formData1.bankName">
+          </div>
+          <div class="tab-amount1 form-group">
+            <span>充值金额：</span>
+            <input id="recharge-input1" type="text" class="account-Input" ng-model="formData1.cash" maxlength="10" required dymin="{{minRechargeAmount}}" dy-min="minRechargeAmount" ng-pattern="/^[1-9]\d*$/" pattern-err-type="Integer" ng-change="rechargeAmount()">
+            <input type="hidden" name="cashStr" ng-value="formData1.cashStr">
+          </div>
+          <input type="hidden" name="token" ng-value="token">
+          <input type="button" class="accountBtn accountBtnPosi" ng-disabled="form2.$invalid" value="提交" cp-form-recharge-pay />
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="part-cont">
+    <div class="holder">
+      <div class="content1">
+        <span class="tip-lamp"></span>
+      </div>
+      <div class="content2">
+        <span class="account-font3">温馨提示：</span>
+        <br>
+        <span>1、充值/提现必须为开通网上银行的借记卡，不支持存折、信用卡充值。</span>
+        <br>
+        <span>2、充值期间，请勿关闭浏览器，待充值成功并返回后，可在系统中查看充值金额。</span>
+        <br>
+        <span>3、严禁信用卡套现、虚假交易等行为。</span>
+      </div>
+    </div>
+  </div>
+  <table class="account-table">
+    <thead class="thead-holder">
+      <tr>
+        <td>充值时间</td>
+        <td>充值流水号</td>
+        <td>充值金额</td>
+        <td>状态</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="item in innerData">
+        <td ng-bind="item.addTime | date:'yyyy-MM-dd HH:mm:ss'"></td>
+        <td ng-bind="item.tradeNo"></td>
+        <td><span ng-bind="item.cash | number:2"></span>元</td>
+        <td>
+          <span ng-if="item.status==0 || item.status==6">充值处理中</span>
+          <span ng-if="item.status==1">充值成功</span>
+          <span ng-if="item.status==2">充值失败</span>
+          <span ng-if="item.status==-1">充值初始中</span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div id="page">
+    <div
+		paging
+		class="small"
+		page="page"
+		page-size="pageSize"
+		total="total"
+		adjacent="2"
+		dots="..."
+		scroll-top="false"
+		hide-if-empty="true"
+		ul-class="pagination"
+		active-class="active"
+		disabled-class="disabled"
+		show-prev-next="true"
+		paging-action="pageSerch(page)"
+		>
+    </div>
+  </div>
+</div>

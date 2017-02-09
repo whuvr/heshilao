@@ -1,0 +1,356 @@
+﻿//元素的初始化
+/*元素的初始化*/
+
+@import "variables";
+
+body, div, dl, dt, dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td{
+	margin:0;padding:0;
+}
+
+body,button,input,select,textarea {
+    font:14px/1.5 \5b8b\4f53,arial,sans-serif;
+}
+input,select,textarea,button{
+    font-size:100%;
+    font-family: "Microsoft Yahei", Avenir, "Hiragino Sans GB", "Noto Sans S Chinese",  "Microsoft Sans Serif", "WenQuanYi Micro Hei", sans-serif;
+}
+table {
+    border-collapse:collapse;
+    border-spacing:0;
+}
+fieldset,img {
+    border:none;
+}
+img{
+	display: block;
+}
+iframe {
+    display:block;
+}
+ol,ul {
+    list-style:none;
+}
+.clearfix:before,.clearfix:after {
+    content:"";
+    display:table;
+}
+.clearfix:after {
+    clear:both;
+    overflow:hidden;
+}
+.clearfix {
+    zoom:1; /* for ie6 & ie7 */
+}
+.clear {
+    clear:both;
+    display:block;
+    font-size:0;
+    height:0;
+    line-height:0;
+    overflow:hidden;
+}
+input[type="text"],input[type="password"],textarea{	
+	outline: none;
+}
+input[type="text"]:focus,input[type="password"]:focus,textarea:focus {
+	outline: none;
+}
+a{
+	text-decoration: none;
+	cursor: pointer;
+	outline: none;
+}
+body{
+	background: #f3f3f3;
+	font-family: "Microsoft Yahei", Avenir, "Hiragino Sans GB", "Noto Sans S Chinese",  "Microsoft Sans Serif", "WenQuanYi Micro Hei", sans-serif;
+}
+/****** main cont wrap start ******/
+#content .container,#main-cont{
+	width: 1192px;
+	margin: 0px auto;
+}
+#main-cont{
+	margin: 0 auto;	
+	min-height: 750px;
+	height: auto;
+	padding: 20px 0;
+	position: relative;
+}
+/****** main cont wrap end ******/
+
+
+/*valid*/
+.has-error input[type="text"],.has-error input[type="password"],.apply.has-error textarea{
+	border: 1px solid #ff6600;
+}
+
+//%占位符 不被调用的话，不会产生任何代码
+//常用的字号（可以根据具体的项目字号调整）
+.f12{
+	font-size:$f12;
+}
+.f14{
+	font-size:$f14!important;
+}
+.f16{
+	font-size:$f16;
+}
+.f18{
+	font-size:$f18;
+}
+.f20{
+	font-size:$f20;
+}
+.f22{
+	font-size:$f22;
+}
+.f24{
+	font-size:$f24;
+}
+.f28{
+	font-size:28px;
+}
+.f30{
+	font-size:30px;
+}
+.f32{
+	font-size:32px;
+}
+.f36{
+	font-size:36px;
+}
+//常用的颜色（可以根据具体的项目调整色值和添加变量）
+.main-color,.darks,.gray-dark{
+	color:$main-color;
+}
+.dark-color,.dark,.gray{
+	color:$dark-color;
+}
+.light-color,.light,.gray-light{
+	color:$light-color;
+}
+.gray-lighter{
+	color:$gray-lighter;
+}
+.white-color,.white{
+	color:$white-color;
+}
+.blue{
+	color: $blue;
+}
+.error-color{
+	color:$error-color;
+}
+.title-color{
+	color:$title-color;
+}
+.light-on{
+	color:$light-on;
+}
+.light-lighter-on{
+	color: $light-lighter-on;
+}
+.light-lightest-on{
+	color: #f56a52;
+}
+.gary-bg{
+	background:$gray-bg;
+}
+.top-bg{
+	background: $top-bg;
+}
+.bottom-bg{
+	background: $bottom-bg;
+}
+.white-bg{
+	background:$white-color;
+}
+.red-color,.fred{
+	color:$light-lighter-on;
+}
+.org{
+	color: #ff7d00;
+}
+.bluec{
+	color: #25b5f7;
+}
+.graybg,a.graybg{
+	background: #ccc;
+}
+.pinkbg{
+	background: #fdeee9;
+}
+
+
+//加粗 正常
+.font-b{
+	font-size:bold;
+}
+.font-n{
+	font-size:normal;
+}
+.table-noline .blue-color,.blue-color{
+	color: #25b5f7;
+}
+.n{
+	font-weight: normal;
+	font-style: normal;
+}
+.lh24{
+	line-height: 24px;
+}
+//左对齐 居中对齐 右对齐 垂直对齐
+.tl{
+	text-align:left;
+}
+.tc{
+	text-align:center!important;
+}
+.tr{
+	text-align:right;
+}
+.vm{
+	vertical-align:middle;
+}
+
+//左右居中 左浮动 右浮动  
+.c{
+	margin:0 auto;
+}
+.fl,.l{
+	float:left;
+}
+.fr,.r{
+	float:right;
+}
+
+//清除浮动
+.cb{
+	clear:both;
+}
+.cl{
+	clear:left;
+}
+.cr{
+	clear:right;
+}
+
+
+//相对定位 绝对定位
+.pr,.relative{
+	position:relative;
+}
+.pa,.absolute{
+	position:absolute;
+}
+
+//显示 隐藏
+.block{
+	display:block;
+}
+.none{
+	display:none;
+}
+
+//100%宽高
+.w{
+	width:100%;
+}
+.h{
+	height:100%;
+}
+
+//常用的marign padding值
+.mt0{
+	margin-top:0px;
+}
+.mt5{
+	margin-top:5px;
+}
+.mt10{
+	margin-top:10px;
+}
+.mt15{
+	margin-top:15px;
+}
+.mt20{
+	margin-top:20px;
+}
+.mt30{
+	margin-top:30px;
+}
+.mt40{
+	margin-top: 40px;
+}
+.ml5{
+	margin-left: 5px;
+}
+.ml10{
+	margin-left: 10px;
+}
+.ml15{
+	margin-left: 15px;
+}
+.ml20{
+	margin-left: 20px;
+}
+.ml30{
+	margin-left: 30px;
+}
+.ml35{
+	margin-left: 35px;
+}
+.ml45{
+	margin-left:45px;
+}
+.ml60{
+	margin-left:60px;
+}
+
+.mr5{
+	margin-right:5px;
+}
+.mr10{
+	margin-right:10px;
+}
+
+.mb0{
+	margin-bottom:0px;
+}
+.mb10{
+	margin-bottom:10px;
+}
+.mb15{
+	margin-bottom: 15px;
+}
+.mb20{
+	margin-bottom:20px;
+}
+
+.pt10{
+	padding-top:10px;
+}
+.pt20{
+	padding-top: 20px;
+}
+.pb10{
+	padding-bottom: 10px;
+}
+.pl10{
+	padding-left:10px;
+}
+.pl50{
+	padding-left:45px;
+}
+
+.w80{
+	width:80px;
+}
+.w170{
+	width:170px!important;
+	margin-left: 4px;
+}
+//手型
+.hand{
+	cursor: pointer;
+}

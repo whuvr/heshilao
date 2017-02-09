@@ -1,0 +1,1 @@
+define(["modules/invest/investCtrl","directives/opPagingDirective","directives/knobDirective","text!htmlModule/invest/invest.html"],function(e,i,t,n){return function(v,r,s,c){e(v,r,s,c),i(v,r,s,c),t(v,r,s,c),r.append(n)}});

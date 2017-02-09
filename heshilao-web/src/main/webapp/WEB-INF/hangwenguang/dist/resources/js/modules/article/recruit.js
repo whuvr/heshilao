@@ -1,0 +1,1 @@
+define(["modules/article/recruitCtrl","modules/article/recruitService","text!htmlModule/article/recruit.html"],function(e,t,r){return function(i,c,l,u){e(i,c,l,u),t(i,c,l,u),c.append(r)}});

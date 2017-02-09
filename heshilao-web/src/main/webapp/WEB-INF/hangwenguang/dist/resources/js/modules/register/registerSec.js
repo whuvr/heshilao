@@ -1,0 +1,1 @@
+define(["modules/register/registerSecCtrl","text!htmlModule/register/registerSec.html"],function(e,t){return function(r,i,n,l){e(r,i,n,l),i.append(t)}});

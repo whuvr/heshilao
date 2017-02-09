@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rongdu.rongyun.mapper.ProductCategoryMapper">
+	<resultMap id="BaseResultMap" type="productCatoryRes">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="categoryCode" property="categoryCode" jdbcType="VARCHAR" />
+		<result column="categoryName" property="categoryName"
+			jdbcType="VARCHAR" />
+		<result column="categoryDescription" property="categoryDescription"
+			jdbcType="VARCHAR" />
+		<result column="strategyUnit" property="strategyUnit" jdbcType="VARCHAR" />
+		<result column="syncFlag" property="syncFlag" jdbcType="INTEGER" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, categoryCode, categoryName, categoryDescription,
+		strategyUnit,syncFlag
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from productCategory
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+
+	<select id="selectBycategoryCode" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from productCategory
+		where categoryCode =
+		#{categoryCode,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		productCategory
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="productCatoryReq">
+		insert into productCategory
+		(id, categoryCode, categoryName,
+		categoryDescription, strategyUnit,syncFlag)
+		values (#{id,jdbcType=INTEGER}, #{categoryCode,jdbcType=VARCHAR},
+		#{categoryName,jdbcType=VARCHAR},
+		#{categoryDescription,jdbcType=VARCHAR},
+		#{strategyUnit,jdbcType=VARCHAR}),
+		#{syncFlag,jdbcType=INTEGER}
+	</insert>
+	<insert id="insertSelective" parameterType="productCatoryReq">
+		insert into productCategory
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="categoryCode != null">
+				categoryCode,
+			</if>
+			<if test="categoryName != null">
+				categoryName,
+			</if>
+			<if test="categoryDescription != null">
+				categoryDescription,
+			</if>
+			<if test="strategyUnit != null">
+				strategyUnit,
+			</if>
+			<if test="syncFlag != null">
+				syncFlag,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="categoryCode != null">
+				#{categoryCode,jdbcType=VARCHAR},
+			</if>
+			<if test="categoryName != null">
+				#{categoryName,jdbcType=VARCHAR},
+			</if>
+			<if test="categoryDescription != null">
+				#{categoryDescription,jdbcType=VARCHAR},
+			</if>
+			<if test="strategyUnit != null">
+				#{strategyUnit,jdbcType=VARCHAR},
+			</if>
+			<if test="syncFlag != null">
+				#{syncFlag,jdbcType=INTEGER},
+			</if>
+			
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="productCatoryReq">
+		update productCategory
+		<set>
+			<if test="categoryCode != null">
+				categoryCode = #{categoryCode,jdbcType=VARCHAR},
+			</if>
+			<if test="categoryName != null">
+				categoryName = #{categoryName,jdbcType=VARCHAR},
+			</if>
+			<if test="categoryDescription != null">
+				categoryDescription =
+				#{categoryDescription,jdbcType=VARCHAR},
+			</if>
+			<if test="strategyUnit != null">
+				strategyUnit = #{strategyUnit,jdbcType=VARCHAR},
+			</if>
+			<if test="syncFlag != null">
+				syncFlag = #{syncFlag,jdbcType=INTEGER},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="productCatoryReq">
+		update
+		productCategory
+		set categoryCode = #{categoryCode,jdbcType=VARCHAR},
+		categoryName = #{categoryName,jdbcType=VARCHAR},
+		categoryDescription
+		= #{categoryDescription,jdbcType=VARCHAR},
+		strategyUnit =
+		#{strategyUnit,jdbcType=VARCHAR},
+		syncFlag = #{syncFlag,jdbcType=INTEGER}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+</mapper>

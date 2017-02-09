@@ -1,0 +1,1 @@
+define(["modules/account/transferCtrl","modules/account/transferService","text!htmlModule/account/transfer.html"],function(t,e,n){return function(r,c,u,o){t(r,c,u,o),e(r,c,u,o),c.append(n)}});
